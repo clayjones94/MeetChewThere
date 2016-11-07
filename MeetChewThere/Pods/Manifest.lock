@@ -1,0 +1,15 @@
+PODS:
+  - ChameleonFramework (2.1.0):
+    - ChameleonFramework/Default (= 2.1.0)
+  - ChameleonFramework/Default (2.1.0)
+  - HMSegmentedControl (1.5.3)
+
+DEPENDENCIES:
+  - ChameleonFramework (~> 2.1)
+  - HMSegmentedControl
+
+SPEC CHECKSUMS:
+  ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
+  HMSegmentedControl: 7c6145afb50f26cec5f3243082f6f12b9f41318f
+
+COCOAPODS: 0.39.0
