@@ -15,6 +15,7 @@
 @synthesize details = _details;
 @synthesize location = _location;
 @synthesize urlString = _urlString;
+@synthesize phone = _phone;
 @synthesize imageName = _imageName;
 @synthesize price = _price;
 @synthesize dietTags = _dietTags;

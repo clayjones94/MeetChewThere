@@ -74,9 +74,10 @@
     restaurant.name = @"Umami Burger";
     restaurant.urlString = @"umamiburger.com";
     restaurant.imageName = @"umami_prof";
-    restaurant.location = [[CLLocation alloc] initWithLatitude:60 longitude:60];
+    restaurant.phone = @"888-888-8888";
+    restaurant.location = [[CLLocation alloc] initWithLatitude:37.447606 longitude:-122.159583];
     restaurant.details = @"Great burger joint!";
-    restaurant.dietTags = @[_dietTags[0], _dietTags[1]];
+    restaurant.dietTags = @[_dietTags[0], _dietTags[1], _dietTags[2]];
     restaurant.price = 3;
     [_restaurants addObject:restaurant];
 }
