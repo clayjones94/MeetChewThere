@@ -37,9 +37,12 @@
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
-    if (![MCTContentManager sharedManager].user) {
-        [self presentViewController:[MCTRegisterViewController new] animated:YES completion:nil];
-    }
+    
+    //Presents registration view
+    
+//    if (![MCTContentManager sharedManager].user) {
+//        [self presentViewController:[MCTRegisterViewController new] animated:YES completion:nil];
+//    }
 }
 
 - (void)viewDidLoad {

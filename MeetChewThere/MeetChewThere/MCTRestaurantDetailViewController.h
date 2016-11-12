@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MCTRestaurant.h"
 
-@interface MCTRestaurantDetailViewController : UIViewController
+@interface MCTRestaurantDetailViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) MCTRestaurant *restaurant;
 

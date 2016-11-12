@@ -12,6 +12,7 @@
 #import "MCTContentManager.h"
 #import "MCTRestaurant.h"
 #import "Masonry.h"
+#import "MCTRestaurantDetailViewController.h"
 
 @implementation MCTDiscoverRestaurantsViewController {
     ZLDropDownMenu *_filterMenu;
@@ -124,6 +125,9 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     [cell setSelected:NO];
+    MCTRestaurantDetailViewController *vc = [MCTRestaurantDetailViewController new];
+    [vc setRestaurant:_restaurants[indexPath.row]];
+    [self.parentViewController.navigationController pushViewController:vc animated:YES];
     [_searchBar resignFirstResponder];
 }
 

@@ -12,6 +12,8 @@
 		925DF7EB1DC6A2A900A96BAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 925DF7EA1DC6A2A900A96BAF /* Assets.xcassets */; };
 		925DF7F91DC6A2A900A96BAF /* MeetChewThereTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 925DF7F81DC6A2A900A96BAF /* MeetChewThereTests.m */; };
 		925DF8041DC6A2A900A96BAF /* MeetChewThereUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 925DF8031DC6A2A900A96BAF /* MeetChewThereUITests.m */; };
+		927E5C801DD658CA0060F111 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 927E5C7F1DD658CA0060F111 /* MapKit.framework */; };
+		927E5C831DD65D2A0060F111 /* MCTDietRatingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 927E5C821DD65D2A0060F111 /* MCTDietRatingsTableViewCell.m */; };
 		92A855581DCD5AA100DB27A3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 92A855571DCD5AA100DB27A3 /* Default-568h@2x.png */; };
 		92A8555D1DCD5D9B00DB27A3 /* MCTDiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A8555C1DCD5D9B00DB27A3 /* MCTDiscoverViewController.m */; };
 		92A855621DCD61F300DB27A3 /* MCTCreateEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A855611DCD61F300DB27A3 /* MCTCreateEventViewController.m */; };
@@ -80,6 +82,9 @@
 		925DF7FF1DC6A2A900A96BAF /* MeetChewThereUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeetChewThereUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		925DF8031DC6A2A900A96BAF /* MeetChewThereUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeetChewThereUITests.m; sourceTree = "<group>"; };
 		925DF8051DC6A2A900A96BAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		927E5C7F1DD658CA0060F111 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		927E5C811DD65D2A0060F111 /* MCTDietRatingsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTDietRatingsTableViewCell.h; sourceTree = "<group>"; };
+		927E5C821DD65D2A0060F111 /* MCTDietRatingsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTDietRatingsTableViewCell.m; sourceTree = "<group>"; };
 		92A855571DCD5AA100DB27A3 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		92A8555B1DCD5D9B00DB27A3 /* MCTDiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTDiscoverViewController.h; sourceTree = "<group>"; };
 		92A8555C1DCD5D9B00DB27A3 /* MCTDiscoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTDiscoverViewController.m; sourceTree = "<group>"; };
@@ -161,6 +166,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				927E5C801DD658CA0060F111 /* MapKit.framework in Frameworks */,
 				92A855C31DCDA4A000DB27A3 /* CoreLocation.framework in Frameworks */,
 				C17DBFCDDBD6DA906E81F668 /* libPods.a in Frameworks */,
 			);
@@ -422,6 +428,8 @@
 			children = (
 				92A855CF1DCEF20400DB27A3 /* MCTRestaurantDetailViewController.h */,
 				92A855D01DCEF20400DB27A3 /* MCTRestaurantDetailViewController.m */,
+				927E5C811DD65D2A0060F111 /* MCTDietRatingsTableViewCell.h */,
+				927E5C821DD65D2A0060F111 /* MCTDietRatingsTableViewCell.m */,
 			);
 			name = "Restaurant Detail";
 			sourceTree = "<group>";
@@ -438,6 +446,7 @@
 		F3FAF438E30B1C27A92A9272 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				927E5C7F1DD658CA0060F111 /* MapKit.framework */,
 				92A855C21DCDA4A000DB27A3 /* CoreLocation.framework */,
 				B10112525DEE9511811A6144 /* libPods.a */,
 			);
@@ -650,6 +659,7 @@
 				92A8555D1DCD5D9B00DB27A3 /* MCTDiscoverViewController.m in Sources */,
 				92A855B11DCD963A00DB27A3 /* MCTContentManager.m in Sources */,
 				92A855D51DCEF63700DB27A3 /* MCTRegisterViewController.m in Sources */,
+				927E5C831DD65D2A0060F111 /* MCTDietRatingsTableViewCell.m in Sources */,
 				92A855B51DCD967100DB27A3 /* MCTEvent.m in Sources */,
 				92A855A71DCD7ADC00DB27A3 /* NSArray+MASAdditions.m in Sources */,
 				92A855AE1DCD7ADC00DB27A3 /* ZLDropDownMenuUICalc.m in Sources */,
