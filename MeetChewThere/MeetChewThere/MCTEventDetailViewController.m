@@ -10,6 +10,7 @@
 #import "Masonry.h"
 #import "MCTUtils.h"
 #import "MCTConstants.h"
+#import "MCTContentManager.h"
 
 @implementation MCTEventDetailViewController {
     UIImageView *_imageView;
@@ -26,6 +27,10 @@
     
     UIView *_descriptionContainerView;
     UILabel *_descriptionLabel;
+    
+    UIButton *_joinButton;
+    
+    MCTContentManager *_contentManager;
 }
 
 @synthesize event = _event;
@@ -38,6 +43,7 @@
     [self.view setBackgroundColor:[UIColor whiteColor]];
     self.navigationController.navigationBarHidden = NO;
     self.edgesForExtendedLayout = UIRectEdgeNone;
+    _contentManager = [MCTContentManager sharedManager];
     [self layoutViews];
 }
 
@@ -209,6 +215,49 @@
         make.left.equalTo(descriptionDetailLabel);
         make.top.equalTo(descriptionDetailLabel.mas_bottom);
     }];
+    
+    _joinButton = [[UIButton alloc] init];
+    [_joinButton setFont:[UIFont fontWithName:MCT_BOLD_FONT_NAME size:14]];
+    [self.view addSubview:_joinButton];
+    [self updateJoinButton];
+    [_joinButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.bottom.right.equalTo(self.view);
+        make.height.mas_equalTo(40);
+    }];
+}
+
+-(void) updateJoinButton {
+    if(_event.isGoing == YES) {
+        [_joinButton setBackgroundColor:[UIColor redColor]];
+        [_joinButton setTitle:@"Unjoin" forState:UIControlStateNormal];
+        [_joinButton addTarget:self action:@selector(unjoinEvent) forControlEvents:UIControlEventTouchUpInside];
+    } else {
+        [_joinButton setBackgroundColor:[MCTUtils defaultBarColor]];
+        [_joinButton setTitle:@"Join" forState:UIControlStateNormal];
+        [_joinButton addTarget:self action:@selector(joinEvent) forControlEvents:UIControlEventTouchUpInside];
+    }
+}
+
+-(void) updateAttendanceLabel {
+    [_guestsLabel setText:[NSString stringWithFormat:@"%lu of %ld spots are filled", (unsigned long)_event.guests.count, (long)_event.capacity]];
+}
+
+-(void) joinEvent {
+    [_event setIsGoing:YES];
+    if (![_event.guests containsObject:_contentManager.user] && _event.guests.count < _event.capacity) {
+        [_event.guests addObject:_contentManager.user];
+    }
+    [self updateJoinButton];
+    [self updateAttendanceLabel];
+}
+
+-(void) unjoinEvent {
+    [_event setIsGoing:NO];
+    if ([_event.guests containsObject:_contentManager.user]) {
+        [_event.guests removeObject:_contentManager.user];
+    }
+    [self updateJoinButton];
+    [self updateAttendanceLabel];
 }
 
 @end

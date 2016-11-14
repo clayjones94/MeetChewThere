@@ -22,6 +22,6 @@
 @property (nonatomic) NSInteger capacity;
 @property (strong, nonatomic) MCTRestaurant *restaurant;
 @property (strong, nonatomic) NSArray<MCTDietTag *> *dietTags;
-@property (strong, nonatomic) NSArray<MCTUser *> *guests;
+@property (strong, nonatomic) NSMutableArray<MCTUser *> *guests;
 
 @end
