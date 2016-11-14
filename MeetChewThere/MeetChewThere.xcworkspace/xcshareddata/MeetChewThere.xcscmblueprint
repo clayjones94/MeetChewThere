@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "21DACF0BEA880EC09F96E291F9899303F53742F6+++0073DB4",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "21DACF0BEA880EC09F96E291F9899303F53742F6+++0073DB4" : 0,
+    "21DACF0BEA880EC09F96E291F9899303F53742F6+++F47CC4D" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "A403A612-08CE-47C8-AF37-B1390302DF43",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "21DACF0BEA880EC09F96E291F9899303F53742F6+++0073DB4" : "",
+    "21DACF0BEA880EC09F96E291F9899303F53742F6+++F47CC4D" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "MeetChewThere",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "MeetChewThere\/MeetChewThere.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/clayjones94\/MeetChewThere.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "21DACF0BEA880EC09F96E291F9899303F53742F6+++0073DB4"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/clayjones94\/MeetChewThere.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "21DACF0BEA880EC09F96E291F9899303F53742F6+++F47CC4D"
+    }
+  ]
+}
