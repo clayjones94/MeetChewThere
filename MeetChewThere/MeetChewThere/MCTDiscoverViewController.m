@@ -39,15 +39,16 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
     
-//    if (![MCTContentManager sharedManager].user) {
-//        [self presentViewController:[MCTRegisterViewController new] animated:YES completion:nil];
-//    }
     if (![MCTContentManager sharedManager].user) {
-        MCTUser *user = [MCTUser new];
-        user.name = @"Clayy";
-        user.password = @"pass";
-        [MCTContentManager sharedManager].user = user;
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:[MCTRegisterViewController new]];
+        [self presentViewController:nav animated:YES completion:nil];
     }
+//    if (![MCTContentManager sharedManager].user) {
+//        MCTUser *user = [MCTUser new];
+//        user.name = @"Clayy";
+//        user.password = @"pass";
+//        [MCTContentManager sharedManager].user = user;
+//    }
 }
 
 - (void)viewDidLoad {

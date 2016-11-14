@@ -48,6 +48,7 @@
 		92A855CD1DCED41600DB27A3 /* MCTEventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A855CC1DCED41600DB27A3 /* MCTEventDetailViewController.m */; };
 		92A855D11DCEF20400DB27A3 /* MCTRestaurantDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A855D01DCEF20400DB27A3 /* MCTRestaurantDetailViewController.m */; };
 		92A855D51DCEF63700DB27A3 /* MCTRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A855D41DCEF63700DB27A3 /* MCTRegisterViewController.m */; };
+		92FCA45B1DD988230066AF76 /* MCTRegisterPickDietViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FCA45A1DD988230066AF76 /* MCTRegisterPickDietViewController.m */; };
 		C17DBFCDDBD6DA906E81F668 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B10112525DEE9511811A6144 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -157,6 +158,8 @@
 		92A855D01DCEF20400DB27A3 /* MCTRestaurantDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTRestaurantDetailViewController.m; sourceTree = "<group>"; };
 		92A855D31DCEF63700DB27A3 /* MCTRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTRegisterViewController.h; sourceTree = "<group>"; };
 		92A855D41DCEF63700DB27A3 /* MCTRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTRegisterViewController.m; sourceTree = "<group>"; };
+		92FCA4591DD988230066AF76 /* MCTRegisterPickDietViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTRegisterPickDietViewController.h; sourceTree = "<group>"; };
+		92FCA45A1DD988230066AF76 /* MCTRegisterPickDietViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTRegisterPickDietViewController.m; sourceTree = "<group>"; };
 		9A28442C93FBC8DE77B7A8AD /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		B10112525DEE9511811A6144 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -439,6 +442,8 @@
 			children = (
 				92A855D31DCEF63700DB27A3 /* MCTRegisterViewController.h */,
 				92A855D41DCEF63700DB27A3 /* MCTRegisterViewController.m */,
+				92FCA4591DD988230066AF76 /* MCTRegisterPickDietViewController.h */,
+				92FCA45A1DD988230066AF76 /* MCTRegisterPickDietViewController.m */,
 			);
 			name = Register;
 			sourceTree = "<group>";
@@ -656,6 +661,7 @@
 				92A855621DCD61F300DB27A3 /* MCTCreateEventViewController.m in Sources */,
 				92A855BB1DCD9F8700DB27A3 /* MCTRestaurantReview.m in Sources */,
 				92A8555D1DCD5D9B00DB27A3 /* MCTDiscoverViewController.m in Sources */,
+				92FCA45B1DD988230066AF76 /* MCTRegisterPickDietViewController.m in Sources */,
 				92A855B11DCD963A00DB27A3 /* MCTContentManager.m in Sources */,
 				92A855D51DCEF63700DB27A3 /* MCTRegisterViewController.m in Sources */,
 				927E5C831DD65D2A0060F111 /* MCTDietRatingsTableViewCell.m in Sources */,
