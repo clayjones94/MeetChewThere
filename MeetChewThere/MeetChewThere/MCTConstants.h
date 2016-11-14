@@ -14,4 +14,7 @@ typedef enum {
     EVENTS,
 } MCTListType;
 
+static NSString *const MCT_REGULAR_FONT_NAME = @"AppleSDGothicNeo-Regular";
+static NSString *const MCT_BOLD_FONT_NAME = @"AppleSDGothicNeo-Bold";
+
 #endif /* MCTConstants_h */

@@ -9,6 +9,7 @@
 #import "MCTEventTableViewCell.h"
 #import "Masonry.h"
 #import "MCTUtils.h"
+#import "MCTConstants.h"
 
 @implementation MCTEventTableViewCell {
     UILabel *_nameLabel;
@@ -32,22 +33,22 @@
     
     if (self) {
         _nameLabel = [UILabel new];
-        _nameLabel.font = [UIFont fontWithName:@"AppleSDGothicNeo-Regular" size:15];
+        _nameLabel.font = [UIFont fontWithName:MCT_REGULAR_FONT_NAME size:15];
         
         _restaurantButton = [UILabel new];
         _restaurantButton.textColor = [MCTUtils defaultBarColor];
-        _restaurantButton.font = [UIFont fontWithName:@"AppleSDGothicNeo-Regular" size:12];
+        _restaurantButton.font = [UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12];
         
         _dietTagsLabel = [UILabel new];
-        _dietTagsLabel.font = [UIFont fontWithName:@"AppleSDGothicNeo-Regular" size:12];
+        _dietTagsLabel.font = [UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12];
         _dietTagsLabel.textColor = [UIColor grayColor];
         
         _guestsLabel = [UILabel new];
-        _guestsLabel.font = [UIFont fontWithName:@"AppleSDGothicNeo-Regular" size:12];
+        _guestsLabel.font = [UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12];
         _guestsLabel.textColor = [UIColor blackColor];
         
         _dateLabel = [UILabel new];
-        _dateLabel.font = [UIFont fontWithName:@"AppleSDGothicNeo-Regular" size:12];
+        _dateLabel.font = [UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12];
         _dateLabel.textColor = [UIColor blackColor];
         
         _imageView = [UIImageView new];

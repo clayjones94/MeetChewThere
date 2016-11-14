@@ -10,6 +10,7 @@
 #import "Masonry.h"
 #import "MCTUtils.h"
 #import "MCTContentManager.h"
+#import "MCTConstants.h"
 
 @implementation MCTRestaurantTableViewCell {
     UILabel *_nameLabel;
@@ -36,22 +37,22 @@
     
     if (self) {
         _nameLabel = [UILabel new];
-        _nameLabel.font = [UIFont fontWithName:@"AppleSDGothicNeo-Regular" size:15];
+        _nameLabel.font = [UIFont fontWithName:MCT_REGULAR_FONT_NAME size:15];
         
         _ratingsButton = [UILabel new];
         _ratingsButton.textColor = [MCTUtils defaultBarColor];
-        _ratingsButton.font = [UIFont fontWithName:@"AppleSDGothicNeo-Regular" size:12];
+        _ratingsButton.font = [UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12];
         
         _dietTagsLabel = [UILabel new];
-        _dietTagsLabel.font = [UIFont fontWithName:@"AppleSDGothicNeo-Regular" size:12];
+        _dietTagsLabel.font = [UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12];
         _dietTagsLabel.textColor = [UIColor grayColor];
         
         _eventsLabel = [UILabel new];
-        _eventsLabel.font = [UIFont fontWithName:@"AppleSDGothicNeo-Regular" size:12];
+        _eventsLabel.font = [UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12];
         _eventsLabel.textColor = [UIColor blackColor];
         
         _distanceLabel = [UILabel new];
-        _distanceLabel.font = [UIFont fontWithName:@"AppleSDGothicNeo-Regular" size:12];
+        _distanceLabel.font = [UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12];
         _distanceLabel.textColor = [UIColor blackColor];
         
         _imageView = [UIImageView new];

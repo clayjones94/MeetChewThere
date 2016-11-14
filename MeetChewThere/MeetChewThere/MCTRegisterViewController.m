@@ -12,6 +12,7 @@
 #import "Masonry.h"
 #import "MCTUser.h"
 #import "MCTContentManager.h"
+#import "MCTConstants.h"
 
 @implementation MCTRegisterViewController {
     UITextField *_nameField;
@@ -40,7 +41,7 @@
     _passwordField = [UITextField new];
     [self.view addSubview:_passwordField];
     
-    [_usernameField setFont:[UIFont fontWithName:@"AppleSDGothicNeo-Regular" size:18]];
+    [_usernameField setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:18]];
     [_usernameField setPlaceholder:@"Username"];
     [_usernameField setTextAlignment:NSTextAlignmentCenter];
     [_usernameField setBackgroundColor:[UIColor whiteColor]];
@@ -61,7 +62,7 @@
         make.height.mas_equalTo(1.0f);
     }];
     
-    [_nameField setFont:[UIFont fontWithName:@"AppleSDGothicNeo-Regular" size:18]];
+    [_nameField setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:18]];
     [_nameField setPlaceholder:@"Name"];
     [_nameField setTextAlignment:NSTextAlignmentCenter];
     [_nameField setBackgroundColor:[UIColor whiteColor]];
@@ -81,7 +82,7 @@
         make.height.mas_equalTo(1.0f);
     }];
     
-    [_passwordField setFont:[UIFont fontWithName:@"AppleSDGothicNeo-Regular" size:18]];
+    [_passwordField setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:18]];
     [_passwordField setPlaceholder:@"Password"];
     [_passwordField setTextAlignment:NSTextAlignmentCenter];
     [_passwordField setSecureTextEntry:YES];
@@ -94,7 +95,7 @@
     }];
     
     _registerButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_registerButton setFont:[UIFont fontWithName:@"AppleSDGothicNeo-Regular" size:18]];
+    [_registerButton setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:18]];
     [_registerButton setTitle:@"Create Account" forState:UIControlStateNormal];
     [_registerButton addTarget:self action:@selector(registerAccount) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_registerButton];

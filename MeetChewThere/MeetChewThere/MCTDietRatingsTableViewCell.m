@@ -8,6 +8,7 @@
 
 #import "MCTDietRatingsTableViewCell.h"
 #import "Masonry.h"
+#import "MCTConstants.h"
 
 @implementation MCTDietRatingsTableViewCell {
     UILabel *_dietTagLabel;
@@ -23,7 +24,7 @@
     if (self){
         _starsImageViews = [NSMutableArray new];
         _dietTagLabel = [UILabel new];
-        _dietTagLabel.font = [UIFont fontWithName:@"AppleSDGothicNeo-Regular" size:12];
+        _dietTagLabel.font = [UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12];
         _dietTagLabel.textColor = [UIColor blackColor];
         [self addSubview:_dietTagLabel];
         

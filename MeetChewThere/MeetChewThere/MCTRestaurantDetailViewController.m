@@ -13,6 +13,7 @@
 #import "MCTUtils.h"
 #import "MCTContentManager.h"
 #import "MCTDietRatingsTableViewCell.h"
+#import "MCTConstants.h"
 
 #define RATING_CELL_HEIGHT 25;
 
@@ -52,7 +53,6 @@
 
 -(void) layoutViews {
     CGFloat LEFT_MARGIN = 10;
-    CGFloat TOP_MARGIN = 10;
     
     _imageView = [[UIImageView alloc] init];
     [self.view addSubview:_imageView];
@@ -100,7 +100,7 @@
     _costLabel = [[UILabel alloc] init];
     [_introContainerView addSubview:_costLabel];
     [_costLabel setText: [NSString stringWithFormat:@"%@ - American, Burgers, Shakes", [MCTUtils priceStringForRestaurant:_restaurant]]];
-    [_costLabel setFont:[UIFont fontWithName:@"AppleSDGothicNeo-Regular" size:12]];
+    [_costLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12]];
     [_costLabel setTextColor:[UIColor grayColor]];
     [_costLabel sizeToFit];
     
@@ -129,7 +129,7 @@
     UILabel *guestDetailLabel = [[UILabel alloc] init];
     [_eventsContainerView addSubview:guestDetailLabel];
     [guestDetailLabel setText:@"Events"];
-    [guestDetailLabel setFont:[UIFont fontWithName:@"AppleSDGothicNeo-Regular" size:12]];
+    [guestDetailLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12]];
     [guestDetailLabel setTextColor:[UIColor lightGrayColor]];
     [guestDetailLabel sizeToFit];
     
@@ -140,7 +140,7 @@
     _eventsLabel = [[UILabel alloc] init];
     [_eventsContainerView addSubview:_eventsLabel];
     [_eventsLabel setText:[NSString stringWithFormat:@"%lu upcoming events", (unsigned long)3]];
-    [_eventsLabel setFont:[UIFont fontWithName:@"AppleSDGothicNeo-Regular" size:16]];
+    [_eventsLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:16]];
     [_eventsLabel setTextColor:[UIColor blackColor]];
     [_eventsLabel sizeToFit];
     
@@ -188,7 +188,7 @@
     
     _phoneLabel = [[UILabel alloc] init];
     [_phoneLabel setText:_restaurant.phone];
-    [_phoneLabel setFont:[UIFont fontWithName:@"AppleSDGothicNeo-Regular" size:14]];
+    [_phoneLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:14]];
     [_phoneLabel setTextColor:[MCTUtils defaultBarColor]];
     [phoneView addSubview:_phoneLabel];
     [_phoneLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -206,7 +206,7 @@
     
     _websiteLabel = [[UILabel alloc] init];
     [_websiteLabel setText:@"Website"];
-    [_websiteLabel setFont:[UIFont fontWithName:@"AppleSDGothicNeo-Regular" size:14]];
+    [_websiteLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:14]];
     [_websiteLabel setTextColor:[MCTUtils defaultBarColor]];
     [websiteView addSubview:_websiteLabel];
     [_websiteLabel mas_makeConstraints:^(MASConstraintMaker *make) {

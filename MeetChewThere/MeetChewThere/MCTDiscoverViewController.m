@@ -57,11 +57,11 @@
     [_segControl setBackgroundColor:[UIColor clearColor]];
     [_segControl addTarget:self action:@selector(segmentedControlChangedValue) forControlEvents:UIControlEventValueChanged];
     NSDictionary *titleTextAttr = @{
-                                    NSFontAttributeName:[UIFont fontWithName:@"AppleSDGothicNeo-Regular" size:15],
+                                    NSFontAttributeName:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:15],
                                     NSForegroundColorAttributeName: [UIColor whiteColor]
                                     };
     NSDictionary *selectedTitleTextAttr = @{
-                                            NSFontAttributeName:[UIFont fontWithName:@"AppleSDGothicNeo-Bold" size:15],
+                                            NSFontAttributeName:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:15],
                                             NSForegroundColorAttributeName:[UIColor whiteColor]
                                             };
     

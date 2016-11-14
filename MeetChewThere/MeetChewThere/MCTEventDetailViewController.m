@@ -9,6 +9,7 @@
 #import "MCTEventDetailViewController.h"
 #import "Masonry.h"
 #import "MCTUtils.h"
+#import "MCTConstants.h"
 
 @implementation MCTEventDetailViewController {
     UIImageView *_imageView;
@@ -73,7 +74,7 @@
     _monthLabel = [[UILabel alloc] init];
     [_introContainerView addSubview:_monthLabel];
     [_monthLabel setText:@"OCTOBER"];
-    [_monthLabel setFont:[UIFont fontWithName:@"AppleSDGothicNeo-Regular" size:12]];
+    [_monthLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12]];
     [_monthLabel setTextColor:[MCTUtils defaultBarColor]];
     [_monthLabel sizeToFit];
     
@@ -85,7 +86,7 @@
     _dateLabel = [[UILabel alloc] init];
     [_introContainerView addSubview:_dateLabel];
     [_dateLabel setText:@"30"];
-    [_dateLabel setFont:[UIFont fontWithName:@"AppleSDGothicNeo-Regular" size:35]];
+    [_dateLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:35]];
     [_dateLabel setTextColor:[UIColor blackColor]];
     [_dateLabel sizeToFit];
     
@@ -97,7 +98,7 @@
     _timeLabel = [[UILabel alloc] init];
     [_introContainerView addSubview:_timeLabel];
     [_timeLabel setText:@"7:30pm"];
-    [_timeLabel setFont:[UIFont fontWithName:@"AppleSDGothicNeo-Regular" size:12]];
+    [_timeLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12]];
     [_timeLabel setTextColor:[MCTUtils defaultBarColor]];
     [_timeLabel sizeToFit];
     
@@ -109,7 +110,7 @@
     _nameLabel = [[UILabel alloc] init];
     [_introContainerView addSubview:_nameLabel];
     [_nameLabel setText:_event.name];
-    [_nameLabel setFont:[UIFont fontWithName:@"AppleSDGothicNeo-Regular" size:22]];
+    [_nameLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:22]];
     [_nameLabel setTextColor:[UIColor blackColor]];
     [_nameLabel sizeToFit];
     
@@ -121,7 +122,7 @@
     _restaurantButton = [[UILabel alloc] init];
     [_introContainerView addSubview:_restaurantButton];
     [_restaurantButton setText:_event.restaurant.name];
-    [_restaurantButton setFont:[UIFont fontWithName:@"AppleSDGothicNeo-Bold" size:14]];
+    [_restaurantButton setFont:[UIFont fontWithName:MCT_BOLD_FONT_NAME size:14]];
     [_restaurantButton setTextColor:[MCTUtils defaultBarColor]];
     [_restaurantButton sizeToFit];
     
@@ -149,7 +150,7 @@
     UILabel *guestDetailLabel = [[UILabel alloc] init];
     [_guestsContainerView addSubview:guestDetailLabel];
     [guestDetailLabel setText:@"Attending"];
-    [guestDetailLabel setFont:[UIFont fontWithName:@"AppleSDGothicNeo-Regular" size:12]];
+    [guestDetailLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12]];
     [guestDetailLabel setTextColor:[UIColor lightGrayColor]];
     [guestDetailLabel sizeToFit];
     
@@ -160,7 +161,7 @@
     _guestsLabel = [[UILabel alloc] init];
     [_guestsContainerView addSubview:_guestsLabel];
     [_guestsLabel setText:[NSString stringWithFormat:@"%lu of %ld spots are filled", (unsigned long)_event.guests.count, (long)_event.capacity]];
-    [_guestsLabel setFont:[UIFont fontWithName:@"AppleSDGothicNeo-Regular" size:16]];
+    [_guestsLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:16]];
     [_guestsLabel setTextColor:[UIColor blackColor]];
     [_guestsLabel sizeToFit];
     
@@ -188,7 +189,7 @@
     UILabel *descriptionDetailLabel = [[UILabel alloc] init];
     [_descriptionContainerView addSubview:descriptionDetailLabel];
     [descriptionDetailLabel setText:@"Description"];
-    [descriptionDetailLabel setFont:[UIFont fontWithName:@"AppleSDGothicNeo-Regular" size:12]];
+    [descriptionDetailLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12]];
     [descriptionDetailLabel setTextColor:[UIColor lightGrayColor]];
     [descriptionDetailLabel sizeToFit];
     
@@ -200,7 +201,7 @@
     _descriptionLabel.numberOfLines = 0;
     [_descriptionContainerView addSubview:_descriptionLabel];
     [_descriptionLabel setText:_event.details];
-    [_descriptionLabel setFont:[UIFont fontWithName:@"AppleSDGothicNeo-Regular" size:12]];
+    [_descriptionLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12]];
     [_descriptionLabel setTextColor:[UIColor blackColor]];
     [_descriptionLabel sizeToFit];
     
