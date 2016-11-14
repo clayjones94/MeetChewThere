@@ -14,6 +14,7 @@
 #import "MCTConstants.h"
 #import "MCTContentManager.h"
 #import "MCTRegisterViewController.h"
+#import "MCTRegisterViewController.h"
 
 @implementation MCTDiscoverViewController {
 
@@ -37,6 +38,16 @@
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
+    
+//    if (![MCTContentManager sharedManager].user) {
+//        [self presentViewController:[MCTRegisterViewController new] animated:YES completion:nil];
+//    }
+    if (![MCTContentManager sharedManager].user) {
+        MCTUser *user = [MCTUser new];
+        user.name = @"Clayy";
+        user.password = @"pass";
+        [MCTContentManager sharedManager].user = user;
+    }
 }
 
 - (void)viewDidLoad {

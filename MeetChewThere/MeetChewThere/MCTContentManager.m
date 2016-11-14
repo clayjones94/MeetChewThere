@@ -90,11 +90,11 @@
     event.details = @"Fun party!";
     event.date = [NSDate date];
     event.admin = _users[0];
-    event.isGoing = YES;
+    event.isGoing = NO;
     event.capacity = 10;
     event.restaurant = _restaurants[0];
     event.dietTags = @[_dietTags[0], _dietTags[1]];
-    event.guests = @[_users[0]];
+    event.guests = [[NSMutableArray alloc] initWithArray: @[_users[0]]];
     [_events addObject:event];
 }
 
