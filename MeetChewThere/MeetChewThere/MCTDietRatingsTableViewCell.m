@@ -72,7 +72,7 @@
 -(void)setDietTag:(MCTDietTag *)dietTag {
     _dietTag = dietTag;
     [_dietTagLabel setText:_dietTag.name];
-    _starCount = 4.7;
+    _starCount = 3.6;
     [self setStars];
 }
 

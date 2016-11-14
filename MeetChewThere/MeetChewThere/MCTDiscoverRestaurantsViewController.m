@@ -156,6 +156,10 @@
 - (void)menu:(ZLDropDownMenu *)menu didSelectRowAtIndexPath:(ZLIndexPath *)indexPath {
     [_filterMenu reloadInputViews];
     [_searchBar resignFirstResponder];
+    if([_filterOptions[indexPath.row]  isEqual: @"Rating"]){
+        _restaurants = [_contentManager getAllRestaurants];
+        [_tableView reloadData];
+    }
 }
 
 #pragma text field
