@@ -1,14 +1,28 @@
 {
+<<<<<<< HEAD
   "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "21DACF0BEA880EC09F96E291F9899303F53742F6",
+=======
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "21DACF0BEA880EC09F96E291F9899303F53742F6+++0073DB4",
+>>>>>>> origin/master
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+<<<<<<< HEAD
     "21DACF0BEA880EC09F96E291F9899303F53742F6" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "A403A612-08CE-47C8-AF37-B1390302DF43",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "21DACF0BEA880EC09F96E291F9899303F53742F6" : ""
+=======
+    "21DACF0BEA880EC09F96E291F9899303F53742F6+++0073DB4" : 0,
+    "21DACF0BEA880EC09F96E291F9899303F53742F6+++F47CC4D" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "A403A612-08CE-47C8-AF37-B1390302DF43",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "21DACF0BEA880EC09F96E291F9899303F53742F6+++0073DB4" : "",
+    "21DACF0BEA880EC09F96E291F9899303F53742F6+++F47CC4D" : ""
+>>>>>>> origin/master
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "MeetChewThere",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
@@ -17,12 +31,20 @@
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/clayjones94\/MeetChewThere.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+<<<<<<< HEAD
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "21DACF0BEA880EC09F96E291F9899303F53742F6"
+=======
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "21DACF0BEA880EC09F96E291F9899303F53742F6+++0073DB4"
+>>>>>>> origin/master
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/clayjones94\/MeetChewThere.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+<<<<<<< HEAD
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "21DACF0BEA880EC09F96E291F9899303F53742F6"
+=======
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "21DACF0BEA880EC09F96E291F9899303F53742F6+++F47CC4D"
+>>>>>>> origin/master
     }
   ]
 }
