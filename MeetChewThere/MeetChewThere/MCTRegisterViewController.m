@@ -13,6 +13,7 @@
 #import "MCTUser.h"
 #import "MCTContentManager.h"
 #import "MCTConstants.h"
+#import "MCTRegisterPickDietViewController.h"
 
 @implementation MCTRegisterViewController {
     UITextField *_nameField;
@@ -29,6 +30,10 @@
     [self.view setBackgroundColor:[MCTUtils gradientBackgroundColorWithFrame:self.view.frame]];
     [self setThemeUsingPrimaryColor:[UIColor whiteColor] withSecondaryColor:[MCTUtils defaultBarColor] andContentStyle:UIContentStyleLight];
     [self setupFields];
+}
+
+-(void) viewWillAppear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:YES];
 }
 
 -(void) setupFields {
@@ -130,7 +135,7 @@
     }
     if (complete) {
         [_contentManager setUser:new_user];
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [self.navigationController pushViewController:[MCTRegisterPickDietViewController new] animated:YES];
     }
 }
 
