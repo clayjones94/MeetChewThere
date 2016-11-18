@@ -13,6 +13,7 @@
 #import "Masonry.h"
 #import "MCTDietTag.h"
 #import "MCTConstants.h"
+#import <POP.h>
 
 @implementation MCTRegisterPickDietViewController {
     UITableView *_tableView;
@@ -88,7 +89,19 @@
     } else {
         [_selectedTags addObject:_dietTags[indexPath.row]];
     }
-    [tableView reloadData];
+    
+    POPSpringAnimation *springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewScaleXY];
+    springAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(0.95, 0.95)];
+    springAnimation.velocity = [NSValue valueWithCGPoint:CGPointMake(2, 2)];
+    springAnimation.springBounciness = 10.f;
+    [cell.accessoryView pop_addAnimation:springAnimation forKey:@"springAnimation"];
+    [springAnimation setAnimationDidReachToValueBlock:^(POPAnimation * animation) {
+        if([_selectedTags containsObject:_dietTags[indexPath.row]]){
+            cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"delete_diet_minus"]];
+        } else {
+            cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"add_diet_plus"]];
+        }
+    }];
 }
 
 -(void) finish {

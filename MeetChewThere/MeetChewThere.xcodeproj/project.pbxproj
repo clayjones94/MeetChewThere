@@ -48,6 +48,7 @@
 		92A855CD1DCED41600DB27A3 /* MCTEventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A855CC1DCED41600DB27A3 /* MCTEventDetailViewController.m */; };
 		92A855D11DCEF20400DB27A3 /* MCTRestaurantDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A855D01DCEF20400DB27A3 /* MCTRestaurantDetailViewController.m */; };
 		92A855D51DCEF63700DB27A3 /* MCTRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A855D41DCEF63700DB27A3 /* MCTRegisterViewController.m */; };
+		92C8A2401DDF834C001B606A /* libpop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 92C8A23F1DDF834C001B606A /* libpop.a */; };
 		92FCA45B1DD988230066AF76 /* MCTRegisterPickDietViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FCA45A1DD988230066AF76 /* MCTRegisterPickDietViewController.m */; };
 		C17DBFCDDBD6DA906E81F668 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B10112525DEE9511811A6144 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -158,6 +159,7 @@
 		92A855D01DCEF20400DB27A3 /* MCTRestaurantDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTRestaurantDetailViewController.m; sourceTree = "<group>"; };
 		92A855D31DCEF63700DB27A3 /* MCTRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTRegisterViewController.h; sourceTree = "<group>"; };
 		92A855D41DCEF63700DB27A3 /* MCTRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTRegisterViewController.m; sourceTree = "<group>"; };
+		92C8A23F1DDF834C001B606A /* libpop.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpop.a; path = "Pods/../build/Debug-iphoneos/libpop.a"; sourceTree = "<group>"; };
 		92FCA4591DD988230066AF76 /* MCTRegisterPickDietViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTRegisterPickDietViewController.h; sourceTree = "<group>"; };
 		92FCA45A1DD988230066AF76 /* MCTRegisterPickDietViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTRegisterPickDietViewController.m; sourceTree = "<group>"; };
 		9A28442C93FBC8DE77B7A8AD /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92C8A2401DDF834C001B606A /* libpop.a in Frameworks */,
 				927E5C801DD658CA0060F111 /* MapKit.framework in Frameworks */,
 				92A855C31DCDA4A000DB27A3 /* CoreLocation.framework in Frameworks */,
 				C17DBFCDDBD6DA906E81F668 /* libPods.a in Frameworks */,
@@ -451,6 +454,7 @@
 		F3FAF438E30B1C27A92A9272 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				92C8A23F1DDF834C001B606A /* libpop.a */,
 				927E5C7F1DD658CA0060F111 /* MapKit.framework */,
 				92A855C21DCDA4A000DB27A3 /* CoreLocation.framework */,
 				B10112525DEE9511811A6144 /* libPods.a */,
@@ -800,6 +804,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = MeetChewThere/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = CS147Group.MeetChewThere;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -815,6 +823,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = MeetChewThere/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = CS147Group.MeetChewThere;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

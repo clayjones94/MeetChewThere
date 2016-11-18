@@ -7,3 +7,4 @@ source "https://github.com/CocoaPods/Old-Specs"
 
 pod 'HMSegmentedControl'
 pod 'ChameleonFramework', '~> 2.1'
+pod 'pop', '~> 1.0'
