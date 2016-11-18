@@ -126,8 +126,8 @@
     
     POPSpringAnimation *springAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewScaleXY];
     springAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(0.95, 0.95)];
-    springAnimation.velocity = [NSValue valueWithCGPoint:CGPointMake(2, 2)];
-    springAnimation.springBounciness = 10.f;
+    springAnimation.velocity = [NSValue valueWithCGPoint:CGPointMake(1, 1)];
+    springAnimation.springBounciness = 20.f;
     [cell.accessoryView pop_addAnimation:springAnimation forKey:@"springAnimation"];
     [springAnimation setAnimationDidReachToValueBlock:^(POPAnimation * animation) {
         if([_selectedTags containsObject:_dietTags[indexPath.row]]){
