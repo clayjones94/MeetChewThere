@@ -29,6 +29,8 @@
     [self.navigationController setNavigationBarHidden:NO];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(finish)];
     
+    self.navigationItem.title = @"Diet Preferences";
+    
     _contentManager = [MCTContentManager sharedManager];
     _selectedTags = [NSMutableArray new];
     
@@ -47,7 +49,6 @@
     _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     _tableView.dataSource = self;
     _tableView.delegate = self;
-    _tableView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_tableView];
     
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -60,17 +61,17 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if(!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
-        cell.backgroundColor = [UIColor clearColor];
-        cell.tintColor = [UIColor whiteColor];
+        cell.tintColor = [MCTUtils defaultBarColor];
         [cell.textLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:14]];
-        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
+
     MCTDietTag *tag = _dietTags[indexPath.row];
     cell.textLabel.text = tag.name;
     if([_selectedTags containsObject:tag]){
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"delete_diet_minus"]];
     } else {
-        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"add_diet_plus"]];
     }
     return cell;
 }
