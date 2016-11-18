@@ -47,7 +47,7 @@
     [_topBar setBackgroundColor:[MCTUtils defaultBarColor]];
     [self.view addSubview:_topBar];
     
-    _segControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"Past",@"Upcoming", @"Hosted"]];
+    _segControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"Past",@"Upcoming", @"Hosting"]];
     [_segControl setBackgroundColor:[UIColor clearColor]];
     [_segControl addTarget:self action:@selector(segmentedControlChangedValue) forControlEvents:UIControlEventValueChanged];
     NSDictionary *titleTextAttr = @{

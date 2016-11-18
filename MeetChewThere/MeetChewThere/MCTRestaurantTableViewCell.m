@@ -98,13 +98,13 @@
     
     [_ratingsButton sizeToFit];
     [_ratingsButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_nameLabel.mas_bottom);
+        make.top.equalTo(_nameLabel.mas_bottom).with.offset(5);
         make.left.equalTo(_nameLabel);
     }];
     
     [_dietTagsLabel sizeToFit];
     [_dietTagsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_ratingsButton.mas_bottom);
+        make.top.equalTo(_ratingsButton.mas_bottom).with.offset(5);
         make.left.equalTo(_nameLabel);
     }];
     
