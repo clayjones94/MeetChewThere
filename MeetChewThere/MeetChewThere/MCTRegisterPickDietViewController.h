@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MCTRegisterPickDietViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface MCTRegisterPickDietViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, UITextFieldDelegate>
 
 @end

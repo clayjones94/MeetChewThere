@@ -21,6 +21,8 @@
     NSArray<MCTDietTag *> *_dietTags;
     NSMutableArray<MCTDietTag *> *_selectedTags;
     
+    UITextField *_searchBar;
+    
     MCTContentManager *_contentManager;
 }
 
@@ -36,7 +38,7 @@
     _selectedTags = [NSMutableArray new];
     
     _dietTags = [_contentManager getAllDietTags];
-    [self.view setBackgroundColor:[MCTUtils defaultBarColor]];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
     [self setThemeUsingPrimaryColor:[UIColor whiteColor] withSecondaryColor:[MCTUtils defaultBarColor] andContentStyle:UIContentStyleLight];
     
     [self layoutViews];
@@ -47,13 +49,45 @@
 }
 
 -(void) layoutViews {
+    _searchBar = [[UITextField alloc] init];
+    UIView *leftView = [[UIView alloc] init];
+    UIImageView *icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"search_icon"]];
+    [icon sizeToFit];
+    [leftView setFrame:CGRectMake(0, 0, icon.frame.size.width + 10, icon.frame.size.height)];
+    [icon setFrame:CGRectMake(0, 0, icon.frame.size.width, icon.frame.size.height)];
+    [leftView addSubview:icon];
+    
+    [_searchBar setLeftView:leftView];
+    [_searchBar setLeftViewMode:UITextFieldViewModeUnlessEditing];
+    _searchBar.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 0);
+    [_searchBar setFont:[UIFont fontWithName:@"AppleSDGothicNeo-Regular" size:18]];
+    [_searchBar setPlaceholder:@"Search"];
+    [_searchBar setReturnKeyType:UIReturnKeySearch];
+    [_searchBar setDelegate:self];
+    [self.view addSubview:_searchBar];
+    
+    [_searchBar mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.equalTo(self.view);
+        make.height.mas_equalTo(50);
+    }];
+    
+    UIView * bottomSeparator = [[UIView alloc] init];
+    [bottomSeparator setBackgroundColor:[UIColor lightGrayColor]];
+    [self.view addSubview:bottomSeparator];
+    
+    [bottomSeparator mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.left.right.equalTo(_searchBar);
+        make.height.mas_equalTo(1.0);
+    }];
+    
     _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     [self.view addSubview:_tableView];
     
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.bottom.equalTo(self.view);
+        make.left.right.bottom.equalTo(self.view);
+        make.top.equalTo(_searchBar.mas_bottom);
     }];
 }
 
@@ -107,6 +141,28 @@
 -(void) finish {
     _contentManager.user.dietTags = _selectedTags;
     [self dismissViewControllerAnimated:NO completion:nil];
+}
+
+#pragma text field
+
+-(BOOL)textFieldShouldBeginEditing:(UITextView *)textView {
+    return YES;
+}
+
+-(BOOL)textFieldShouldEndEditing:(UITextView *)textView {
+    [_searchBar resignFirstResponder];
+    return YES;
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [_searchBar resignFirstResponder];
+    NSString *searchText = textField.text;
+    return YES;
+}
+
+-(void)textFieldDidChange:(UITextField *)textField {
+    NSString *searchText = textField.text;
+    [_tableView reloadData];
 }
 
 @end
