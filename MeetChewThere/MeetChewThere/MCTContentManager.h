@@ -24,6 +24,10 @@
 - (NSArray *) getAllDietTags;
 - (NSArray *) getAllEvents;
 - (NSArray *) getAllRestaurants;
+- (NSArray *) getAllRestaurantsByRating;
+- (NSArray *) getAllRestaurantsByDistance;
+- (NSArray *) getAllRestaurantsByName;
+- (NSArray *) getAllRestaurantsByPrice;
 -(NSArray *) getEventsForRestaurant: (MCTRestaurant *) restaurant;
 - (NSArray *) getReviewsForRestaurant: (MCTRestaurant *) restaurant WithTag: (MCTDietTag *) dietTag;
 

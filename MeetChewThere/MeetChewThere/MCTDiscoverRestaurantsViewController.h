@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "ZLDropDownMenu.h"
 
-@interface MCTDiscoverRestaurantsViewController : UIViewController <ZLDropDownMenuDataSource, ZLDropDownMenuDelegate, UITextViewDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface MCTDiscoverRestaurantsViewController : UIViewController <ZLDropDownMenuDataSource, ZLDropDownMenuDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @end
