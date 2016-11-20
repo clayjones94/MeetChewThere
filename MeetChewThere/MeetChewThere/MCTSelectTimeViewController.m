@@ -7,6 +7,7 @@
 //
 
 #import "MCTSelectTimeViewController.h"
+#import "MCTSelectRestaurantViewController.h"
 
 @implementation MCTSelectTimeViewController {
     UIDatePicker *_datePicker;
@@ -20,8 +21,8 @@
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
     [self.navigationController setNavigationBarHidden:NO];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(nextPage)];
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStyleDone target:self action:@selector(nextPage)];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
     
     [self layoutSubviews];
 }
@@ -34,12 +35,9 @@
 }
 
 -(void) nextPage {
-    MCTSelectTimeViewController *vc = [MCTSelectTimeViewController new];
+    MCTSelectRestaurantViewController *vc = [MCTSelectRestaurantViewController new];
     vc.event = _event;
-}
-
--(void) cancelPage {
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

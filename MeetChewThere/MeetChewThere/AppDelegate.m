@@ -13,6 +13,7 @@
 #import "MCTUtils.h"
 #import <ChameleonFramework/Chameleon.h>
 #import "MCTSelectDateViewController.h"
+#import "MCTAddEventDetailsViewController.h"
 
 @interface AppDelegate () <UITabBarControllerDelegate>
 
@@ -61,7 +62,7 @@
 -(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
     NSArray *viewControllers = ((UINavigationController *) viewController).viewControllers;
     if([[viewControllers objectAtIndex:viewControllers.count - 1] isKindOfClass:[MCTCreateEventViewController class]]) {
-        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:[MCTSelectDateViewController new]];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:[MCTAddEventDetailsViewController new]];
         [_controller presentViewController:nav animated:YES completion:nil];
         return NO;
     }

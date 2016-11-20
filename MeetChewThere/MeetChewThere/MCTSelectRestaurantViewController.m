@@ -1,21 +1,18 @@
 //
-//  MCTDiscoverRestaurantsViewController.m
+//  MCTSelectRestaurantViewController.m
 //  MeetChewThere
 //
-//  Created by Clay Jones on 11/4/16.
+//  Created by Clay Jones on 11/20/16.
 //  Copyright © 2016 CS147Group. All rights reserved.
 //
 
-#import "MCTDiscoverRestaurantsViewController.h"
-#import "ZLDropDownMenu.h"
-#import "MCTRestaurantTableViewCell.h"
-#import "MCTContentManager.h"
-#import "MCTRestaurant.h"
+#import "MCTSelectRestaurantViewController.h"
 #import "Masonry.h"
-#import "MCTRestaurantDetailViewController.h"
+#import "MCTRestaurant.h"
+#import "MCTContentManager.h"
+#import "MCTRestaurantTableViewCell.h"
 
-@implementation MCTDiscoverRestaurantsViewController {
-    ZLDropDownMenu *_filterMenu;
+@implementation MCTSelectRestaurantViewController {
     NSArray *_filterOptions;
     UITableView *_tableView;
     MCTContentManager *_contentManager;
@@ -23,18 +20,20 @@
     UITextField *_searchBar;
 }
 
+@synthesize event = _event;
+
 -(void)viewDidLoad {
     [self.view setBackgroundColor:[UIColor whiteColor]];
     _contentManager = [MCTContentManager sharedManager];
+    _restaurants = [_contentManager getAllRestaurants];
+    
+    self.navigationController.navigationBarHidden = NO;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(finishPage)];
     
     [self layoutSearch];
     [self layoutTableView];
-}
-
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    _restaurants = [_contentManager getAllRestaurants];
-    [_tableView reloadData];
 }
 
 -(void) layoutSearch {
@@ -58,19 +57,7 @@
     [_searchBar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.equalTo(self.view);
         make.height.mas_equalTo(50);
-        make.width.mas_equalTo(self.view.frame.size.width * 3/4);
-    }];
-    
-    _filterOptions = @[@"Distance", @"Rating", @"Events"];
-    
-    _filterMenu = [[ZLDropDownMenu alloc] init];
-    _filterMenu.delegate = self;
-    _filterMenu.dataSource = self;
-    [self.view addSubview:_filterMenu];
-    [_filterMenu mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.right.equalTo(self.view);
-        make.bottom.equalTo(_searchBar);
-        make.left.equalTo(_searchBar.mas_right);
+        make.width.equalTo(self.view);
     }];
     
     UIView * bottomSeparator = [[UIView alloc] init];
@@ -101,7 +88,7 @@
     [_tableView setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:_tableView];
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_filterMenu.mas_bottom);
+        make.top.equalTo(_searchBar.mas_bottom);
         make.left.right.equalTo(self.view);
         make.bottom.equalTo(self.view);
     }];
@@ -128,43 +115,17 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    [cell setSelected:NO];
-    MCTRestaurantDetailViewController *vc = [MCTRestaurantDetailViewController new];
-    [vc setRestaurant:_restaurants[indexPath.row]];
-    [self.parentViewController.navigationController pushViewController:vc animated:YES];
-    [_searchBar resignFirstResponder];
+//    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+//    [cell setSelected:NO];
+//    MCTRestaurantDetailViewController *vc = [MCTRestaurantDetailViewController new];
+//    [vc setRestaurant:_restaurants[indexPath.row]];
+//    [self.parentViewController.navigationController pushViewController:vc animated:YES];
+//    [_searchBar resignFirstResponder];
+    _event.restaurant = _restaurants[indexPath.row];
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [_searchBar resignFirstResponder];
-}
-
-#pragma Filter Menu
-
-- (NSInteger)numberOfColumnsInMenu:(ZLDropDownMenu *)menu {
-    return 4;
-}
-
-- (NSInteger)menu:(ZLDropDownMenu *)menu numberOfRowsInColumns:(NSInteger)column {
-    return _filterOptions.count;
-}
-
-- (NSString *)menu:(ZLDropDownMenu *)menu titleForColumn:(NSInteger)column {
-    return @"Sort by";
-}
-
-- (NSString *)menu:(ZLDropDownMenu *)menu titleForRowAtIndexPath:(ZLIndexPath *)indexPath {
-    return _filterOptions[indexPath.row];
-}
-
-- (void)menu:(ZLDropDownMenu *)menu didSelectRowAtIndexPath:(ZLIndexPath *)indexPath {
-    [_filterMenu reloadInputViews];
-    [_searchBar resignFirstResponder];
-    if([_filterOptions[indexPath.row]  isEqual: @"Rating"]){
-        _restaurants = [_contentManager getAllRestaurants];
-        [_tableView reloadData];
-    }
 }
 
 #pragma text field
@@ -188,5 +149,11 @@
     NSString *searchText = textField.text;
     [_tableView reloadData];
 }
+
+-(void) finishPage {
+    [_contentManager addNewEvent:_event];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 @end

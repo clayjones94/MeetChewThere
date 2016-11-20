@@ -17,11 +17,9 @@
 
 -(void)viewDidLoad {
     [self.navigationItem setTitle:@"Pick a Date"];
-    _event = [MCTEvent new];
     
     [self.navigationController setNavigationBarHidden:NO];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(nextPage)];
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPage)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStyleDone target:self action:@selector(nextPage)];
     
     [self layoutSubviews];
 }
@@ -95,10 +93,6 @@
     MCTSelectTimeViewController *vc = [MCTSelectTimeViewController new];
     vc.event = _event;
     [self.navigationController pushViewController:vc animated:YES];
-}
-
--(void) cancelPage {
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

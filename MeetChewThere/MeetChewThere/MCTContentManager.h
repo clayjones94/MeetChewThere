@@ -19,6 +19,7 @@
 @property (strong, nonatomic) MCTUser *user;
 
 + (MCTContentManager *)sharedManager;
+-(void) addNewEvent: (MCTEvent *)event;
 - (NSArray *) getAllUsers;
 - (NSArray *) getAllReviews;
 - (NSArray *) getAllDietTags;
