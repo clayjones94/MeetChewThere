@@ -15,5 +15,7 @@
 +(UIColor *) defaultBarColor;
 +(UIColor *) gradientBackgroundColorWithFrame: (CGRect) frame;
 +(NSString *) priceStringForRestaurant: (MCTRestaurant *) restaurant;
++(NSString *) dietTagsListtoString: (NSArray <MCTDietTag *> * ) tags;
+
 
 @end

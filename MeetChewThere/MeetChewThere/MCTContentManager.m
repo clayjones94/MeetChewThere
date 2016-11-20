@@ -74,12 +74,45 @@
     restaurant.name = @"Umami Burger";
     restaurant.urlString = @"umamiburger.com";
     restaurant.imageName = @"umami_prof";
-    restaurant.phone = @"888-888-8888";
+    restaurant.phone = @"650-123-4567";
     restaurant.location = [[CLLocation alloc] initWithLatitude:37.447606 longitude:-122.159583];
     restaurant.details = @"Great burger joint!";
     restaurant.dietTags = @[_dietTags[0], _dietTags[1], _dietTags[2]];
     restaurant.price = 3;
     [_restaurants addObject:restaurant];
+    MCTRestaurant *restaurant1 = [[MCTRestaurant alloc] init];
+    restaurant1.objectID = 1;
+    restaurant1.name = @"Chilli's Restaurant";
+    restaurant1.urlString = @"chillisrestaurant.com";
+    restaurant1.imageName = @"chillis_prof";
+    restaurant1.phone = @"650-888-1234";
+    restaurant1.location = [[CLLocation alloc] initWithLatitude:37.457606 longitude:-122.169583];
+    restaurant1.details = @"Best place to get Sandwiches!";
+    restaurant1.dietTags = @[_dietTags[2], _dietTags[3], _dietTags[2]];
+    restaurant1.price = 1;
+    [_restaurants addObject:restaurant1];
+    MCTRestaurant *restaurant2 = [[MCTRestaurant alloc] init];
+    restaurant2.objectID = 2;
+    restaurant2.name = @"Don's Pizza";
+    restaurant2.urlString = @"donspizza.com";
+    restaurant2.imageName = @"dons_prof";
+    restaurant2.phone = @"650-789-1234";
+    restaurant2.location = [[CLLocation alloc] initWithLatitude:37.452606 longitude:-122.169183];
+    restaurant2.details = @"Must visit for pizza lovers!";
+    restaurant2.dietTags = @[_dietTags[0], _dietTags[1]];
+    restaurant2.price = 2;
+    [_restaurants addObject:restaurant2];
+    MCTRestaurant *restaurant3 = [[MCTRestaurant alloc] init];
+    restaurant3.objectID = 2;
+    restaurant3.name = @"Wang's Chinese Kitchen";
+    restaurant3.urlString = @"wangschinesekitchen.com";
+    restaurant3.imageName = @"wangs_prof";
+    restaurant3.phone = @"650-333-2222";
+    restaurant3.location = [[CLLocation alloc] initWithLatitude:37.451606 longitude:-122.163183];
+    restaurant3.details = @"Traditional chinese!";
+    restaurant3.dietTags = @[_dietTags[1]];
+    restaurant3.price = 1;
+    [_restaurants addObject:restaurant3];
 }
 
 -(void) initEvents {
@@ -96,6 +129,19 @@
     event.dietTags = @[_dietTags[0], _dietTags[1]];
     event.guests = [[NSMutableArray alloc] initWithArray: @[_users[0]]];
     [_events addObject:event];
+    _events = [[NSMutableArray<MCTEvent *> alloc] init];
+    MCTEvent *event1 = [[MCTEvent alloc] init];
+    event1.objectID = 1;
+    event1.name = @"Sandwich Party";
+    event1.details = @"The best party in town!";
+    event1.date = [NSDate date];
+    event1.admin = _users[0];
+    event1.isGoing = NO;
+    event1.capacity = 15;
+    event1.restaurant = _restaurants[2];
+    event1.dietTags = @[_dietTags[1]];
+    event1.guests = [[NSMutableArray alloc] initWithArray: @[_users[0]]];
+    [_events addObject:event1];
 }
 
 -(void) initReviews {
@@ -156,6 +202,169 @@
 
 - (NSArray *) getAllRestaurants {
     return _restaurants;
+}
+
+- (NSArray *) getAllRestaurantsByRating {
+    //Yet to implement
+    return _restaurants;
+}
+
+- (NSArray *) getAllRestaurantsByDistance {
+    NSMutableArray<MCTRestaurant *> *_restaurants1 = [[NSMutableArray<MCTRestaurant *> alloc] init];
+    NSMutableArray<NSString *> *distances = [[NSMutableArray<NSString *> alloc] init];
+    for (int i = 0; i < _restaurants.count; i++) {
+        CLLocationDistance distance = [_restaurants[i].location distanceFromLocation: _locationManager.location];
+        [distances addObject:[NSString stringWithFormat:@"%.1f", distance/1607.0]];
+    }
+    [distances sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    for (int i = 0; i < distances.count; i++) {
+        for (int j = 0; j < _restaurants.count; j++) {
+            CLLocationDistance distance = [_restaurants[j].location distanceFromLocation: _locationManager.location];
+            if ([distances[i] isEqualToString:[NSString stringWithFormat:@"%.1f", distance/1607.0]]) {
+                [_restaurants1 addObject:_restaurants[j]];
+            }
+        }
+    }
+    return _restaurants1;
+}
+
+- (NSArray *) getAllRestaurantsByPrice {
+    NSMutableArray<MCTRestaurant *> *_restaurants1 = [[NSMutableArray<MCTRestaurant *> alloc] init];
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < _restaurants.count; j++) {
+            if (i+1 == _restaurants[j].price) {
+                [_restaurants1 addObject:_restaurants[j]];
+            }
+        }
+    }
+    return _restaurants1;
+}
+
+- (NSArray *) getAllRestaurantsByName {
+    NSMutableArray<MCTRestaurant *> *_restaurants1 = [[NSMutableArray<MCTRestaurant *> alloc] init];
+    NSMutableArray<NSString *> *names = [[NSMutableArray<NSString *> alloc] init];
+    for (int i = 0; i < _restaurants.count; i++) {
+        [names addObject:_restaurants[i].name];
+    }
+    [names sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    for (int i = 0; i < names.count; i++) {
+        for (int j = 0; j < _restaurants.count; j++) {
+            if ([names[i] isEqualToString:_restaurants[j].name]) {
+                [_restaurants1 addObject:_restaurants[j]];
+            }
+        }
+    }
+    return _restaurants1;
+}
+
+- (NSArray *) getAllEventsByAnytime1 {
+    return _events;
+}
+
+- (NSArray *) getAllEventsByToday {
+    return _events;
+}
+
+- (NSArray *) getAllEventsByThisWeek {
+    return _events;
+}
+
+- (NSArray *) getAllEventsByNextWeek {
+    return _events;
+}
+
+- (NSArray *) getAllEventsByAnytime2 {
+    return _events;
+}
+
+- (NSArray *) getAllEventsByMorning {
+    return _events;
+}
+
+- (NSArray *) getAllEventsByAfternoon {
+    return _events;
+}
+
+- (NSArray *) getAllEventsByEvening {
+    return _events;
+}
+
+- (NSArray *) getAllEventsByDistance1 {
+    NSMutableArray<MCTEvent *> *_events1 = [[NSMutableArray<MCTEvent *> alloc] init];
+    for (int i = 0; i < _events.count; i++) {
+        CLLocationDistance distance = [_events[i].restaurant.location distanceFromLocation: _locationManager.location];
+        if (distance/1607.0 <= 1) {
+            [_events1 addObject:_events[i]];
+        }
+    }
+    return _events1;
+}
+
+- (NSArray *) getAllEventsByDistance50 {
+    NSMutableArray<MCTEvent *> *_events1 = [[NSMutableArray<MCTEvent *> alloc] init];
+    for (int i = 0; i < _events.count; i++) {
+        CLLocationDistance distance = [_events[i].restaurant.location distanceFromLocation: _locationManager.location];
+        if (distance/1607.0 <= 50) {
+            [_events1 addObject:_events[i]];
+        }
+    }
+    return _events1;
+}
+
+- (NSArray *) getAllEventsByDistance10 {
+    NSMutableArray<MCTEvent *> *_events1 = [[NSMutableArray<MCTEvent *> alloc] init];
+    for (int i = 0; i < _events.count; i++) {
+        CLLocationDistance distance = [_events[i].restaurant.location distanceFromLocation: _locationManager.location];
+        if (distance/1607.0 <= 10) {
+            [_events1 addObject:_events[i]];
+        }
+    }
+    return _events1;
+}
+
+- (NSArray *) getAllEventsByDistance25 {
+    NSMutableArray<MCTEvent *> *_events1 = [[NSMutableArray<MCTEvent *> alloc] init];
+    for (int i = 0; i < _events.count; i++) {
+        CLLocationDistance distance = [_events[i].restaurant.location distanceFromLocation: _locationManager.location];
+        if (distance/1607.0 <= 25) {
+            [_events1 addObject:_events[i]];
+        }
+    }
+    return _events1;
+}
+
+- (NSArray *) getAllEventsByPriceAny {
+    return _events;
+}
+
+- (NSArray *) getAllEventsByPrice1 {
+    NSMutableArray<MCTEvent *> *_events1 = [[NSMutableArray<MCTEvent *> alloc] init];
+    for (int i = 0; i < _events.count; i++) {
+        if (_events[i].restaurant.price == 1) {
+            [_events1 addObject:_events[i]];
+        }
+    }
+    return _events1;
+}
+
+- (NSArray *) getAllEventsByPrice2 {
+    NSMutableArray<MCTEvent *> *_events1 = [[NSMutableArray<MCTEvent *> alloc] init];
+    for (int i = 0; i < _events.count; i++) {
+        if (_events[i].restaurant.price == 2) {
+            [_events1 addObject:_events[i]];
+        }
+    }
+    return _events1;
+}
+
+- (NSArray *) getAllEventsByPrice3 {
+    NSMutableArray<MCTEvent *> *_events1 = [[NSMutableArray<MCTEvent *> alloc] init];
+    for (int i = 0; i < _events.count; i++) {
+        if (_events[i].restaurant.price == 3) {
+            [_events1 addObject:_events[i]];
+        }
+    }
+    return _events1;
 }
 
 #pragma Location Delegate

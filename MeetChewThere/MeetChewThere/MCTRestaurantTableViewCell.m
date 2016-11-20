@@ -83,7 +83,8 @@
     if (_restaurant) {
         [_nameLabel setText:_restaurant.name];
         [_ratingsButton setText:[NSString stringWithFormat:@"%@", [MCTUtils priceStringForRestaurant:_restaurant]]];
-        [_dietTagsLabel setText:_restaurant.dietTags.firstObject.name];
+        [_dietTagsLabel setText: [MCTUtils dietTagsListtoString: _restaurant.dietTags]];
+//        [_dietTagsLabel setText:_restaurant.dietTags.firstObject.name];
         [_eventsLabel setText:[NSString stringWithFormat:@"%lu events", (unsigned long)[_contentManager getEventsForRestaurant:_restaurant].count]];
         CLLocationDistance distance = [_restaurant.location distanceFromLocation: [_contentManager locationManager].location];
         _distanceLabel.text = [NSString stringWithFormat:@"%.1f mi", distance/1607.0];

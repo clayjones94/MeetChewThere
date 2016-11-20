@@ -24,7 +24,29 @@
 - (NSArray *) getAllDietTags;
 - (NSArray *) getAllEvents;
 - (NSArray *) getAllRestaurants;
+- (NSArray *) getAllRestaurantsByRating;
+- (NSArray *) getAllRestaurantsByDistance;
+- (NSArray *) getAllRestaurantsByName;
+- (NSArray *) getAllRestaurantsByPrice;
 -(NSArray *) getEventsForRestaurant: (MCTRestaurant *) restaurant;
 - (NSArray *) getReviewsForRestaurant: (MCTRestaurant *) restaurant WithTag: (MCTDietTag *) dietTag;
+- (NSArray *) getAllEventsByAnytime1;
+- (NSArray *) getAllEventsByToday;
+- (NSArray *) getAllEventsByThisWeek;
+- (NSArray *) getAllEventsByNextWeek;
+- (NSArray *) getAllEventsByAnytime2;
+- (NSArray *) getAllEventsByMorning;
+- (NSArray *) getAllEventsByAfternoon;
+- (NSArray *) getAllEventsByEvening;
+- (NSArray *) getAllEventsByDistance1;
+- (NSArray *) getAllEventsByDistance50;
+- (NSArray *) getAllEventsByDistance10;
+- (NSArray *) getAllEventsByDistance25;
+- (NSArray *) getAllEventsByPriceAny;
+- (NSArray *) getAllEventsByPrice1;
+- (NSArray *) getAllEventsByPrice2;
+- (NSArray *) getAllEventsByPrice3;
+
+
 
 @end
