@@ -25,6 +25,7 @@
     [super viewDidLoad];
     _event = [MCTEvent new];
     _event.admin = [MCTContentManager sharedManager].user;
+    [_event.guests addObject:[MCTContentManager sharedManager].user];
     
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self.navigationItem setTitle:@"New Event"];
@@ -152,6 +153,8 @@
     _event.name = _nameField.text;
     _event.capacity = [_capacityField.text integerValue];
     _event.details = _descriptionField.text;
+    _event.dietTags = [[NSMutableArray alloc] init];
+    _event.guests = [[NSMutableArray alloc] init];
     
     MCTSelectDateViewController *vc = [MCTSelectDateViewController new];
     vc.event = _event;
