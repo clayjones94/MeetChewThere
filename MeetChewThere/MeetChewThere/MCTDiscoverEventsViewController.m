@@ -39,10 +39,10 @@ int _selectedIndexes[4] = {0,0,0,0};
     _filterTitles = @[@"Date", @"Time", @"Distance", @"Price"];
     _filterOptions = [[NSMutableDictionary alloc] initWithDictionary:
     @{
-      _filterTitles[0]: @[@"Anytime", @"Today", @"Tomorrow", @"This Week", @"Next Week"],
-      _filterTitles[1]: @[@"Anytime", @"Morning", @"Mid Day", @"Afternoon", @"Evening", @"Late Night"],
-      _filterTitles[2]: @[@1, @5, @10, @25, @50],
-      _filterTitles[3]: @[@1, @2, @3, @4, @5],
+      _filterTitles[0]: @[@"Anytime", @"Today", @"This Week", @"Next Week"],
+      _filterTitles[1]: @[@"Anytime", @"Morning", @"Afternoon", @"Evening"],
+      _filterTitles[2]: @[@1, @10, @25, @50],
+      _filterTitles[3]: @[@1, @2, @3],
       }];
     
     _filterMenu = [[ZLDropDownMenu alloc] init];
@@ -131,7 +131,72 @@ int _selectedIndexes[4] = {0,0,0,0};
 
 - (void)menu:(ZLDropDownMenu *)menu didSelectRowAtIndexPath:(ZLIndexPath *)indexPath {
     _selectedIndexes[(int)indexPath.column] = (int)indexPath.row;
-    
+//    _filterTitles[0]: @[@"Anytime", @"Today", @"This Week", @"Next Week"],
+//    _filterTitles[1]: @[@"Anytime", @"Morning", @"Afternoon", @"Evening"],
+//    _filterTitles[2]: @[@1, @5, @10, @25],
+//    _filterTitles[3]: @[@1, @2, @3],
+    NSLog(@"Search text: %ld", (long)indexPath.column);
+    if(indexPath.column  == 0 && indexPath.row  == 0){
+        _events = [_contentManager getAllEventsByAnytime1];
+        [_tableView reloadData];
+    }
+    else if(indexPath.column  == 0 && indexPath.row  == 1){
+        NSLog(@"Search text: hereeeee");
+        _events = [_contentManager getAllEventsByToday];
+        [_tableView reloadData];
+    }
+    else if(indexPath.column  == 0 && indexPath.row  == 2){
+        _events = [_contentManager getAllEventsByThisWeek];
+        [_tableView reloadData];
+    }
+    else if(indexPath.column  == 0 && indexPath.row  == 3){
+        _events = [_contentManager getAllEventsByNextWeek];
+        [_tableView reloadData];
+    }
+    else if(indexPath.column  == 1 && indexPath.row  == 0){
+        _events = [_contentManager getAllEventsByAnytime2];
+        [_tableView reloadData];
+    }
+    else if(indexPath.column  == 1 && indexPath.row  == 1){
+        _events = [_contentManager getAllEventsByMorning];
+        [_tableView reloadData];
+    }
+    else if(indexPath.column  == 1 && indexPath.row  == 2){
+        _events = [_contentManager getAllEventsByAfternoon];
+        [_tableView reloadData];
+    }
+    else if(indexPath.column  == 1 && indexPath.row  == 3){
+        _events = [_contentManager getAllEventsByEvening];
+        [_tableView reloadData];
+    }
+    else if(indexPath.column  == 2 && indexPath.row  == 0){
+        _events = [_contentManager getAllEventsByDistance1];
+        [_tableView reloadData];
+    }
+    else if(indexPath.column  == 2 && indexPath.row  == 1){
+        _events = [_contentManager getAllEventsByDistance10];
+        [_tableView reloadData];
+    }
+    else if(indexPath.column  == 2 && indexPath.row  == 2){
+        _events = [_contentManager getAllEventsByDistance25];
+        [_tableView reloadData];
+    }
+    else if(indexPath.column  == 2 && indexPath.row  == 3){
+        _events = [_contentManager getAllEventsByDistance50];
+        [_tableView reloadData];
+    }
+    else if(indexPath.column  == 3 && indexPath.row  == 0){
+        _events = [_contentManager getAllEventsByPrice1];
+        [_tableView reloadData];
+    }
+    else if(indexPath.column  == 3 && indexPath.row  == 1){
+        _events = [_contentManager getAllEventsByPrice2];
+        [_tableView reloadData];
+    }
+    else if(indexPath.column  == 3 && indexPath.row  == 2){
+        _events = [_contentManager getAllEventsByPrice3];
+        [_tableView reloadData];
+    }
     [_filterMenu reloadInputViews];
 }
 

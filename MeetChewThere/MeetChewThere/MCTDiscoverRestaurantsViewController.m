@@ -61,7 +61,7 @@
         make.width.mas_equalTo(self.view.frame.size.width * 3/4);
     }];
     
-    _filterOptions = @[@"Distance", @"Rating", @"Events"];
+    _filterOptions = @[@"Distance", @"Rating", @"Name", @"Price"];
     
     _filterMenu = [[ZLDropDownMenu alloc] init];
     _filterMenu.delegate = self;
@@ -162,7 +162,19 @@
     [_filterMenu reloadInputViews];
     [_searchBar resignFirstResponder];
     if([_filterOptions[indexPath.row]  isEqual: @"Rating"]){
-        _restaurants = [_contentManager getAllRestaurants];
+        _restaurants = [_contentManager getAllRestaurantsByRating];
+        [_tableView reloadData];
+    }
+    else if([_filterOptions[indexPath.row]  isEqual: @"Distance"]){
+        _restaurants = [_contentManager getAllRestaurantsByDistance];
+        [_tableView reloadData];
+    }
+    else if([_filterOptions[indexPath.row]  isEqual: @"Price"]){
+        _restaurants = [_contentManager getAllRestaurantsByPrice];
+        [_tableView reloadData];
+    }
+    else if([_filterOptions[indexPath.row]  isEqual: @"Name"]){
+        _restaurants = [_contentManager getAllRestaurantsByName];
         [_tableView reloadData];
     }
 }
@@ -186,6 +198,7 @@
 
 -(void)textFieldDidChange:(UITextField *)textField {
     NSString *searchText = textField.text;
+//    NSLog(@"Search text: %@", searchText);
     [_tableView reloadData];
 }
 

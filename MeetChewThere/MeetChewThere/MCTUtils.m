@@ -44,4 +44,15 @@
     return str;
 }
 
++(NSString *) dietTagsListtoString: (NSArray <MCTDietTag *> * ) tags {
+    NSMutableString * str = [[NSMutableString alloc] initWithString: @""];
+    for (int i = 0; i < tags.count; i++) {
+        [str appendString: tags[i].name];
+        if (i != tags.count-1) {
+             [str appendString: @", "];
+        }
+    }
+    return str;
+}
+
 @end
