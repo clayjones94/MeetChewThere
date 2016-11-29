@@ -12,6 +12,8 @@
 #import "MCTProfileEventsViewController.h"
 #import "MCTUtils.h"
 #import <ChameleonFramework/Chameleon.h>
+#import "MCTSelectDateViewController.h"
+#import "MCTAddEventDetailsViewController.h"
 
 @interface AppDelegate () <UITabBarControllerDelegate>
 
@@ -29,7 +31,6 @@
     
     _controller = [[UITabBarController alloc] init];
     _controller.delegate = self;
-//    _controller.tabBar.tintColor = [MCTUtils defaultBarColor];
     [_controller setViewControllers:[self tabBarControllers] animated:NO];
     
     self.window.rootViewController = _controller;
@@ -53,12 +54,19 @@
     
     NSArray *viewControllers = @[discoverController, createController, eventsController];
     for (UINavigationController *vc in viewControllers) {
-//        vc.navigationBar.barTintColor = [MCTUtils defaultBarColor];
-//        vc.navigationBar.tintColor = [UIColor whiteColor];
-//        vc.navigationBar.backgroundColor = [MCTUtils defaultBarColor];
         [vc.navigationBar setOpaque:YES];
     }
     return viewControllers;
+}
+
+-(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
+    NSArray *viewControllers = ((UINavigationController *) viewController).viewControllers;
+    if([[viewControllers objectAtIndex:viewControllers.count - 1] isKindOfClass:[MCTCreateEventViewController class]]) {
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:[MCTAddEventDetailsViewController new]];
+        [_controller presentViewController:nav animated:YES completion:nil];
+        return NO;
+    }
+    return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

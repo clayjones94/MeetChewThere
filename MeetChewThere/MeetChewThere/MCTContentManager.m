@@ -157,6 +157,10 @@
     [_reviews addObject:review];
 }
 
+-(void) addNewEvent:(MCTEvent *)event {
+    [_events addObject:event];
+}
+
 - (NSArray *) getAllUsers {
     return _users;
 }

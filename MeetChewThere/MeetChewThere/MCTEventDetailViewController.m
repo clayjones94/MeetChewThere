@@ -209,11 +209,13 @@
     [_descriptionLabel setText:_event.details];
     [_descriptionLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12]];
     [_descriptionLabel setTextColor:[UIColor blackColor]];
-    [_descriptionLabel sizeToFit];
+    [_descriptionLabel setNumberOfLines:0];
+    [_descriptionLabel setLineBreakMode:NSLineBreakByWordWrapping];
     
     [_descriptionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(descriptionDetailLabel);
         make.top.equalTo(descriptionDetailLabel.mas_bottom);
+        make.right.equalTo(self.view.mas_right).with.offset(-10);
     }];
     
     _joinButton = [[UIButton alloc] init];

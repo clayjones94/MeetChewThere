@@ -26,10 +26,15 @@
 -(void)viewDidLoad {
     [self.view setBackgroundColor:[UIColor whiteColor]];
     _contentManager = [MCTContentManager sharedManager];
-    _restaurants = [_contentManager getAllRestaurants];
     
     [self layoutSearch];
     [self layoutTableView];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    _restaurants = [_contentManager getAllRestaurants];
+    [_tableView reloadData];
 }
 
 -(void) layoutSearch {
