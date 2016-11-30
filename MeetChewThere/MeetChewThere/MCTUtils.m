@@ -68,21 +68,21 @@
 
 + (NSInteger) getMonthForDate: (NSDate *)date {
     NSCalendar* calendar = [NSCalendar currentCalendar];
-    NSDateComponents* components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:date];
+    NSDateComponents* components = [calendar components:NSCalendarUnitMonth fromDate:date];
     
     return [components month];
 }
 
 + (NSInteger) getHourForDate: (NSDate *)date {
     NSCalendar* calendar = [NSCalendar currentCalendar];
-    NSDateComponents* components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:date];
+    NSDateComponents* components = [calendar components:NSCalendarUnitHour fromDate:date];
     
     return [components hour];
 }
 
 + (NSInteger) getMinuteForDate: (NSDate *)date {
     NSCalendar* calendar = [NSCalendar currentCalendar];
-    NSDateComponents* components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:date];
+    NSDateComponents* components = [calendar components:NSCalendarUnitMinute fromDate:date];
     
     return [components minute];
 }

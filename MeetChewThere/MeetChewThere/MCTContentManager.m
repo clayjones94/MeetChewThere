@@ -206,6 +206,7 @@
     MCTRestaurant *restaurant48 = [[MCTRestaurant alloc] init];	restaurant48.objectID = 48;	restaurant48.name = @"Mayfield Bakery & Cafe";	restaurant48.urlString = @"mayfieldbakery.com";	restaurant48.imageName = @"48_prof";	restaurant48.phone = @"(650) 853-9200";	restaurant48.location = [[CLLocation alloc] initWithLatitude:37.438625 longitude:-122.160529];	restaurant48.details = @"American (New), Bakeries, Breakfast & Brunch";	restaurant48.dietTags = @[_dietTags[0], _dietTags[7]];	[_restaurants addObject:restaurant48];
     _allRestaurants = [[NSMutableArray alloc] init];
     for (MCTRestaurant *restaurant in _restaurants) {
+        [restaurant setPrice: arc4random_uniform(3)+1];
         [_allRestaurants addObject:restaurant];
     }
 }
@@ -474,6 +475,11 @@
     for (MCTEvent *event in _events) {
         CLLocationDistance distance = [event.restaurant.location distanceFromLocation: _locationManager.location];
         if ([price integerValue] != event.restaurant.price || distance/1607.0 > [miles doubleValue]) {
+            continue;
+        }
+        if (([MCTUtils getHourForDate:event.date] > 12 && [timeOfDayString.lowercaseString isEqualToString:@"morning"])
+            || ([MCTUtils getHourForDate:event.date] > 17 && [MCTUtils getHourForDate:event.date] <= 12 && [timeOfDayString.lowercaseString isEqualToString:@"afternoon"])
+            || ([MCTUtils getHourForDate:event.date] <= 17 && [timeOfDayString.lowercaseString isEqualToString:@"evening"])) {
             continue;
         }
         [events addObject:event];
