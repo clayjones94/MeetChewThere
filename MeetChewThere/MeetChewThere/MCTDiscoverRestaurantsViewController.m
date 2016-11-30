@@ -21,12 +21,14 @@
     MCTContentManager *_contentManager;
     NSArray<MCTRestaurant *> *_restaurants;
     UITextField *_searchBar;
+    NSInteger _filterIndex;
+    NSString *_searchText;
 }
 
 -(void)viewDidLoad {
     [self.view setBackgroundColor:[UIColor whiteColor]];
     _contentManager = [MCTContentManager sharedManager];
-    
+    _searchText = @"";
     [self layoutSearch];
     [self layoutTableView];
 }
@@ -161,19 +163,25 @@
 - (void)menu:(ZLDropDownMenu *)menu didSelectRowAtIndexPath:(ZLIndexPath *)indexPath {
     [_filterMenu reloadInputViews];
     [_searchBar resignFirstResponder];
-    if([_filterOptions[indexPath.row]  isEqual: @"Rating"]){
+    _filterIndex = indexPath.row;
+    [self loadTableView];
+}
+
+-(void) loadTableView {
+    [_contentManager searchRestaurantsBySearchText:_searchText];
+    if([_filterOptions[_filterIndex]  isEqual: @"Rating"]){
         _restaurants = [_contentManager getAllRestaurantsByRating];
         [_tableView reloadData];
     }
-    else if([_filterOptions[indexPath.row]  isEqual: @"Distance"]){
+    else if([_filterOptions[_filterIndex]  isEqual: @"Distance"]){
         _restaurants = [_contentManager getAllRestaurantsByDistance];
         [_tableView reloadData];
     }
-    else if([_filterOptions[indexPath.row]  isEqual: @"Price"]){
+    else if([_filterOptions[_filterIndex]  isEqual: @"Price"]){
         _restaurants = [_contentManager getAllRestaurantsByPrice];
         [_tableView reloadData];
     }
-    else if([_filterOptions[indexPath.row]  isEqual: @"Name"]){
+    else if([_filterOptions[_filterIndex]  isEqual: @"Name"]){
         _restaurants = [_contentManager getAllRestaurantsByName];
         [_tableView reloadData];
     }
@@ -192,14 +200,16 @@
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
     [_searchBar resignFirstResponder];
-    NSString *searchText = textField.text;
+    _searchText = textField.text;
+    [self loadTableView];
     return YES;
 }
 
--(void)textFieldDidChange:(UITextField *)textField {
-    NSString *searchText = textField.text;
-//    NSLog(@"Search text: %@", searchText);
-    [_tableView reloadData];
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    _searchText = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    [self loadTableView];
+    return YES;
 }
+
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "MCTContentManager.h"
+#import "MCTUtils.h"
 
 @implementation MCTContentManager {
     NSMutableArray<MCTDietTag *> *_dietTags;
@@ -14,6 +15,7 @@
     NSMutableArray<MCTRestaurantReview *> *_reviews;
     NSMutableArray<MCTEvent *> *_events;
     NSMutableArray<MCTRestaurant *> *_restaurants;
+    NSMutableArray<MCTRestaurant *> *_allRestaurants;
 }
 
 @synthesize locationManager = _locationManager;
@@ -113,6 +115,10 @@
     restaurant3.dietTags = @[_dietTags[1]];
     restaurant3.price = 1;
     [_restaurants addObject:restaurant3];
+    _allRestaurants = [[NSMutableArray alloc] init];
+    for (MCTRestaurant *restaurant in _restaurants) {
+        [_allRestaurants addObject:restaurant];
+    }
 }
 
 -(void) initEvents {
@@ -134,7 +140,7 @@
     event1.objectID = 1;
     event1.name = @"Sandwich Party";
     event1.details = @"The best party in town!";
-    event1.date = [NSDate date];
+    event1.date = [MCTUtils dateWithYear:2015 month:11 day:5 hour:14 minute:30];
     event1.admin = _users[0];
     event1.isGoing = NO;
     event1.capacity = 15;
@@ -261,6 +267,19 @@
     return _restaurants1;
 }
 
+- (void) searchRestaurantsBySearchText: (NSString *) text {
+    if ([text isEqualToString:@""]) {
+        _restaurants = _allRestaurants;
+    } else {
+        _restaurants = [[NSMutableArray alloc] init];
+        for (MCTRestaurant *restaurant in _allRestaurants) {
+            if ([[restaurant.name lowercaseString] containsString:[text lowercaseString]]) {
+                [_restaurants addObject:restaurant];
+            }
+        }
+    }
+}
+
 - (NSArray *) getAllEventsByAnytime1 {
     return _events;
 }
@@ -369,6 +388,18 @@
         }
     }
     return _events1;
+}
+
+-(NSArray *) getEventsForPrice: (NSNumber *) price beforeDate: (NSString *) dateString withinDistanceMiles: (NSNumber *) miles forTimeOfDay: (NSString *) timeOfDayString {
+    NSMutableArray *events = [NSMutableArray new];
+    for (MCTEvent *event in _events) {
+        CLLocationDistance distance = [event.restaurant.location distanceFromLocation: _locationManager.location];
+        if ([price integerValue] != event.restaurant.price || distance/1607.0 > [miles doubleValue]) {
+            continue;
+        }
+        [events addObject:event];
+    }
+    return events;
 }
 
 #pragma Location Delegate

@@ -55,4 +55,79 @@
     return str;
 }
 
++ (NSDate *)dateWithYear:(NSInteger)year month:(NSInteger)month day:(NSInteger)day hour:(NSInteger)hour minute:(NSInteger)minute {
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    [components setYear:year];
+    [components setMonth:month];
+    [components setDay:day];
+    [components setHour:hour];
+    [components setMinute:minute];
+    return [calendar dateFromComponents:components];
+}
+
++ (NSInteger) getMonthForDate: (NSDate *)date {
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSDateComponents* components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:date];
+    
+    return [components month];
+}
+
++ (NSInteger) getHourForDate: (NSDate *)date {
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSDateComponents* components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:date];
+    
+    return [components hour];
+}
+
++ (NSInteger) getMinuteForDate: (NSDate *)date {
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSDateComponents* components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:date];
+    
+    return [components minute];
+}
+
++ (NSInteger) getDayForDate: (NSDate *)date {
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSDateComponents* components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:date];
+    
+    return [components day];
+}
+
++ (NSInteger) getYearForDate: (NSDate *)date {
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSDateComponents* components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:date];
+    
+    return [components year];
+}
+
++ (NSString *) getMonthStringForDate: (NSDate *)date {
+    if ([self getMonthForDate:date] == 0) {
+        return @"January";
+    } else if ([self getMonthForDate:date] == 1) {
+        return @"February";
+    } else if ([self getMonthForDate:date] == 2) {
+        return @"March";
+    } else if ([self getMonthForDate:date] == 3) {
+        return @"April";
+    } else if ([self getMonthForDate:date] == 4) {
+        return @"May";
+    } else if ([self getMonthForDate:date] == 5) {
+        return @"June";
+    } else if ([self getMonthForDate:date] == 6) {
+        return @"July";
+    } else if ([self getMonthForDate:date] == 7) {
+        return @"August";
+    } else if ([self getMonthForDate:date] == 8) {
+        return @"September";
+    } else if ([self getMonthForDate:date] == 9) {
+        return @"October";
+    } else if ([self getMonthForDate:date] == 10) {
+        return @"November";
+    } else if ([self getMonthForDate:date] == 11) {
+        return @"December";
+    }
+    return @"";
+}
+
 @end

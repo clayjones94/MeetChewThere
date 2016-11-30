@@ -81,13 +81,13 @@
         [_restaurantButton setText:[NSString stringWithFormat:@"%@ - %@", _event.restaurant.name, [MCTUtils priceStringForRestaurant:_event.restaurant]]];
         [_dietTagsLabel setText:_event.dietTags.firstObject.name];
         [_guestsLabel setText:[NSString stringWithFormat:@"%lu guests", (unsigned long)_event.guests.count]];
-        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitMinute fromDate:_event.date];
         NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init] ;
         [dateFormatter setDateStyle:NSDateFormatterLongStyle];
-        NSString *labelData = [dateFormatter stringFromDate:_event.date];
-        _dateLabel.text = labelData;
+        NSDateFormatter *timeFormatter = [[NSDateFormatter alloc]init];
+        timeFormatter.dateFormat = @"h:mma";
+        NSString *timeString = [timeFormatter stringFromDate:_event.date];
+        _dateLabel.text = [NSString stringWithFormat:@"%@ - %@ %ld", timeString, [[MCTUtils getMonthStringForDate:_event.date] substringToIndex:3], (long)[MCTUtils getDayForDate:_event.date]];
         [_imageView setImage:[UIImage imageNamed:_event.restaurant.imageName]];
-//        [_dateLabel setText:[NSString stringWithFormat:@"%ld:%ld - %ld/%ld", (long)components.hour, (long)components.minute, (long)components.month, (long)components.day]];
     }
     
     [_nameLabel sizeToFit];

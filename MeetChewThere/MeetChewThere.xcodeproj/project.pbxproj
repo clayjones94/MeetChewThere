@@ -304,7 +304,6 @@
 				92A855681DCD63ED00DB27A3 /* DiscoverRestaurants */,
 				92A8556C1DCD645600DB27A3 /* DiscoverEvents */,
 				92A8555E1DCD5DA400DB27A3 /* Discover */,
-				92A855631DCD61FA00DB27A3 /* CreateEvent */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -349,6 +348,7 @@
 		92A8556C1DCD645600DB27A3 /* DiscoverEvents */ = {
 			isa = PBXGroup;
 			children = (
+				92A855631DCD61FA00DB27A3 /* CreateEvent */,
 				92A8556D1DCD64A700DB27A3 /* MCTDiscoverEventsViewController.h */,
 				92A8556E1DCD64A700DB27A3 /* MCTDiscoverEventsViewController.m */,
 				92A855C41DCDAFD100DB27A3 /* MCTEventTableViewCell.h */,

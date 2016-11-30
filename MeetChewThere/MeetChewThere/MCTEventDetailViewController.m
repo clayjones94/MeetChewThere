@@ -79,7 +79,7 @@
     
     _monthLabel = [[UILabel alloc] init];
     [_introContainerView addSubview:_monthLabel];
-    [_monthLabel setText:@"OCTOBER"];
+    [_monthLabel setText:[[MCTUtils getMonthStringForDate:_event.date] substringToIndex:3].uppercaseString];
     [_monthLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12]];
     [_monthLabel setTextColor:[MCTUtils defaultBarColor]];
     [_monthLabel sizeToFit];
@@ -91,7 +91,7 @@
     
     _dateLabel = [[UILabel alloc] init];
     [_introContainerView addSubview:_dateLabel];
-    [_dateLabel setText:@"30"];
+    [_dateLabel setText:[NSString stringWithFormat:@"%lu", [MCTUtils getDayForDate:_event.date]]];
     [_dateLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:35]];
     [_dateLabel setTextColor:[UIColor blackColor]];
     [_dateLabel sizeToFit];
@@ -103,7 +103,10 @@
     
     _timeLabel = [[UILabel alloc] init];
     [_introContainerView addSubview:_timeLabel];
-    [_timeLabel setText:@"7:30pm"];
+    NSDateFormatter *timeFormatter = [[NSDateFormatter alloc]init];
+    timeFormatter.dateFormat = @"h:mma";
+    NSString *timeString = [timeFormatter stringFromDate:_event.date];
+    [_timeLabel setText:timeString];
     [_timeLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12]];
     [_timeLabel setTextColor:[MCTUtils defaultBarColor]];
     [_timeLabel sizeToFit];

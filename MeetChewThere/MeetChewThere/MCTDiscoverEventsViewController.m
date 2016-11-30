@@ -135,68 +135,8 @@ int _selectedIndexes[4] = {0,0,0,0};
 //    _filterTitles[1]: @[@"Anytime", @"Morning", @"Afternoon", @"Evening"],
 //    _filterTitles[2]: @[@1, @5, @10, @25],
 //    _filterTitles[3]: @[@1, @2, @3],
-    NSLog(@"Search text: %ld", (long)indexPath.column);
-    if(indexPath.column  == 0 && indexPath.row  == 0){
-        _events = [_contentManager getAllEventsByAnytime1];
-        [_tableView reloadData];
-    }
-    else if(indexPath.column  == 0 && indexPath.row  == 1){
-        NSLog(@"Search text: hereeeee");
-        _events = [_contentManager getAllEventsByToday];
-        [_tableView reloadData];
-    }
-    else if(indexPath.column  == 0 && indexPath.row  == 2){
-        _events = [_contentManager getAllEventsByThisWeek];
-        [_tableView reloadData];
-    }
-    else if(indexPath.column  == 0 && indexPath.row  == 3){
-        _events = [_contentManager getAllEventsByNextWeek];
-        [_tableView reloadData];
-    }
-    else if(indexPath.column  == 1 && indexPath.row  == 0){
-        _events = [_contentManager getAllEventsByAnytime2];
-        [_tableView reloadData];
-    }
-    else if(indexPath.column  == 1 && indexPath.row  == 1){
-        _events = [_contentManager getAllEventsByMorning];
-        [_tableView reloadData];
-    }
-    else if(indexPath.column  == 1 && indexPath.row  == 2){
-        _events = [_contentManager getAllEventsByAfternoon];
-        [_tableView reloadData];
-    }
-    else if(indexPath.column  == 1 && indexPath.row  == 3){
-        _events = [_contentManager getAllEventsByEvening];
-        [_tableView reloadData];
-    }
-    else if(indexPath.column  == 2 && indexPath.row  == 0){
-        _events = [_contentManager getAllEventsByDistance1];
-        [_tableView reloadData];
-    }
-    else if(indexPath.column  == 2 && indexPath.row  == 1){
-        _events = [_contentManager getAllEventsByDistance10];
-        [_tableView reloadData];
-    }
-    else if(indexPath.column  == 2 && indexPath.row  == 2){
-        _events = [_contentManager getAllEventsByDistance25];
-        [_tableView reloadData];
-    }
-    else if(indexPath.column  == 2 && indexPath.row  == 3){
-        _events = [_contentManager getAllEventsByDistance50];
-        [_tableView reloadData];
-    }
-    else if(indexPath.column  == 3 && indexPath.row  == 0){
-        _events = [_contentManager getAllEventsByPrice1];
-        [_tableView reloadData];
-    }
-    else if(indexPath.column  == 3 && indexPath.row  == 1){
-        _events = [_contentManager getAllEventsByPrice2];
-        [_tableView reloadData];
-    }
-    else if(indexPath.column  == 3 && indexPath.row  == 2){
-        _events = [_contentManager getAllEventsByPrice3];
-        [_tableView reloadData];
-    }
+    _events = [_contentManager getEventsForPrice:_filterOptions[_filterTitles[3]][_selectedIndexes[3]] beforeDate:_filterOptions[_filterTitles[0]][_selectedIndexes[0]] withinDistanceMiles:_filterOptions[_filterTitles[2]][_selectedIndexes[2]] forTimeOfDay:_filterOptions[_filterTitles[1]][_selectedIndexes[1]]];
+    [_tableView reloadData];
     [_filterMenu reloadInputViews];
 }
 
