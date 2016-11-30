@@ -474,7 +474,7 @@
     NSMutableArray *events = [NSMutableArray new];
     for (MCTEvent *event in _events) {
         CLLocationDistance distance = [event.restaurant.location distanceFromLocation: _locationManager.location];
-        if ([price integerValue] != event.restaurant.price || distance/1607.0 > [miles doubleValue]) {
+        if (([price integerValue] != event.restaurant.price && [price integerValue] != 0) || distance/1607.0 > [miles doubleValue]) {
             continue;
         }
         if (([MCTUtils getHourForDate:event.date] > 12 && [timeOfDayString.lowercaseString isEqualToString:@"morning"])

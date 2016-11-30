@@ -23,13 +23,13 @@
     NSArray<MCTEvent *> *_events;
 }
 
-int _selectedIndexes[4] = {0,0,0,0};
+int _selectedIndexes[4] = {0,0,3,0};
 
 -(void)viewDidLoad {
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
     _contentManager = [MCTContentManager sharedManager];
-    _events = [_contentManager getAllEvents];
+    [self updateEventsTable];
     
     [self layoutDropDownMenu];
     [self layoutTableView];
@@ -42,7 +42,7 @@ int _selectedIndexes[4] = {0,0,0,0};
       _filterTitles[0]: @[@"Anytime", @"Today", @"This Week", @"Next Week"],
       _filterTitles[1]: @[@"Anytime", @"Morning", @"Afternoon", @"Evening"],
       _filterTitles[2]: @[@1, @10, @25, @50],
-      _filterTitles[3]: @[@1, @2, @3],
+      _filterTitles[3]: @[@0, @1, @2, @3],
       }];
     
     _filterMenu = [[ZLDropDownMenu alloc] init];
@@ -120,6 +120,9 @@ int _selectedIndexes[4] = {0,0,0,0};
     }
     if (indexPath.column == 3) {
         int price = [[((NSArray *)_filterOptions[_filterTitles[indexPath.column]]) objectAtIndex:indexPath.row] intValue];
+        if (price == 0) {
+            return @"Any Price";
+        }
         NSMutableString *str = [[NSMutableString alloc] initWithString: @""];
         for (int i = 0; i < price; i++) {
             [str appendString:@"$"];
@@ -131,13 +134,14 @@ int _selectedIndexes[4] = {0,0,0,0};
 
 - (void)menu:(ZLDropDownMenu *)menu didSelectRowAtIndexPath:(ZLIndexPath *)indexPath {
     _selectedIndexes[(int)indexPath.column] = (int)indexPath.row;
-//    _filterTitles[0]: @[@"Anytime", @"Today", @"This Week", @"Next Week"],
-//    _filterTitles[1]: @[@"Anytime", @"Morning", @"Afternoon", @"Evening"],
-//    _filterTitles[2]: @[@1, @5, @10, @25],
-//    _filterTitles[3]: @[@1, @2, @3],
+
+    [self updateEventsTable];
+    [_filterMenu reloadInputViews];
+}
+
+-(void) updateEventsTable {
     _events = [_contentManager getEventsForPrice:_filterOptions[_filterTitles[3]][_selectedIndexes[3]] beforeDate:_filterOptions[_filterTitles[0]][_selectedIndexes[0]] withinDistanceMiles:_filterOptions[_filterTitles[2]][_selectedIndexes[2]] forTimeOfDay:_filterOptions[_filterTitles[1]][_selectedIndexes[1]]];
     [_tableView reloadData];
-    [_filterMenu reloadInputViews];
 }
 
 @end
