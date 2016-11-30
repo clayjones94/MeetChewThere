@@ -48,6 +48,7 @@
 - (NSArray *) getAllEventsByPrice2;
 - (NSArray *) getAllEventsByPrice3;
 
-
+- (void) searchRestaurantsBySearchText: (NSString *) text;
+-(NSArray *) getEventsForPrice: (NSNumber *) price beforeDate: (NSString *) dateString withinDistanceMiles: (NSNumber *) miles forTimeOfDay: (NSString *) timeOfDayString;
 
 @end
