@@ -103,7 +103,10 @@
     
     _timeLabel = [[UILabel alloc] init];
     [_introContainerView addSubview:_timeLabel];
-    [_timeLabel setText:@"7:30pm"];
+    NSDateFormatter *timeFormatter = [[NSDateFormatter alloc]init];
+    timeFormatter.dateFormat = @"h:mma";
+    NSString *timeString = [timeFormatter stringFromDate:_event.date];
+    [_timeLabel setText:timeString];
     [_timeLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12]];
     [_timeLabel setTextColor:[MCTUtils defaultBarColor]];
     [_timeLabel sizeToFit];
