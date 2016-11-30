@@ -41,7 +41,7 @@ int _selectedIndexes[4] = {0,0,3,0};
     @{
       _filterTitles[0]: @[@"Anytime", @"Today", @"This Week", @"Next Week"],
       _filterTitles[1]: @[@"Anytime", @"Morning", @"Afternoon", @"Evening"],
-      _filterTitles[2]: @[@1, @10, @25, @50],
+      _filterTitles[2]: @[@0, @1, @10, @25, @50],
       _filterTitles[3]: @[@0, @1, @2, @3],
       }];
     
@@ -116,6 +116,9 @@ int _selectedIndexes[4] = {0,0,3,0};
 
 - (NSString *)menu:(ZLDropDownMenu *)menu titleForRowAtIndexPath:(ZLIndexPath *)indexPath {
     if (indexPath.column == 2) {
+        if ([[((NSArray *)_filterOptions[_filterTitles[indexPath.column]]) objectAtIndex:indexPath.row] integerValue] == 0) {
+            return @"Any Distance";
+        }
         return [NSString stringWithFormat:@"%@ mi",[((NSArray *)_filterOptions[_filterTitles[indexPath.column]]) objectAtIndex:indexPath.row]];
     }
     if (indexPath.column == 3) {
