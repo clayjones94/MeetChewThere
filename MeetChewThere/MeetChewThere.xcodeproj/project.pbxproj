@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		920E05531DEF83DA00F5E93C /* MCTContentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 920E05521DEF83DA00F5E93C /* MCTContentManager.m */; };
 		925DF7E01DC6A2A900A96BAF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 925DF7DF1DC6A2A900A96BAF /* main.m */; };
 		925DF7E31DC6A2A900A96BAF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 925DF7E21DC6A2A900A96BAF /* AppDelegate.m */; };
 		925DF7EB1DC6A2A900A96BAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 925DF7EA1DC6A2A900A96BAF /* Assets.xcassets */; };
@@ -36,7 +37,6 @@
 		92A855AC1DCD7ADC00DB27A3 /* ZLDropDownMenuCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A8559B1DCD7ADC00DB27A3 /* ZLDropDownMenuCollectionViewCell.m */; };
 		92A855AD1DCD7ADC00DB27A3 /* ZLDropDownMenuTitleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A8559D1DCD7ADC00DB27A3 /* ZLDropDownMenuTitleButton.m */; };
 		92A855AE1DCD7ADC00DB27A3 /* ZLDropDownMenuUICalc.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A8559F1DCD7ADC00DB27A3 /* ZLDropDownMenuUICalc.m */; };
-		92A855B11DCD963A00DB27A3 /* MCTContentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A855B01DCD963A00DB27A3 /* MCTContentManager.m */; };
 		92A855B51DCD967100DB27A3 /* MCTEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A855B41DCD967100DB27A3 /* MCTEvent.m */; };
 		92A855B81DCD968D00DB27A3 /* MCTRestaurant.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A855B71DCD968D00DB27A3 /* MCTRestaurant.m */; };
 		92A855BB1DCD9F8700DB27A3 /* MCTRestaurantReview.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A855BA1DCD9F8700DB27A3 /* MCTRestaurantReview.m */; };
@@ -76,6 +76,7 @@
 
 /* Begin PBXFileReference section */
 		1571D3AB9A8DC56A7CAA5575 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		920E05521DEF83DA00F5E93C /* MCTContentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTContentManager.m; sourceTree = "<group>"; };
 		925DF7DB1DC6A2A900A96BAF /* MeetChewThere.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetChewThere.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		925DF7DF1DC6A2A900A96BAF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		925DF7E11DC6A2A900A96BAF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -141,7 +142,6 @@
 		92A8559E1DCD7ADC00DB27A3 /* ZLDropDownMenuUICalc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLDropDownMenuUICalc.h; sourceTree = "<group>"; };
 		92A8559F1DCD7ADC00DB27A3 /* ZLDropDownMenuUICalc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLDropDownMenuUICalc.m; sourceTree = "<group>"; };
 		92A855AF1DCD963A00DB27A3 /* MCTContentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTContentManager.h; sourceTree = "<group>"; };
-		92A855B01DCD963A00DB27A3 /* MCTContentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTContentManager.m; sourceTree = "<group>"; };
 		92A855B31DCD967100DB27A3 /* MCTEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTEvent.h; sourceTree = "<group>"; };
 		92A855B41DCD967100DB27A3 /* MCTEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTEvent.m; sourceTree = "<group>"; };
 		92A855B61DCD968D00DB27A3 /* MCTRestaurant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTRestaurant.h; sourceTree = "<group>"; };
@@ -253,7 +253,7 @@
 				92A855701DCD662000DB27A3 /* MCTUtils.h */,
 				92A855711DCD662000DB27A3 /* MCTUtils.m */,
 				92A855AF1DCD963A00DB27A3 /* MCTContentManager.h */,
-				92A855B01DCD963A00DB27A3 /* MCTContentManager.m */,
+				920E05521DEF83DA00F5E93C /* MCTContentManager.m */,
 				92A855B21DCD964F00DB27A3 /* Models */,
 			);
 			path = MeetChewThere;
@@ -664,6 +664,7 @@
 			files = (
 				92A855A61DCD7ADC00DB27A3 /* MASViewConstraint.m in Sources */,
 				925DF7E31DC6A2A900A96BAF /* AppDelegate.m in Sources */,
+				920E05531DEF83DA00F5E93C /* MCTContentManager.m in Sources */,
 				92A855A51DCD7ADC00DB27A3 /* MASViewAttribute.m in Sources */,
 				925DF7E01DC6A2A900A96BAF /* main.m in Sources */,
 				92A855A01DCD7ADC00DB27A3 /* NSString+ZLStringSize.m in Sources */,
@@ -688,7 +689,6 @@
 				92A855BB1DCD9F8700DB27A3 /* MCTRestaurantReview.m in Sources */,
 				92A8555D1DCD5D9B00DB27A3 /* MCTDiscoverViewController.m in Sources */,
 				92FCA45B1DD988230066AF76 /* MCTRegisterPickDietViewController.m in Sources */,
-				92A855B11DCD963A00DB27A3 /* MCTContentManager.m in Sources */,
 				92A855D51DCEF63700DB27A3 /* MCTRegisterViewController.m in Sources */,
 				927E5C831DD65D2A0060F111 /* MCTDietRatingsTableViewCell.m in Sources */,
 				92A855B51DCD967100DB27A3 /* MCTEvent.m in Sources */,
