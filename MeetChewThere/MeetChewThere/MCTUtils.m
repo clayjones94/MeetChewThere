@@ -102,29 +102,29 @@
 }
 
 + (NSString *) getMonthStringForDate: (NSDate *)date {
-    if ([self getMonthForDate:date] == 0) {
+    if ([self getMonthForDate:date] == 1) {
         return @"January";
-    } else if ([self getMonthForDate:date] == 1) {
-        return @"February";
     } else if ([self getMonthForDate:date] == 2) {
-        return @"March";
+        return @"February";
     } else if ([self getMonthForDate:date] == 3) {
-        return @"April";
+        return @"March";
     } else if ([self getMonthForDate:date] == 4) {
-        return @"May";
+        return @"April";
     } else if ([self getMonthForDate:date] == 5) {
-        return @"June";
+        return @"May";
     } else if ([self getMonthForDate:date] == 6) {
-        return @"July";
+        return @"June";
     } else if ([self getMonthForDate:date] == 7) {
-        return @"August";
+        return @"July";
     } else if ([self getMonthForDate:date] == 8) {
-        return @"September";
+        return @"August";
     } else if ([self getMonthForDate:date] == 9) {
-        return @"October";
+        return @"September";
     } else if ([self getMonthForDate:date] == 10) {
-        return @"November";
+        return @"October";
     } else if ([self getMonthForDate:date] == 11) {
+        return @"November";
+    } else if ([self getMonthForDate:date] == 12) {
         return @"December";
     }
     return @"";

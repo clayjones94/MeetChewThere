@@ -37,6 +37,7 @@
 
 - (void)setEvent:(MCTEvent *)event {
     _event = event;
+    _contentManager = [MCTContentManager sharedManager];
 }
 
 -(void)viewDidLoad {
@@ -48,7 +49,7 @@
 }
 
 -(void) layoutViews {
-    CGFloat LEFT_MARGIN = 10;
+    CGFloat LEFT_MARGIN = 15;
     
     _imageView = [[UIImageView alloc] init];
     [self.view addSubview:_imageView];
@@ -229,6 +230,10 @@
         make.left.bottom.right.equalTo(self.view);
         make.height.mas_equalTo(40);
     }];
+    
+    if ([_event.admin isEqual:_contentManager.user]) {
+        [_joinButton setHidden:YES];
+    }
 }
 
 -(void) updateJoinButton {
@@ -251,6 +256,7 @@
     [_event setIsGoing:YES];
     if (![_event.guests containsObject:_contentManager.user] && _event.guests.count < _event.capacity) {
         [_event.guests addObject:_contentManager.user];
+        [_contentManager attendEvent:_event];
     }
     [self updateJoinButton];
     [self updateAttendanceLabel];
@@ -260,6 +266,7 @@
     [_event setIsGoing:NO];
     if ([_event.guests containsObject:_contentManager.user]) {
         [_event.guests removeObject:_contentManager.user];
+        [_contentManager unattendEvent:_event];
     }
     [self updateJoinButton];
     [self updateAttendanceLabel];

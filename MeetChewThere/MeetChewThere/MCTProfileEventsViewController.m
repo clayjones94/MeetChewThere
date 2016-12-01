@@ -36,10 +36,22 @@
     [self.navigationController setNavigationBarHidden:YES];
     
     _contentManager = [MCTContentManager sharedManager];
-    _events = [_contentManager getAllEvents];
+    _events = [_contentManager getUserPastEvents];
     
     [self layoutSegmentedControl];
     [self layoutTableView];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (_segControl.selectedSegmentIndex == 0) {
+        _events = [_contentManager getUserPastEvents];
+    } else if(_segControl.selectedSegmentIndex == 1) {
+        _events = [_contentManager getUserUpcomingEvents];
+    } else {
+        _events = [_contentManager getUserHostingEvents];
+    }
+    [_tableView reloadData];
 }
 
 -(void) layoutSegmentedControl {
@@ -115,12 +127,13 @@
 
 -(void) segmentedControlChangedValue {
     if (_segControl.selectedSegmentIndex == 0) {
-        
+        _events = [_contentManager getUserPastEvents];
     } else if(_segControl.selectedSegmentIndex == 1) {
-        
+        _events = [_contentManager getUserUpcomingEvents];
     } else {
-        
+        _events = [_contentManager getUserHostingEvents];
     }
+    [_tableView reloadData];
 }
 
 @end

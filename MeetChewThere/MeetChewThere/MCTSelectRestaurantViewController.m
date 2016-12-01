@@ -115,13 +115,8 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-//    [cell setSelected:NO];
-//    MCTRestaurantDetailViewController *vc = [MCTRestaurantDetailViewController new];
-//    [vc setRestaurant:_restaurants[indexPath.row]];
-//    [self.parentViewController.navigationController pushViewController:vc animated:YES];
-//    [_searchBar resignFirstResponder];
     _event.restaurant = _restaurants[indexPath.row];
+    _event.dietTags = _event.restaurant.dietTags;
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -152,6 +147,7 @@
 
 -(void) finishPage {
     [_contentManager addNewEvent:_event];
+    [_contentManager attendEvent:_event];
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 

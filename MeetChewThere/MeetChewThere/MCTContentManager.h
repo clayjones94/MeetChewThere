@@ -31,22 +31,12 @@
 - (NSArray *) getAllRestaurantsByPrice;
 -(NSArray *) getEventsForRestaurant: (MCTRestaurant *) restaurant;
 - (NSArray *) getReviewsForRestaurant: (MCTRestaurant *) restaurant WithTag: (MCTDietTag *) dietTag;
-- (NSArray *) getAllEventsByAnytime1;
-- (NSArray *) getAllEventsByToday;
-- (NSArray *) getAllEventsByThisWeek;
-- (NSArray *) getAllEventsByNextWeek;
-- (NSArray *) getAllEventsByAnytime2;
-- (NSArray *) getAllEventsByMorning;
-- (NSArray *) getAllEventsByAfternoon;
-- (NSArray *) getAllEventsByEvening;
-- (NSArray *) getAllEventsByDistance1;
-- (NSArray *) getAllEventsByDistance50;
-- (NSArray *) getAllEventsByDistance10;
-- (NSArray *) getAllEventsByDistance25;
-- (NSArray *) getAllEventsByPriceAny;
-- (NSArray *) getAllEventsByPrice1;
-- (NSArray *) getAllEventsByPrice2;
-- (NSArray *) getAllEventsByPrice3;
+-(void) attendEvent: (MCTEvent *)event;
+-(void) unattendEvent: (MCTEvent *)event;
+-(NSArray *) getUserUpcomingEvents;
+-(NSArray *)getUserPastEvents;
+-(NSArray *)getUserHostingEvents;
+
 
 - (void) searchRestaurantsBySearchText: (NSString *) text;
 -(NSArray *) getEventsForPrice: (NSNumber *) price beforeDate: (NSString *) dateString withinDistanceMiles: (NSNumber *) miles forTimeOfDay: (NSString *) timeOfDayString;
