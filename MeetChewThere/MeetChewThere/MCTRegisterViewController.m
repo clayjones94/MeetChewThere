@@ -53,7 +53,8 @@
     
     
     [_usernameField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(self.view);
+        make.centerX.equalTo(self.view);
+        make.centerY.equalTo(self.view).with.offset(-60);
         make.width.mas_equalTo(self.view.frame.size.width * .8);
         make.height.mas_equalTo(40);
     }];

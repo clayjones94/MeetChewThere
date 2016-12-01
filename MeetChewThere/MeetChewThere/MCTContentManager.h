@@ -23,6 +23,7 @@
 - (NSArray *) getAllUsers;
 - (NSArray *) getAllReviews;
 - (NSArray *) getAllDietTags;
+- (NSArray *) searchDietTagsBySearchText: (NSString *) text;
 - (NSArray *) getAllEvents;
 - (NSArray *) getAllRestaurants;
 - (NSArray *) getAllRestaurantsByRating;

@@ -292,6 +292,20 @@
     return _dietTags;
 }
 
+- (NSArray *) searchDietTagsBySearchText: (NSString *) text {
+    NSMutableArray *dietTags = [NSMutableArray new];
+    if ([text isEqualToString:@""]) {
+        return _dietTags;
+    } else {
+        for (MCTDietTag *dietTag in _dietTags) {
+            if ([[dietTag.name lowercaseString] containsString:[text lowercaseString]]) {
+                [dietTags addObject:dietTag];
+            }
+        }
+    }
+    return dietTags;
+}
+
 - (NSArray *) getAllEvents {
     return _events;
 }

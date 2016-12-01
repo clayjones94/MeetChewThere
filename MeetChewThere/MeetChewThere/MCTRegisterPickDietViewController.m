@@ -157,12 +157,15 @@
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
     [_searchBar resignFirstResponder];
     NSString *searchText = textField.text;
+    _dietTags = [_contentManager searchDietTagsBySearchText:searchText];
     return YES;
 }
 
--(void)textFieldDidChange:(UITextField *)textField {
-    NSString *searchText = textField.text;
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSString *searchText = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    _dietTags = [_contentManager searchDietTagsBySearchText:searchText];
     [_tableView reloadData];
+    return YES;
 }
 
 @end
