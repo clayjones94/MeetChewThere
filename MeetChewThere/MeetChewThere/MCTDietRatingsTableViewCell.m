@@ -59,15 +59,6 @@
             make.left.equalTo(lastStar.mas_right).with.offset(5);
         }];
     }
-    
-//    UIView *separator = [UIView new];
-//    [separator setBackgroundColor:[UIColor lightGrayColor]];
-//    [self addSubview:separator];
-//    [separator mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.bottom.right.equalTo(self);
-//        make.left.equalTo(_dietTagLabel);
-//        make.height.mas_equalTo(1.f);
-//    }];
 }
 
 -(void)setDietTag:(MCTDietTag *)dietTag {

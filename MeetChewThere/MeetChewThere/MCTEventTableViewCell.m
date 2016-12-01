@@ -34,6 +34,7 @@
     if (self) {
         _nameLabel = [UILabel new];
         _nameLabel.font = [UIFont fontWithName:MCT_REGULAR_FONT_NAME size:15];
+        [_nameLabel setLineBreakMode:NSLineBreakByTruncatingTail];
         
         _restaurantButton = [UILabel new];
         _restaurantButton.textColor = [MCTUtils defaultBarColor];
@@ -42,6 +43,7 @@
         _dietTagsLabel = [UILabel new];
         _dietTagsLabel.font = [UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12];
         _dietTagsLabel.textColor = [UIColor grayColor];
+        [_dietTagsLabel setLineBreakMode:NSLineBreakByTruncatingTail];
         
         _guestsLabel = [UILabel new];
         _guestsLabel.font = [UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12];
