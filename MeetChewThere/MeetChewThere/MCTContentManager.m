@@ -301,16 +301,15 @@
 }
 
 - (NSArray *) getAllRestaurantsByRating {
-//    NSMutableArray<MCTRestaurant *> *_restaurants1 = [[NSMutableArray<MCTRestaurant *> alloc] init];
-//    for (int i = 5; i > 0; i--) {
-//        for (int j = 0; j < _restaurants.count; j++) {
-//            if (i-1 < _restaurants[j].overallRating) {
-//                [_restaurants1 addObject:_restaurants[j]];
-//            }
-//        }
-//    }
-    return _restaurants;
+    NSArray *sortedArray;
+    sortedArray = [_restaurants sortedArrayUsingComparator:^NSComparisonResult(MCTRestaurant *rest1, MCTRestaurant *rest2) {
+        NSNumber *first = [NSNumber numberWithDouble: [rest1 overallRating]];
+        NSNumber *second = [NSNumber numberWithDouble: [rest2 overallRating]];
+        return [second compare:first];
+    }];
+    return sortedArray;
 }
+
 
 - (NSArray *) getAllRestaurantsByDistance {
     NSMutableArray<MCTRestaurant *> *_restaurants1 = [[NSMutableArray<MCTRestaurant *> alloc] init];

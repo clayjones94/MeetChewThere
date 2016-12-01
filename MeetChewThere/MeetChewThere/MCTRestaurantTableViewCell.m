@@ -40,6 +40,7 @@
     if (self) {
         _nameLabel = [UILabel new];
         _nameLabel.font = [UIFont fontWithName:MCT_REGULAR_FONT_NAME size:15];
+        [_nameLabel setLineBreakMode:NSLineBreakByTruncatingTail];
         
         _priceLabel = [UILabel new];
         _priceLabel.textColor = [MCTUtils defaultBarColor];
@@ -48,6 +49,7 @@
         _dietTagsLabel = [UILabel new];
         _dietTagsLabel.font = [UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12];
         _dietTagsLabel.textColor = [UIColor grayColor];
+        [_dietTagsLabel setLineBreakMode:NSLineBreakByTruncatingTail];
         
         _eventsLabel = [UILabel new];
         _eventsLabel.font = [UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12];
@@ -112,12 +114,6 @@
         make.left.equalTo(_nameLabel);
     }];
     
-    [_dietTagsLabel sizeToFit];
-    [_dietTagsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_priceLabel.mas_bottom).with.offset(5);
-        make.left.equalTo(_nameLabel);
-    }];
-    
     [_distanceLabel sizeToFit];
     [_distanceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_nameLabel);
@@ -130,6 +126,13 @@
         make.right.equalTo(_distanceLabel.mas_right);
         make.bottom.mas_equalTo(-BOTTOM);
         make.width.mas_equalTo(self.frame.size.width * .25);
+    }];
+    
+    [_dietTagsLabel sizeToFit];
+    [_dietTagsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_priceLabel.mas_bottom).with.offset(5);
+        make.left.equalTo(_nameLabel);
+        make.right.equalTo(_imageView.mas_left).with.offset(-5);
     }];
     
     [_separator mas_makeConstraints:^(MASConstraintMaker *make) {
