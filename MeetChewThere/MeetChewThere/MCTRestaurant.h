@@ -20,6 +20,7 @@
 @property (strong, nonatomic) NSString *details;
 @property (strong, nonatomic) NSString *imageName;
 @property (nonatomic) NSInteger price;
+@property (nonatomic) double overallRating;
 @property (strong, nonatomic) NSArray<MCTDietTag *> *dietTags;
 
 @end

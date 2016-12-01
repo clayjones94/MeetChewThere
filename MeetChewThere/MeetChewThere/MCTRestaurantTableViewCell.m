@@ -14,19 +14,21 @@
 
 @implementation MCTRestaurantTableViewCell {
     UILabel *_nameLabel;
-    UILabel *_ratingsButton;
+    UILabel *_priceLabel;
     UILabel *_dietTagsLabel;
     UILabel *_eventsLabel;
     UILabel *_distanceLabel;
     UIImageView *_imageView;
     UIView *_separator;
     MCTContentManager *_contentManager;
+    NSMutableArray<UIImageView *> *_starsImageViews;
 }
 
 @synthesize restaurant = _restaurant;
 
 -(void)setRestaurant:(MCTRestaurant *)restaurant {
     _restaurant = restaurant;
+    [self setStars];
     [self layoutSubviews];
 }
 
@@ -39,9 +41,9 @@
         _nameLabel = [UILabel new];
         _nameLabel.font = [UIFont fontWithName:MCT_REGULAR_FONT_NAME size:15];
         
-        _ratingsButton = [UILabel new];
-        _ratingsButton.textColor = [MCTUtils defaultBarColor];
-        _ratingsButton.font = [UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12];
+        _priceLabel = [UILabel new];
+        _priceLabel.textColor = [MCTUtils defaultBarColor];
+        _priceLabel.font = [UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12];
         
         _dietTagsLabel = [UILabel new];
         _dietTagsLabel.font = [UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12];
@@ -62,8 +64,15 @@
         _separator = [[UIView alloc] init];
         [_separator setBackgroundColor:[UIColor lightGrayColor]];
         
+        _starsImageViews = [NSMutableArray new];
+        for (int i = 0; i < 5; i ++) {
+            UIImageView *star = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"empty_star"]];
+            [self addSubview:star];
+            [_starsImageViews addObject:star];
+        }
+        
         [self addSubview:_nameLabel];
-        [self addSubview:_ratingsButton];
+        [self addSubview:_priceLabel];
         [self addSubview:_dietTagsLabel];
         [self addSubview:_eventsLabel];
         [self addSubview:_imageView];
@@ -82,7 +91,7 @@
     
     if (_restaurant) {
         [_nameLabel setText:_restaurant.name];
-        [_ratingsButton setText:[NSString stringWithFormat:@"%@", [MCTUtils priceStringForRestaurant:_restaurant]]];
+        [_priceLabel setText:[NSString stringWithFormat:@"%@", [MCTUtils priceStringForRestaurant:_restaurant]]];
         [_dietTagsLabel setText: [MCTUtils dietTagsListtoString: _restaurant.dietTags]];
 //        [_dietTagsLabel setText:_restaurant.dietTags.firstObject.name];
         [_eventsLabel setText:[NSString stringWithFormat:@"%lu events", (unsigned long)[_contentManager getEventsForRestaurant:_restaurant].count]];
@@ -97,15 +106,15 @@
         make.left.mas_equalTo(LEFT);
     }];
     
-    [_ratingsButton sizeToFit];
-    [_ratingsButton mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_priceLabel sizeToFit];
+    [_priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_nameLabel.mas_bottom).with.offset(5);
         make.left.equalTo(_nameLabel);
     }];
     
     [_dietTagsLabel sizeToFit];
     [_dietTagsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_ratingsButton.mas_bottom).with.offset(5);
+        make.top.equalTo(_priceLabel.mas_bottom).with.offset(5);
         make.left.equalTo(_nameLabel);
     }];
     
@@ -128,8 +137,36 @@
         make.left.mas_equalTo(LEFT);
         make.height.mas_equalTo(1.f);
     }];
+    
+    [[_starsImageViews objectAtIndex:0] sizeToFit];
+    [[_starsImageViews objectAtIndex:0] mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(_priceLabel);
+        make.left.equalTo(_priceLabel.mas_right).with.offset(10);
+    }];
+    
+    
+    for (int i = 1; i < 5; i++) {
+        UIImageView *lastStar = [_starsImageViews objectAtIndex:i-1];
+        [_starsImageViews[i] sizeToFit];
+        [_starsImageViews[i] mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(_priceLabel);
+            make.left.equalTo(lastStar.mas_right).with.offset(5);
+        }];
+    }
 }
 
-
+-(void) setStars {
+    for (int i = 0; i < 5; i++) {
+        UIImageView *star = [_starsImageViews objectAtIndex:i];
+        if (i <= _restaurant.overallRating - 1) {
+            [star setImage:[UIImage imageNamed:@"full_star"]];
+        } else if(i >= _restaurant.overallRating){
+            [star setImage:[UIImage imageNamed:@"empty_star"]];
+        } else if(_restaurant.overallRating - (int)_restaurant.overallRating > .25 && _restaurant.overallRating - (int)_restaurant.overallRating < .75) {
+            [star setImage:[UIImage imageNamed:@"half_star"]];
+        }
+        [star sizeToFit];
+    }
+}
 
 @end

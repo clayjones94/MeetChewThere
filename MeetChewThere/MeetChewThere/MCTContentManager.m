@@ -155,6 +155,8 @@
     MCTUser *user88 = [[MCTUser alloc] init];     user88.objectID = 88;	user88.name = @"Brandi W.";	user88.imageName = @"user88_prof";	user88.dietTags = @[_dietTags[1]];	[_users addObject:user88];
 }
 
+#define ARC4RANDOM_MAX 0x100000000
+
 -(void) initRestaurants {
     _restaurants = [[NSMutableArray<MCTRestaurant *> alloc] init];
     MCTRestaurant *restaurant0 = [[MCTRestaurant alloc] init];	restaurant0.objectID = 0;	restaurant0.name = @"RawDaddy’s Fun Cone Food";	restaurant0.urlString = @"rawdaddys.com";	restaurant0.imageName = @"0_prof";	restaurant0.phone = @"(818) 571-5730";	restaurant0.location = [[CLLocation alloc] initWithLatitude:37.441883 longitude:-122.143019];	restaurant0.details = @"Caterers";	restaurant0.dietTags = @[_dietTags[0], _dietTags[1], _dietTags[2], _dietTags[7]];	[_restaurants addObject:restaurant0];
@@ -209,6 +211,8 @@
     _allRestaurants = [[NSMutableArray alloc] init];
     for (MCTRestaurant *restaurant in _restaurants) {
         [restaurant setPrice: arc4random_uniform(3)+1];
+        double rating = ((double)arc4random() / ARC4RANDOM_MAX) * (5) + 1;
+        [restaurant setOverallRating: rating];
         [_allRestaurants addObject:restaurant];
     }
 }
@@ -297,7 +301,14 @@
 }
 
 - (NSArray *) getAllRestaurantsByRating {
-    //Yet to implement
+//    NSMutableArray<MCTRestaurant *> *_restaurants1 = [[NSMutableArray<MCTRestaurant *> alloc] init];
+//    for (int i = 5; i > 0; i--) {
+//        for (int j = 0; j < _restaurants.count; j++) {
+//            if (i-1 < _restaurants[j].overallRating) {
+//                [_restaurants1 addObject:_restaurants[j]];
+//            }
+//        }
+//    }
     return _restaurants;
 }
 

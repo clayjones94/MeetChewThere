@@ -18,6 +18,7 @@
 @synthesize phone = _phone;
 @synthesize imageName = _imageName;
 @synthesize price = _price;
+@synthesize overallRating = _overallRating;
 @synthesize dietTags = _dietTags;
 
 @end
