@@ -11,6 +11,7 @@
 #import "MCTUtils.h"
 #import "MCTConstants.h"
 #import "MCTContentManager.h"
+#import "MCTRestaurantDetailViewController.h"
 
 @implementation MCTEventDetailViewController {
     UIImageView *_imageView;
@@ -130,6 +131,8 @@
     }];
     
     _restaurantButton = [[UILabel alloc] init];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapRestaurant)];
+    [_restaurantButton addGestureRecognizer:tap];
     [_introContainerView addSubview:_restaurantButton];
     [_restaurantButton setText:_event.restaurant.name];
     [_restaurantButton setFont:[UIFont fontWithName:MCT_BOLD_FONT_NAME size:14]];
@@ -270,6 +273,12 @@
     }
     [self updateJoinButton];
     [self updateAttendanceLabel];
+}
+
+-(void) tapRestaurant {
+    MCTRestaurantDetailViewController *vc = [[MCTRestaurantDetailViewController alloc] init];
+    vc.restaurant = _event.restaurant;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

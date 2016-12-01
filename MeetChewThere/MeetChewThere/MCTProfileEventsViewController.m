@@ -13,6 +13,7 @@
 #import "MCTConstants.h"
 #import "MCTContentManager.h"
 #import "Masonry.h"
+#import "MCTEventDetailViewController.h"
 
 @implementation MCTProfileEventsViewController {
     
@@ -123,6 +124,10 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     [cell setSelected:NO];
+    MCTEvent *event = _events[indexPath.row];
+    MCTEventDetailViewController *vc = [[MCTEventDetailViewController alloc] init];
+    vc.event = event;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void) segmentedControlChangedValue {
