@@ -57,7 +57,9 @@
     _imageView = [[UIImageView alloc] init];
     [self.view addSubview:_imageView];
     [_imageView setImage:[UIImage imageNamed:_restaurant.imageName]];
-    [_imageView setBackgroundColor:[UIColor redColor]];
+    [_imageView setBackgroundColor:[UIColor grayColor]];
+    [_imageView setContentMode:UIViewContentModeScaleAspectFill];
+    [_imageView setClipsToBounds:YES];
     [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view);
         make.right.left.equalTo(self.view);
