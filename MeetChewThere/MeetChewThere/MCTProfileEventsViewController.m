@@ -45,6 +45,9 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    [self.navigationController setNavigationBarHidden:YES];
+    
     if (_segControl.selectedSegmentIndex == 0) {
         _events = [_contentManager getUserPastEvents];
     } else if(_segControl.selectedSegmentIndex == 1) {
@@ -82,6 +85,7 @@
     _segControl.borderType = HMSegmentedControlBorderTypeBottom;
     _segControl.borderWidth = 0.0f;
     _segControl.borderColor = [UIColor clearColor];
+    [_segControl setSelectedSegmentIndex:1];
     [_segControl setFrame:CGRectMake(0, [[UIApplication sharedApplication] statusBarFrame].size.height, _topBar.frame.size.width, _topBar.frame.size.height - [[UIApplication sharedApplication] statusBarFrame].size.height)];
     [_topBar addSubview:_segControl];
 }
@@ -128,6 +132,35 @@
     MCTEventDetailViewController *vc = [[MCTEventDetailViewController alloc] init];
     vc.event = event;
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    NSInteger numOfSections = 0;
+    if ([_events count] > 0) {
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        numOfSections = 1;
+        //yourTableView.backgroundView   = nil;
+        _tableView.backgroundView = nil;
+    }
+    else {
+        UILabel *noDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, _tableView.bounds.size.width, _tableView.bounds.size.height)];
+        if (_segControl.selectedSegmentIndex == 0) {
+            noDataLabel.text = @"You have no Past Events :(";
+        } else if(_segControl.selectedSegmentIndex == 1) {
+            noDataLabel.text = @"You have no Upcoming Events :(";
+        } else {
+            noDataLabel.text = @"You are not hosting Any Events :(";
+        }
+        noDataLabel.textColor = [UIColor blackColor];
+        noDataLabel.textAlignment = NSTextAlignmentCenter;
+        [noDataLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:14]];
+        [noDataLabel setNumberOfLines:0];
+        [noDataLabel setLineBreakMode:NSLineBreakByWordWrapping];
+        _tableView.backgroundView = noDataLabel;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    
+    return numOfSections;
 }
 
 -(void) segmentedControlChangedValue {

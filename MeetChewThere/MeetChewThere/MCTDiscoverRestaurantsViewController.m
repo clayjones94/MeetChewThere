@@ -13,6 +13,7 @@
 #import "MCTRestaurant.h"
 #import "Masonry.h"
 #import "MCTRestaurantDetailViewController.h"
+#import "MCTConstants.h"
 
 @implementation MCTDiscoverRestaurantsViewController {
     ZLDropDownMenu *_filterMenu;
@@ -136,6 +137,29 @@
     [vc setRestaurant:_restaurants[indexPath.row]];
     [self.parentViewController.navigationController pushViewController:vc animated:YES];
     [_searchBar resignFirstResponder];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    NSInteger numOfSections = 0;
+    if ([_restaurants count] > 0) {
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        numOfSections = 1;
+        //yourTableView.backgroundView   = nil;
+        _tableView.backgroundView = nil;
+    }
+    else {
+        UILabel *noDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, _tableView.bounds.size.width, _tableView.bounds.size.height)];
+        [noDataLabel setText:[NSString stringWithFormat:@"There are no restaurants for search \"%@%\"", _searchText]];
+        noDataLabel.textColor = [UIColor blackColor];
+        noDataLabel.textAlignment = NSTextAlignmentCenter;
+        [noDataLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:14]];
+        [noDataLabel setNumberOfLines:0];
+        [noDataLabel setLineBreakMode:NSLineBreakByWordWrapping];
+        _tableView.backgroundView = noDataLabel;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    
+    return numOfSections;
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {

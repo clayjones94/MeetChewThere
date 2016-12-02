@@ -38,17 +38,21 @@
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
+    [self setExtendedLayoutIncludesOpaqueBars:YES];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.extendedLayoutIncludesOpaqueBars = NO;
+    self.automaticallyAdjustsScrollViewInsets = NO;
     
-    if (![MCTContentManager sharedManager].user) {
-        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:[MCTRegisterViewController new]];
-        [self presentViewController:nav animated:YES completion:nil];
-    }
 //    if (![MCTContentManager sharedManager].user) {
-//        MCTUser *user = [MCTUser new];
-//        user.name = @"Clayy";
-//        user.password = @"pass";
-//        [MCTContentManager sharedManager].user = user;
+//        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:[MCTRegisterViewController new]];
+//        [self presentViewController:nav animated:YES completion:nil];
 //    }
+    if (![MCTContentManager sharedManager].user) {
+        MCTUser *user = [MCTUser new];
+        user.name = @"Clayy";
+        user.password = @"pass";
+        [MCTContentManager sharedManager].user = user;
+    }
 }
 
 - (void)viewDidLoad {

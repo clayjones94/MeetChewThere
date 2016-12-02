@@ -89,14 +89,14 @@
 
 + (NSInteger) getDayForDate: (NSDate *)date {
     NSCalendar* calendar = [NSCalendar currentCalendar];
-    NSDateComponents* components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:date];
+    NSDateComponents* components = [calendar components:NSCalendarUnitDay fromDate:date];
     
     return [components day];
 }
 
 + (NSInteger) getYearForDate: (NSDate *)date {
     NSCalendar* calendar = [NSCalendar currentCalendar];
-    NSDateComponents* components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:date];
+    NSDateComponents* components = [calendar components:NSCalendarUnitYear fromDate:date];
     
     return [components year];
 }

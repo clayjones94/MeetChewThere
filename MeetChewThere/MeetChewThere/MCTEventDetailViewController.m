@@ -133,13 +133,16 @@
     }];
     
     _restaurantButton = [[UILabel alloc] init];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapRestaurant)];
-    [_restaurantButton addGestureRecognizer:tap];
     [_introContainerView addSubview:_restaurantButton];
     [_restaurantButton setText:_event.restaurant.name];
     [_restaurantButton setFont:[UIFont fontWithName:MCT_BOLD_FONT_NAME size:14]];
     [_restaurantButton setTextColor:[MCTUtils defaultBarColor]];
     [_restaurantButton sizeToFit];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapRestaurant)];
+    tap.delegate = self;
+    tap.numberOfTapsRequired = 1;
+    [_restaurantButton setUserInteractionEnabled:YES];
+    [_restaurantButton addGestureRecognizer:tap];
     
     [_restaurantButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_nameLabel);

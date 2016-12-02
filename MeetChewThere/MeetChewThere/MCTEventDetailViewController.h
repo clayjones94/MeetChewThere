@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MCTEvent.h"
 
-@interface MCTEventDetailViewController : UIViewController
+@interface MCTEventDetailViewController : UIViewController<UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) MCTEvent *event;
 

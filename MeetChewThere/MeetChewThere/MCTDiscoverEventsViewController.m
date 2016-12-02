@@ -12,6 +12,7 @@
 #import "MCTEventTableViewCell.h"
 #import "MCTEvent.h"
 #import "MCTEventDetailViewController.h"
+#import "MCTConstants.h"
 
 @implementation MCTDiscoverEventsViewController {
 
@@ -98,6 +99,29 @@ int _selectedIndexes[4] = {0,0,3,0};
     MCTEventDetailViewController *vc = [[MCTEventDetailViewController alloc] init];
     vc.event = event;
     [self.parentViewController.navigationController pushViewController:vc animated:YES];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    NSInteger numOfSections = 0;
+    if ([_events count] > 0) {
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        numOfSections = 1;
+        //yourTableView.backgroundView   = nil;
+        _tableView.backgroundView = nil;
+    }
+    else {
+        UILabel *noDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, _tableView.bounds.size.width, _tableView.bounds.size.height)];
+        [noDataLabel setText:[NSString stringWithFormat:@"There are no events for these filters."]];
+        noDataLabel.textColor = [UIColor blackColor];
+        noDataLabel.textAlignment = NSTextAlignmentCenter;
+        [noDataLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:14]];
+        [noDataLabel setNumberOfLines:0];
+        [noDataLabel setLineBreakMode:NSLineBreakByWordWrapping];
+        _tableView.backgroundView = noDataLabel;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    
+    return numOfSections;
 }
 
 #pragma MENU-DELEGATE

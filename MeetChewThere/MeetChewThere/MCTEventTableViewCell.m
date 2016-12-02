@@ -96,6 +96,7 @@
     [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(TOP);
         make.left.mas_equalTo(LEFT);
+        make.right.equalTo(_imageView.mas_left).with.offset(-10);
     }];
     
     [_restaurantButton sizeToFit];
