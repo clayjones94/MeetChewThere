@@ -36,7 +36,7 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    _restaurants = [_contentManager getAllRestaurants];
+    [self loadTableView];
     [_tableView reloadData];
 }
 
