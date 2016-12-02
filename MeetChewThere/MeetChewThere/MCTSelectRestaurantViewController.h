@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "MCTEvent.h"
+#import "ZLDropDownMenu.h"
 
-@interface MCTSelectRestaurantViewController : UIViewController
+@interface MCTSelectRestaurantViewController : UIViewController <ZLDropDownMenuDataSource, ZLDropDownMenuDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) MCTEvent *event;
 

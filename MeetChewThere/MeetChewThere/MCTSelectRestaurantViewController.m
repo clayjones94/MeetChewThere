@@ -7,33 +7,47 @@
 //
 
 #import "MCTSelectRestaurantViewController.h"
-#import "Masonry.h"
-#import "MCTRestaurant.h"
-#import "MCTContentManager.h"
+#import "ZLDropDownMenu.h"
 #import "MCTRestaurantTableViewCell.h"
+#import "MCTContentManager.h"
+#import "MCTRestaurant.h"
+#import "Masonry.h"
+#import "MCTRestaurantDetailViewController.h"
+#import "MCTConstants.h"
 
 @implementation MCTSelectRestaurantViewController {
+    ZLDropDownMenu *_filterMenu;
     NSArray *_filterOptions;
     UITableView *_tableView;
     MCTContentManager *_contentManager;
     NSArray<MCTRestaurant *> *_restaurants;
     UITextField *_searchBar;
+    NSInteger _filterIndex;
+    NSString *_searchText;
 }
 
-@synthesize event = _event;
-
 -(void)viewDidLoad {
+    [self.navigationItem setTitle:@"Pick a Restaurant"];
+    
     [self.view setBackgroundColor:[UIColor whiteColor]];
+    [self.navigationController.navigationBar setTranslucent:NO];
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+    
+    [self.navigationController setNavigationBarHidden:NO];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStyleDone target:self action:@selector(finishPage)];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
     _contentManager = [MCTContentManager sharedManager];
-    _restaurants = [_contentManager getAllRestaurants];
-    
-    self.navigationController.navigationBarHidden = NO;
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(finishPage)];
-    
+    _searchText = @"";
     [self layoutSearch];
     [self layoutTableView];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    _restaurants = [_contentManager getAllRestaurants];
+    [_tableView reloadData];
 }
 
 -(void) layoutSearch {
@@ -57,7 +71,19 @@
     [_searchBar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.equalTo(self.view);
         make.height.mas_equalTo(50);
-        make.width.equalTo(self.view);
+        make.width.mas_equalTo(self.view.frame.size.width * 3/4);
+    }];
+    
+    _filterOptions = @[@"Distance", @"Rating", @"Name", @"Price"];
+    
+    _filterMenu = [[ZLDropDownMenu alloc] init];
+    _filterMenu.delegate = self;
+    _filterMenu.dataSource = self;
+    [self.view addSubview:_filterMenu];
+    [_filterMenu mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.right.equalTo(self.view);
+        make.bottom.equalTo(_searchBar);
+        make.left.equalTo(_searchBar.mas_right);
     }];
     
     UIView * bottomSeparator = [[UIView alloc] init];
@@ -88,7 +114,7 @@
     [_tableView setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:_tableView];
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_searchBar.mas_bottom);
+        make.top.equalTo(_filterMenu.mas_bottom);
         make.left.right.equalTo(self.view);
         make.bottom.equalTo(self.view);
     }];
@@ -115,12 +141,82 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    _event.restaurant = _restaurants[indexPath.row];
-    _event.dietTags = _event.restaurant.dietTags;
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    [cell setSelected:YES];
+    [_event setRestaurant:[_restaurants objectAtIndex:indexPath.row]];
+    [_searchBar resignFirstResponder];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    NSInteger numOfSections = 0;
+    if ([_restaurants count] > 0) {
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        numOfSections = 1;
+        //yourTableView.backgroundView   = nil;
+        _tableView.backgroundView = nil;
+    }
+    else {
+        UILabel *noDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, _tableView.bounds.size.width, _tableView.bounds.size.height)];
+        [noDataLabel setText:[NSString stringWithFormat:@"There are no restaurants for search \"%@%\"", _searchText]];
+        noDataLabel.textColor = [UIColor blackColor];
+        noDataLabel.textAlignment = NSTextAlignmentCenter;
+        [noDataLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:14]];
+        [noDataLabel setNumberOfLines:0];
+        [noDataLabel setLineBreakMode:NSLineBreakByWordWrapping];
+        _tableView.backgroundView = noDataLabel;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    
+    return numOfSections;
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [_searchBar resignFirstResponder];
+}
+
+#pragma Filter Menu
+
+- (NSInteger)numberOfColumnsInMenu:(ZLDropDownMenu *)menu {
+    return 4;
+}
+
+- (NSInteger)menu:(ZLDropDownMenu *)menu numberOfRowsInColumns:(NSInteger)column {
+    return _filterOptions.count;
+}
+
+- (NSString *)menu:(ZLDropDownMenu *)menu titleForColumn:(NSInteger)column {
+    return @"Sort by";
+}
+
+- (NSString *)menu:(ZLDropDownMenu *)menu titleForRowAtIndexPath:(ZLIndexPath *)indexPath {
+    return _filterOptions[indexPath.row];
+}
+
+- (void)menu:(ZLDropDownMenu *)menu didSelectRowAtIndexPath:(ZLIndexPath *)indexPath {
+    [_filterMenu reloadInputViews];
+    [_searchBar resignFirstResponder];
+    _filterIndex = indexPath.row;
+    [self loadTableView];
+}
+
+-(void) loadTableView {
+    [_contentManager searchRestaurantsBySearchText:_searchText];
+    if([_filterOptions[_filterIndex]  isEqual: @"Rating"]){
+        _restaurants = [_contentManager getAllRestaurantsByRating];
+        [_tableView reloadData];
+    }
+    else if([_filterOptions[_filterIndex]  isEqual: @"Distance"]){
+        _restaurants = [_contentManager getAllRestaurantsByDistance];
+        [_tableView reloadData];
+    }
+    else if([_filterOptions[_filterIndex]  isEqual: @"Price"]){
+        _restaurants = [_contentManager getAllRestaurantsByPrice];
+        [_tableView reloadData];
+    }
+    else if([_filterOptions[_filterIndex]  isEqual: @"Name"]){
+        _restaurants = [_contentManager getAllRestaurantsByName];
+        [_tableView reloadData];
+    }
 }
 
 #pragma text field
@@ -136,13 +232,15 @@
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
     [_searchBar resignFirstResponder];
-    NSString *searchText = textField.text;
+    _searchText = textField.text;
+    [self loadTableView];
     return YES;
 }
 
--(void)textFieldDidChange:(UITextField *)textField {
-    NSString *searchText = textField.text;
-    [_tableView reloadData];
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    _searchText = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    [self loadTableView];
+    return YES;
 }
 
 -(void) finishPage {

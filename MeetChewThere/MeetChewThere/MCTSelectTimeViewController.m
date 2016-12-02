@@ -31,13 +31,14 @@
 -(void) layoutSubviews {
     _datePicker = [UIDatePicker new];
     _datePicker.datePickerMode = UIDatePickerModeTime;
+    _datePicker.minuteInterval = 15;
     _datePicker.frame = self.view.frame;
     [self.view addSubview:_datePicker];
 }
 
 -(void) nextPage {
     MCTSelectRestaurantViewController *vc = [MCTSelectRestaurantViewController new];
-    _event.date = [MCTUtils dateWithYear:[MCTUtils getYearForDate:_event.date] month:[MCTUtils getMonthForDate:_event.date] day:[MCTUtils getDayForDate:_event.date] hour:[MCTUtils getHourForDate:_datePicker.date] minute:[MCTUtils getHourForDate:_datePicker.date]];
+    _event.date = [MCTUtils dateWithYear:[MCTUtils getYearForDate:_event.date] month:[MCTUtils getMonthForDate:_event.date] day:[MCTUtils getDayForDate:_event.date] hour:[MCTUtils getHourForDate:_datePicker.date] minute:[MCTUtils getMinuteForDate:_datePicker.date]];
     vc.event = _event;
     [self.navigationController pushViewController:vc animated:YES];
 }

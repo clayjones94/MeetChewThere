@@ -106,7 +106,6 @@ int _selectedIndexes[4] = {0,0,3,0};
     if ([_events count] > 0) {
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         numOfSections = 1;
-        //yourTableView.backgroundView   = nil;
         _tableView.backgroundView = nil;
     }
     else {
