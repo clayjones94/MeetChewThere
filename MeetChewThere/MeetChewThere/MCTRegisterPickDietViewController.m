@@ -31,7 +31,7 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     [self.navigationController setNavigationBarHidden:NO];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(finish)];
-    
+    [self.navigationItem setHidesBackButton:YES];
     self.navigationItem.title = @"Diet Preferences";
     
     _contentManager = [MCTContentManager sharedManager];

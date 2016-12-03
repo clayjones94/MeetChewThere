@@ -143,7 +143,9 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     [cell setSelected:YES];
-    [_event setRestaurant:[_restaurants objectAtIndex:indexPath.row]];
+    MCTRestaurant *restaurant = [_restaurants objectAtIndex:indexPath.row];
+    [_event setRestaurant:restaurant];
+    [_event setDietTags:restaurant.dietTags];
     [_searchBar resignFirstResponder];
 }
 

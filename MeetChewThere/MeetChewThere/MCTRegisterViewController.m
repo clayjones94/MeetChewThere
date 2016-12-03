@@ -26,6 +26,7 @@
 }
 
 -(void)viewDidLoad {
+    self.navigationController.navigationItem.backBarButtonItem = nil;
     _contentManager = [MCTContentManager sharedManager];
     [self.view setBackgroundColor:[MCTUtils gradientBackgroundColorWithFrame:self.view.frame]];
     [self setThemeUsingPrimaryColor:[UIColor whiteColor] withSecondaryColor:[MCTUtils defaultBarColor] andContentStyle:UIContentStyleLight];
