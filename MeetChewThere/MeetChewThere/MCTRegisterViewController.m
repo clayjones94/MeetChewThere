@@ -14,6 +14,7 @@
 #import "MCTContentManager.h"
 #import "MCTConstants.h"
 #import "MCTRegisterPickDietViewController.h"
+#import "MCTSignInViewController.h"
 
 @implementation MCTRegisterViewController {
     LUNField *_nameField;
@@ -129,7 +130,7 @@
     _nameField.correctStatePlaceholderLabelTextColor = correctColor;
     
     [_nameField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(_usernameField.mas_top).with.offset(-20);
+        make.bottom.equalTo(_usernameField.mas_top).with.offset(-25);
         make.left.right.equalTo(_usernameField);
         make.height.equalTo(_usernameField);
     }];
@@ -155,7 +156,7 @@
     }
     
     [_passwordField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_usernameField.mas_bottom).with.offset(30);
+        make.top.equalTo(_usernameField.mas_bottom).with.offset(25);
         make.left.right.equalTo(_usernameField);
         make.height.equalTo(_usernameField);
     }];
@@ -166,7 +167,7 @@
     [_registerButton addTarget:self action:@selector(registerAccount) forControlEvents:UIControlEventTouchUpInside];
     [_registerButton.layer setCornerRadius:12];
     [_registerButton setClipsToBounds:YES];
-    [_registerButton setBackgroundColor:fieldColor];
+    [_registerButton setBackgroundColor:fieldDetailColor];
     [_registerButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_scrollView addSubview:_registerButton];
     
@@ -180,12 +181,12 @@
     [_signUpButton setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:FONT_SIZE]];
     [_signUpButton setTitle:@"Sign In" forState:UIControlStateNormal];
     [_signUpButton addTarget:self action:@selector(signIn) forControlEvents:UIControlEventTouchUpInside];
-    [_registerButton setBackgroundColor:fieldColor];
-    [_registerButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_signUpButton setBackgroundColor:[UIColor clearColor]];
+    [_signUpButton setTitleColor:fieldColor forState:UIControlStateNormal];
     [_scrollView addSubview:_signUpButton];
     
-    [_registerButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_passwordField.mas_bottom).with.offset(20);
+    [_signUpButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_registerButton.mas_bottom).with.offset(0);
         make.left.right.equalTo(_usernameField);
         make.height.equalTo(_usernameField);
     }];
@@ -194,17 +195,17 @@
 -(void) registerAccount {
     MCTUser *new_user = [[MCTUser alloc] init];
     BOOL complete = YES;
-    if (!_nameField.isCorrect) {
+    if (_nameField.isCorrect == LUNIncorrectContent) {
         complete = NO;
     } else {
         [new_user setName:_nameField.text];
     }
-    if (!_usernameField.isCorrect) {
+    if (_usernameField.isCorrect == LUNIncorrectContent) {
         complete = NO;
     } else {
         [new_user setUsername:_usernameField.text];
     }
-    if (!_passwordField.isCorrect) {
+    if (_passwordField.isCorrect == LUNIncorrectContent) {
         complete = NO;
     } else {
         [new_user setPassword:_passwordField.text];
@@ -216,7 +217,7 @@
 }
 
 -(void) signIn {
-    
+    [self.navigationController pushViewController:[MCTSignInViewController new] animated:YES];
 }
 
 -(NSUInteger)numberOfSectionsInTextField:(LUNField *)LUNField{
@@ -229,7 +230,11 @@
 
 -(void)LUNFieldTextChanged:(LUNField *)LUNField {
     [_scrollView setContentOffset:CGPointMake(0, LUNField.frame.origin.y - self.view.frame.size.height * .4) animated:YES];
-//    [_scrollView scrollRectToVisible:frame animated:YES];
+    if (_passwordField.isCorrect == LUNCorrectContent && _usernameField.isCorrect == LUNCorrectContent && _nameField.isCorrect == LUNCorrectContent) {
+        [_registerButton setBackgroundColor:[MCTUtils defaultBarColor]];
+    } else {
+        [_registerButton setBackgroundColor:[UIColor lightGrayColor]];
+    }
 }
 
 
@@ -253,6 +258,11 @@
             return NO;
         }
     }
+    if (_passwordField.isCorrect == LUNCorrectContent && _usernameField.isCorrect == LUNCorrectContent && _nameField.isCorrect == LUNCorrectContent) {
+        [_registerButton setBackgroundColor:[MCTUtils defaultBarColor]];
+    } else {
+        [_registerButton setBackgroundColor:[UIColor lightGrayColor]];
+    }
     LUNField.correctLabelText = @"Valid";
     return YES;
 }
@@ -263,6 +273,11 @@
     [_usernameField resignFirstResponder];
     [_passwordField resignFirstResponder];
     [_nameField resignFirstResponder];
+    if (_passwordField.isCorrect == LUNCorrectContent && _usernameField.isCorrect == LUNCorrectContent && _nameField.isCorrect == LUNCorrectContent) {
+        [_registerButton setBackgroundColor:[MCTUtils defaultBarColor]];
+    } else {
+        [_registerButton setBackgroundColor:[UIColor lightGrayColor]];
+    }
 }
 
 @end
