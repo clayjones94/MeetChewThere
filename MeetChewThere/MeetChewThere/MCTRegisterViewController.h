@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <LUNField/LUNField.h>
 
-@interface MCTRegisterViewController : UIViewController
+@interface MCTRegisterViewController : UIViewController<LUNFieldDelegate, LUNFieldDataSource, UITextFieldDelegate>
 
 @end
