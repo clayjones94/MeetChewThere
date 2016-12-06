@@ -37,6 +37,7 @@
     [self.navigationController setNavigationBarHidden:NO];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStyleDone target:self action:@selector(finishPage)];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
+    [self.navigationItem.rightBarButtonItem setEnabled:NO];
     
     _contentManager = [MCTContentManager sharedManager];
     _searchText = @"";
@@ -147,6 +148,7 @@
     [_event setRestaurant:restaurant];
     [_event setDietTags:restaurant.dietTags];
     [_searchBar resignFirstResponder];
+    [self.navigationItem.rightBarButtonItem setEnabled:YES];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

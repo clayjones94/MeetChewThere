@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MCTEvent.h"
 
-@interface MCTAddEventDetailsViewController : UIViewController <UITextViewDelegate>
+@interface MCTAddEventDetailsViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate>
 
 @property (strong, nonatomic) MCTEvent *event;
 

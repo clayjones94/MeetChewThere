@@ -33,6 +33,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStyleDone target:self action:@selector(nextPage)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPage)];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
+    [self checkForBackButton];
     
     [self layoutViews];
 }
@@ -45,7 +46,7 @@
     [_nameField setTextAlignment:NSTextAlignmentCenter];
     [_nameField setBackgroundColor:[UIColor whiteColor]];
     [_nameField becomeFirstResponder];
-    
+    _nameField.delegate = self;
     
     [_nameField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
@@ -78,6 +79,7 @@
     [self.view addSubview:_capacityField];
     [_capacityField setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:18]];
     _capacityField.placeholder = @"How many people can come?";
+    _capacityField.delegate = self;
     _capacityField.textColor = [UIColor blackColor];
     [_capacityField setTextAlignment:NSTextAlignmentCenter];
     [_capacityField setBackgroundColor:[UIColor whiteColor]];
@@ -173,13 +175,25 @@
     return YES;
 }
 
--(void) textViewDidChange:(UITextView *)textView
-{
-    
+-(void) textViewDidChange:(UITextView *)textView {
     if(_descriptionField.text.length == 0){
         _descriptionField.textColor = [UIColor lightGrayColor];
         _descriptionField.text = @"Describe Your Event...";
         [_descriptionField resignFirstResponder];
+    }
+    [self checkForBackButton];
+}
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    [self checkForBackButton];
+    return YES;
+}
+
+-(void) checkForBackButton {
+    if(([_descriptionField.text isEqualToString:@"Describe Your Event..."] || [_descriptionField.text isEqualToString:@""]) || !_capacityField.text || !_nameField.text) {
+        [self.navigationItem.rightBarButtonItem setEnabled:NO];
+    } else {
+        [self.navigationItem.rightBarButtonItem setEnabled:YES];
     }
 }
 
