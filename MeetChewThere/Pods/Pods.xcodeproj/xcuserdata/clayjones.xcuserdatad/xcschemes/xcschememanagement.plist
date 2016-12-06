@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>LUNField.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,12 +37,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1157BF7A550A2677EC2A2D38FA59CCE8</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>1282AAC7929465DAD8A31CC1283B3A8C</key>
+		<key>0F7A2336EAB1189A3309724E0DB37EFD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -47,22 +47,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4DEC37610DC06ECF566AE1F62574309F</key>
+		<key>7F55A5AE3AEE50C68A6BBFAB29C45219</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>709E1D018CF73C416C5FDE49EA515D2A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>84BB708399081C2061B4FE115139941D</key>
+		<key>8D8618DD183880ABAE522764A0E9172A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>935A7E52B6D8B7E37EAEA138EDC52155</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C20686DC7C359899DDECCA4FA528DAC3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
