@@ -39,7 +39,6 @@
     [nameLabel sizeToFit];
     
     [dietLabel setText: [MCTUtils dietTagsListtoString:[MCTContentManager sharedManager].user.dietTags]];
-    [dietLabel sizeToFit];
     
     [eventCountLabel setText:[NSString stringWithFormat:@"%lu",(unsigned long)[MCTContentManager sharedManager].getUserHostingEvents.count]];
     [eventCountLabel sizeToFit];
