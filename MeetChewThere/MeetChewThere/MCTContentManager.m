@@ -338,7 +338,9 @@
         for (int j = 0; j < _restaurants.count; j++) {
             CLLocationDistance distance = [_restaurants[j].location distanceFromLocation: _locationManager.location];
             if ([distances[i] isEqualToString:[NSString stringWithFormat:@"%.1f", distance/1607.0]]) {
-                [_restaurants1 addObject:_restaurants[j]];
+                if ([_restaurants1 containsObject:_restaurants[j]] == false) {
+                    [_restaurants1 addObject:_restaurants[j]];
+                }
             }
         }
     }
