@@ -92,6 +92,7 @@
     [dietLabel setText: [MCTUtils dietTagsListtoString:[MCTContentManager sharedManager].user.dietTags]];
     [dietLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:14]];
     [dietLabel setLineBreakMode:NSLineBreakByTruncatingTail];
+    [dietLabel setTextAlignment:NSTextAlignmentCenter];
     [dietLabel setTextColor:[UIColor whiteColor]];
     [dietLabel sizeToFit];
     
