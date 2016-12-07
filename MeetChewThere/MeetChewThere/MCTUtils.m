@@ -14,10 +14,11 @@
 @implementation MCTUtils
 
 +(UIColor *)defaultBarColor {
-    return [UIColor colorWithRed:(0.0f/256.f)
-                          green:(112.0f/256.f)
-                           blue:(220.0f/256.f)
-                          alpha:(1.0f)];
+    return [self colorForHex:0x2E2D2D];
+//    return [UIColor colorWithRed:(0.0f/256.f)
+//                          green:(112.0f/256.f)
+//                           blue:(220.0f/256.f)
+//                          alpha:(1.0f)];
 }
 
 +(UIColor *)MCTLightGrayColor {
@@ -29,6 +30,10 @@
 
 +(UIColor *) MCTSearchSeperatorColor {
     return [self colorForHex:0xF3F3F4];
+}
+
++(UIColor *) MCTRestaurantBackground {
+    return [self colorForHex:0x2E2D2D];
 }
 
 +(UIColor *) colorForHex: (int) rgbValue {

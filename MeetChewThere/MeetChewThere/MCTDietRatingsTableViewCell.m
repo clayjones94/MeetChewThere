@@ -25,7 +25,7 @@
         _starsImageViews = [NSMutableArray new];
         _dietTagLabel = [UILabel new];
         _dietTagLabel.font = [UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12];
-        _dietTagLabel.textColor = [UIColor blackColor];
+        _dietTagLabel.textColor = [UIColor whiteColor];
         [self addSubview:_dietTagLabel];
         
         for (int i = 0; i < 5; i ++) {
@@ -33,6 +33,7 @@
             [self addSubview:star];
             [_starsImageViews addObject:star];
         }
+        [self setBackgroundColor:[UIColor clearColor]];
     }
     return self;
 }
@@ -40,14 +41,14 @@
 -(void)layoutSubviews {
     [_dietTagLabel sizeToFit];
     [_dietTagLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self);
-        make.left.mas_equalTo(10);
+        make.centerX.equalTo(self);
+        make.top.equalTo(self).with.offset(5);
     }];
     
     [[_starsImageViews objectAtIndex:0] sizeToFit];
     [[_starsImageViews objectAtIndex:0] mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(_dietTagLabel);
-        make.left.equalTo(_dietTagLabel.mas_right).with.offset(10);
+        make.top.equalTo(_dietTagLabel.mas_bottom);
+        make.left.equalTo(self.mas_centerX).with.offset(-[_starsImageViews objectAtIndex:0].frame.size.width * 3);
     }];
  
     
@@ -55,7 +56,7 @@
         UIImageView *lastStar = [_starsImageViews objectAtIndex:i-1];
         [_starsImageViews[i] sizeToFit];
         [_starsImageViews[i] mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(_dietTagLabel);
+            make.centerY.equalTo(lastStar);
             make.left.equalTo(lastStar.mas_right).with.offset(5);
         }];
     }
