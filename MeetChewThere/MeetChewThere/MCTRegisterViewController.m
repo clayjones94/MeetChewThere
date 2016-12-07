@@ -76,7 +76,7 @@
 
 -(void) setupFields {
     UIColor *fieldColor = [MCTUtils defaultBarColor];
-    UIColor *fieldDetailColor = [UIColor lightGrayColor];
+    UIColor *fieldDetailColor = [MCTUtils MCTLightGrayColor];
     UIColor *correctColor = fieldColor;
     UIColor *incorrectColor = [UIColor redColor];
     _nameField = [LUNField LUNUnderlinedFieldWithDataSource:self delegate:self underliningHeight:1 underliningColor:fieldDetailColor];
@@ -167,7 +167,7 @@
     [_registerButton addTarget:self action:@selector(registerAccount) forControlEvents:UIControlEventTouchUpInside];
     [_registerButton.layer setCornerRadius:12];
     [_registerButton setClipsToBounds:YES];
-    [_registerButton setBackgroundColor:fieldDetailColor];
+    [_registerButton setBackgroundColor:[MCTUtils MCTLightGrayColor]];
     [_registerButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_scrollView addSubview:_registerButton];
     
@@ -233,7 +233,7 @@
     if (_passwordField.isCorrect == LUNCorrectContent && _usernameField.isCorrect == LUNCorrectContent && _nameField.isCorrect == LUNCorrectContent) {
         [_registerButton setBackgroundColor:[MCTUtils defaultBarColor]];
     } else {
-        [_registerButton setBackgroundColor:[UIColor lightGrayColor]];
+        [_registerButton setBackgroundColor:[MCTUtils MCTLightGrayColor]];
     }
 }
 

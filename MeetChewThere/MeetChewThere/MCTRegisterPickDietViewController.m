@@ -72,12 +72,12 @@
     }];
     
     UIView * bottomSeparator = [[UIView alloc] init];
-    [bottomSeparator setBackgroundColor:[UIColor lightGrayColor]];
+    [bottomSeparator setBackgroundColor:[MCTUtils MCTLightGrayColor]];
     [self.view addSubview:bottomSeparator];
     
     [bottomSeparator mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.left.right.equalTo(_searchBar);
-        make.height.mas_equalTo(1.0);
+        make.height.mas_equalTo(.5);
     }];
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];

@@ -13,6 +13,7 @@
 @interface MCTUtils : NSObject
 
 +(UIColor *) defaultBarColor;
++(UIColor *)MCTLightGrayColor;
 +(UIColor *) gradientBackgroundColorWithFrame: (CGRect) frame;
 +(NSString *) priceStringForRestaurant: (MCTRestaurant *) restaurant;
 +(NSString *) dietTagsListtoString: (NSArray <MCTDietTag *> * ) tags;

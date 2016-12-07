@@ -18,6 +18,13 @@
                           alpha:(1.0f)];
 }
 
++(UIColor *)MCTLightGrayColor {
+    return [UIColor colorWithRed:(172.0f/256.f)
+                           green:(184.0f/256.f)
+                            blue:(193.0f/256.f)
+                           alpha:(1.0f)];
+}
+
 +(UIColor *)gradientBackgroundColorWithFrame: (CGRect) frame {
     UIColor *color1 = [UIColor colorWithRed:(15.0f/256.f)
                                       green:(141.0f/256.f)
