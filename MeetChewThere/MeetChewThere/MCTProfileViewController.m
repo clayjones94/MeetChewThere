@@ -91,12 +91,14 @@
     [upperView addSubview:dietLabel];
     [dietLabel setText: [MCTUtils dietTagsListtoString:[MCTContentManager sharedManager].user.dietTags]];
     [dietLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:14]];
+    [dietLabel setLineBreakMode:NSLineBreakByTruncatingTail];
     [dietLabel setTextColor:[UIColor whiteColor]];
     [dietLabel sizeToFit];
     
     [dietLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(nameLabel.mas_bottom).with.offset(-3);
         make.centerX.equalTo(nameLabel);
+        make.width.mas_equalTo(280);
     }];
     
     UIView *labelView = [[UIView alloc] init];
