@@ -14,6 +14,7 @@
 #import "Masonry.h"
 #import "MCTRestaurantDetailViewController.h"
 #import "MCTConstants.h"
+#import "MCTUtils.h"
 
 @implementation MCTDiscoverRestaurantsViewController {
     ZLDropDownMenu *_filterMenu;
@@ -77,17 +78,17 @@
     }];
     
     UIView * bottomSeparator = [[UIView alloc] init];
-    [bottomSeparator setBackgroundColor:[UIColor lightGrayColor]];
+    [bottomSeparator setBackgroundColor:[MCTUtils MCTSearchSeperatorColor]];
     [self.view addSubview:bottomSeparator];
     
     [bottomSeparator mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.left.equalTo(_searchBar);
         make.right.equalTo(self.view);
-        make.height.mas_equalTo(1.0);
+        make.height.mas_equalTo(0.5);
     }];
     
     UIView * sideSeparator = [[UIView alloc] init];
-    [sideSeparator setBackgroundColor:[UIColor lightGrayColor]];
+    [sideSeparator setBackgroundColor:[MCTUtils MCTSearchSeperatorColor]];
     [self.view addSubview:sideSeparator];
     
     [sideSeparator mas_makeConstraints:^(MASConstraintMaker *make) {

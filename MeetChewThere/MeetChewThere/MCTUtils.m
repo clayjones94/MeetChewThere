@@ -9,6 +9,8 @@
 #import "MCTUtils.h"
 #import <ChameleonFramework/Chameleon.h>
 
+#define kRGBColorFromHex(rgbValue)        [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0f green:((float)((rgbValue & 0xFF00) >> 8))/255.0f blue:((float)(rgbValue & 0xFF))/255.0f alpha:1.0f]
+
 @implementation MCTUtils
 
 +(UIColor *)defaultBarColor {
@@ -23,6 +25,14 @@
                            green:(184.0f/256.f)
                             blue:(193.0f/256.f)
                            alpha:(1.0f)];
+}
+
++(UIColor *) MCTSearchSeperatorColor {
+    return [self colorForHex:0xF3F3F4];
+}
+
++(UIColor *) colorForHex: (int) rgbValue {
+    return [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0f green:((float)((rgbValue & 0xFF00) >> 8))/255.0f blue:((float)(rgbValue & 0xFF))/255.0f alpha:1.0f];
 }
 
 +(UIColor *)gradientBackgroundColorWithFrame: (CGRect) frame {

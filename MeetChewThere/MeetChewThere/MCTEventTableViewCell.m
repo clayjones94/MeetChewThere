@@ -55,10 +55,10 @@
         
         _imageView = [UIImageView new];
         _imageView.layer.cornerRadius = 3;
-        [_imageView setBackgroundColor:[UIColor grayColor]];
+        [_imageView setBackgroundColor:[MCTUtils MCTLightGrayColor]];
         
         _separator = [[UIView alloc] init];
-        [_separator setBackgroundColor:[UIColor lightGrayColor]];
+        [_separator setBackgroundColor:[MCTUtils MCTSearchSeperatorColor]];
         
         [self addSubview:_nameLabel];
         [self addSubview:_restaurantButton];

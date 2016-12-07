@@ -63,7 +63,7 @@
     [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view);
         make.right.left.equalTo(self.view);
-        make.height.mas_equalTo(90);
+        make.height.mas_equalTo(130);
     }];
     
     _introContainerView = [[UIView alloc] init];

@@ -43,12 +43,12 @@
         [_nameLabel setLineBreakMode:NSLineBreakByTruncatingTail];
         
         _priceLabel = [UILabel new];
-        _priceLabel.textColor = [MCTUtils defaultBarColor];
+        _priceLabel.textColor = [MCTUtils MCTLightGrayColor];
         _priceLabel.font = [UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12];
         
         _dietTagsLabel = [UILabel new];
         _dietTagsLabel.font = [UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12];
-        _dietTagsLabel.textColor = [UIColor grayColor];
+        _dietTagsLabel.textColor = [MCTUtils MCTLightGrayColor];
         [_dietTagsLabel setLineBreakMode:NSLineBreakByTruncatingTail];
         
         _eventsLabel = [UILabel new];
@@ -57,14 +57,14 @@
         
         _distanceLabel = [UILabel new];
         _distanceLabel.font = [UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12];
-        _distanceLabel.textColor = [UIColor blackColor];
+        _distanceLabel.textColor = [MCTUtils MCTLightGrayColor];
         
         _imageView = [UIImageView new];
         _imageView.layer.cornerRadius = 3;
-        [_imageView setBackgroundColor:[UIColor grayColor]];
+        [_imageView setBackgroundColor:[MCTUtils MCTLightGrayColor]];
         
         _separator = [[UIView alloc] init];
-        [_separator setBackgroundColor:[UIColor lightGrayColor]];
+        [_separator setBackgroundColor:[MCTUtils MCTSearchSeperatorColor]];
         
         _starsImageViews = [NSMutableArray new];
         for (int i = 0; i < 5; i ++) {
@@ -75,7 +75,7 @@
         
         [self addSubview:_nameLabel];
         [self addSubview:_priceLabel];
-        [self addSubview:_dietTagsLabel];
+//        [self addSubview:_dietTagsLabel];
         [self addSubview:_eventsLabel];
         [self addSubview:_imageView];
         [self addSubview:_distanceLabel];
@@ -111,13 +111,13 @@
     
     [_priceLabel sizeToFit];
     [_priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_nameLabel.mas_bottom).with.offset(5);
-        make.left.equalTo(_nameLabel);
+        make.bottom.equalTo(self).with.offset(-BOTTOM);
+        make.left.equalTo(self).with.offset(LEFT);
     }];
     
     [_distanceLabel sizeToFit];
     [_distanceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_nameLabel);
+        make.top.mas_equalTo(TOP);
         make.right.mas_equalTo(-RIGHT);
     }];
     
@@ -129,12 +129,12 @@
         make.width.mas_equalTo(self.frame.size.width * .25);
     }];
     
-    [_dietTagsLabel sizeToFit];
-    [_dietTagsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_priceLabel.mas_bottom).with.offset(5);
-        make.left.equalTo(_nameLabel);
-        make.right.equalTo(_imageView.mas_left).with.offset(-5);
-    }];
+//    [_dietTagsLabel sizeToFit];
+//    [_dietTagsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(_priceLabel.mas_bottom).with.offset(5);
+//        make.left.equalTo(_nameLabel);
+//        make.right.equalTo(_imageView.mas_left).with.offset(-5);
+//    }];
     
     [_separator mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.right.equalTo(self);
@@ -144,8 +144,8 @@
     
     [[_starsImageViews objectAtIndex:0] sizeToFit];
     [[_starsImageViews objectAtIndex:0] mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(_priceLabel);
-        make.left.equalTo(_priceLabel.mas_right).with.offset(10);
+        make.centerY.equalTo(self).with.offset(0);
+        make.left.equalTo(self).with.offset(LEFT);
     }];
     
     
@@ -153,7 +153,7 @@
         UIImageView *lastStar = [_starsImageViews objectAtIndex:i-1];
         [_starsImageViews[i] sizeToFit];
         [_starsImageViews[i] mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(_priceLabel);
+            make.centerY.equalTo([_starsImageViews objectAtIndex:0]);
             make.left.equalTo(lastStar.mas_right).with.offset(5);
         }];
     }

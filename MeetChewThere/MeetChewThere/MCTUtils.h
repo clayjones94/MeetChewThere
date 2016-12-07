@@ -14,6 +14,8 @@
 
 +(UIColor *) defaultBarColor;
 +(UIColor *)MCTLightGrayColor;
++(UIColor *) MCTSearchSeperatorColor;
++(UIColor *) colorForHex: (int) rgbValue;
 +(UIColor *) gradientBackgroundColorWithFrame: (CGRect) frame;
 +(NSString *) priceStringForRestaurant: (MCTRestaurant *) restaurant;
 +(NSString *) dietTagsListtoString: (NSArray <MCTDietTag *> * ) tags;
@@ -24,5 +26,6 @@
 + (NSInteger) getMinuteForDate: (NSDate *)date;
 + (NSInteger) getYearForDate: (NSDate *)date;
 + (NSString *) getMonthStringForDate: (NSDate *)date;
++ (UIColor *) MCTSearchSeperatorColor;
 
 @end
