@@ -17,6 +17,8 @@
     UITextField *_nameField;
     UITextView *_descriptionField;
     UITextField *_capacityField;
+    
+    UIScrollView *_scrollView;
 }
 
 @synthesize event = _event;
@@ -35,12 +37,24 @@
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
     [self checkForBackButton];
     
+    [self setupScrollView];
     [self layoutViews];
+}
+
+-(void) setupScrollView {
+    _scrollView = [[UIScrollView alloc] init];
+    [_scrollView setFrame: self.view.frame];
+    [_scrollView setScrollEnabled:YES];
+    [_scrollView setContentSize:CGSizeMake(self.view.frame.size.width, self.view.frame.size.height * 1.3)];
+    [_scrollView setBackgroundColor:[UIColor whiteColor]];
+    [_scrollView setShowsVerticalScrollIndicator:YES];
+    [_scrollView setBounces:NO];
+    [self.view addSubview:_scrollView];
 }
 
 -(void) layoutViews {
     _nameField = [UITextField new];
-    [self.view addSubview:_nameField];
+    [_scrollView addSubview:_nameField];
     [_nameField setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:18]];
     [_nameField setPlaceholder:@"Name Your Event"];
     [_nameField setTextAlignment:NSTextAlignmentCenter];
@@ -49,8 +63,8 @@
     _nameField.delegate = self;
     
     [_nameField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view);
-        make.top.mas_equalTo(self.view.frame.size.height * .20);
+        make.centerX.equalTo(_scrollView);
+        make.top.mas_equalTo(40);
         make.width.mas_equalTo(self.view.frame.size.width * .8);
         make.height.mas_equalTo(40);
     }];
@@ -64,7 +78,7 @@
 //    }];
     
     UILabel *nameDetailLabel = [[UILabel alloc] init];
-    [self.view addSubview:nameDetailLabel];
+    [_scrollView addSubview:nameDetailLabel];
     [nameDetailLabel setText:@"Name"];
     [nameDetailLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12]];
     [nameDetailLabel setTextColor:[MCTUtils defaultBarColor]];
@@ -76,7 +90,7 @@
     }];
     
     _capacityField = [UITextField new];
-    [self.view addSubview:_capacityField];
+    [_scrollView addSubview:_capacityField];
     [_capacityField setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:18]];
     _capacityField.placeholder = @"How many people can come?";
     _capacityField.delegate = self;
@@ -102,7 +116,7 @@
     //    }];
     
     UILabel *capacityDetailLabel = [[UILabel alloc] init];
-    [self.view addSubview:capacityDetailLabel];
+    [_scrollView addSubview:capacityDetailLabel];
     [capacityDetailLabel setText:@"Capacity"];
     [capacityDetailLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12]];
     [capacityDetailLabel setTextColor:[MCTUtils defaultBarColor]];
@@ -114,7 +128,7 @@
     }];
     
     _descriptionField = [UITextView new];
-    [self.view addSubview:_descriptionField];
+    [_scrollView addSubview:_descriptionField];
     [_descriptionField setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:18]];
     _descriptionField.text = @"Describe Your Event...";
     _descriptionField.textColor = [UIColor lightGrayColor];
@@ -127,7 +141,7 @@
         make.centerX.equalTo(self.view);
         make.top.mas_equalTo(_capacityField.mas_bottom).with.offset(30);
         make.width.equalTo(_capacityField);
-        make.height.mas_equalTo(40);
+        make.height.mas_equalTo(100);
     }];
     
 //    separator = [UIView new];
@@ -139,7 +153,7 @@
 //    }];
     
     UILabel *descriptionDetailLabel = [[UILabel alloc] init];
-    [self.view addSubview:descriptionDetailLabel];
+    [_scrollView addSubview:descriptionDetailLabel];
     [descriptionDetailLabel setText:@"Description"];
     [descriptionDetailLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12]];
     [descriptionDetailLabel setTextColor:[MCTUtils defaultBarColor]];
@@ -170,6 +184,7 @@
 
 - (BOOL) textViewShouldBeginEditing:(UITextView *)textView
 {
+    [_scrollView setContentOffset:CGPointMake(0, textView.frame.origin.y - self.view.frame.size.height * .15) animated:YES];
     _descriptionField.text = @"";
     _descriptionField.textColor = [UIColor blackColor];
     return YES;
@@ -182,6 +197,11 @@
         [_descriptionField resignFirstResponder];
     }
     [self checkForBackButton];
+}
+
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    [_scrollView setContentOffset:CGPointMake(0, textField.frame.origin.y - self.view.frame.size.height * .15) animated:YES];
+    return YES;
 }
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {

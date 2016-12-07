@@ -179,6 +179,71 @@
         make.width.mas_equalTo(80.f);
     }];
     
+    
+    UIView *buttonContainer = [[UIView alloc] init];
+    [_scrollView addSubview:buttonContainer];
+    
+    [buttonContainer mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(_scrollView);
+        make.width.equalTo(self.view);
+        make.top.equalTo(separator.mas_bottom).with.offset(15);
+        make.height.mas_equalTo(60);
+    }];
+    
+    NSArray *buttonNames = @[@"phone", @"website", @"car"];
+    
+    UIButton *button = [[UIButton alloc] init];
+    [buttonContainer addSubview:button];
+    [button setBackgroundImage:[[UIImage imageNamed:buttonNames[0]]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+//    [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    [button setClipsToBounds:YES];
+    [button setBackgroundColor:[UIColor clearColor]];
+    [button setTintColor:[UIColor whiteColor]];
+    [button sizeToFit];
+    
+    [button mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(buttonContainer).with.offset(10);
+        make.centerX.equalTo(buttonContainer).with.offset(-70);
+    }];
+    
+    button = [[UIButton alloc] init];
+    [buttonContainer addSubview:button];
+    [button setBackgroundImage:[[UIImage imageNamed:buttonNames[1]]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+//    [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    [button setClipsToBounds:YES];
+    [button setBackgroundColor:[UIColor clearColor]];
+    [button setTintColor:[UIColor whiteColor]];
+    [button sizeToFit];
+    
+    [button mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(buttonContainer).with.offset(10);
+        make.centerX.equalTo(buttonContainer);
+    }];
+    
+    button = [[UIButton alloc] init];
+    [buttonContainer addSubview:button];
+    [button setBackgroundImage:[[UIImage imageNamed:buttonNames[2]]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+//    [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    [button setClipsToBounds:YES];
+    [button setBackgroundColor:[UIColor clearColor]];
+    [button setTintColor:[UIColor whiteColor]];
+    [button sizeToFit];
+    
+    [button mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(buttonContainer).with.offset(10);
+        make.centerX.equalTo(buttonContainer).with.offset(70);
+    }];
+    
+    separator = [UIView new];
+    [separator setBackgroundColor:[UIColor whiteColor]];
+    [_scrollView addSubview:separator];
+    [separator mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(buttonContainer);
+        make.top.equalTo(buttonContainer.mas_bottom).with.offset(15);
+        make.height.mas_equalTo(1.f);
+        make.width.mas_equalTo(80.f);
+    }];
+    
     _ratingsContainerView = [[UIView alloc] init];
     [_scrollView addSubview:_ratingsContainerView];
     
@@ -259,7 +324,7 @@
         make.height.mas_equalTo(tvHeight);
     }];
     
-    [_scrollView setContentSize:CGSizeMake(self.view.frame.size.width, 500 + 60 * _events.count + _restaurant.dietTags.count * 40)];
+    [_scrollView setContentSize:CGSizeMake(self.view.frame.size.width, 600 + 60 * _events.count + _restaurant.dietTags.count * 40)];
 }
 
 -(void) back {
