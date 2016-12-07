@@ -15,6 +15,7 @@
 +(UIColor *) defaultBarColor;
 +(UIColor *)MCTLightGrayColor;
 +(UIColor *) MCTSearchSeperatorColor;
++(UIColor *) MCTRestaurantBackground;
 +(UIColor *) colorForHex: (int) rgbValue;
 +(UIColor *) gradientBackgroundColorWithFrame: (CGRect) frame;
 +(NSString *) priceStringForRestaurant: (MCTRestaurant *) restaurant;

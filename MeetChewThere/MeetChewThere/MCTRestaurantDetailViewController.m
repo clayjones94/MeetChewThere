@@ -13,20 +13,26 @@
 #import "MCTUtils.h"
 #import "MCTContentManager.h"
 #import "MCTDietRatingsTableViewCell.h"
+#import <ChameleonFramework/Chameleon.h>
+#import "MCTRestaurantEventTableViewCell.h"
 #import "MCTConstants.h"
+#import "MCTEvent.h"
 
-#define RATING_CELL_HEIGHT 25;
+#define RATING_CELL_HEIGHT 40;
 
 @implementation MCTRestaurantDetailViewController {
     UIImageView *_imageView;
     
     UIView *_introContainerView;
+    
+    UIView *_ratingsContainerView;
     UITableView *_ratingsTableView;
     
     UILabel *_costLabel;
     
     UIView *_eventsContainerView;
     UILabel *_eventsLabel;
+    UITableView *_eventsTableView;
     
     UIView *_contactContainerView;
     
@@ -34,13 +40,25 @@
     UILabel *_phoneLabel;
     UILabel *_websiteLabel;
     
+    UIButton *_backButton;
+    
     MCTContentManager *_contentManager;
+    UIScrollView *_scrollView;
+    
+    NSArray<MCTEvent *> * _events;
 }
 
 @synthesize restaurant = _restaurant;
 
+-(void)setRestaurant:(MCTRestaurant *)restaurant {
+    _restaurant = restaurant;
+    _contentManager = [MCTContentManager sharedManager];
+    _events = [_contentManager getEventsForRestaurant:_restaurant];
+    [_eventsTableView reloadData];
+}
+
 -(void)viewDidLoad {
-    self.navigationController.navigationBarHidden = NO;
+    self.navigationController.navigationBarHidden = YES;
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
     self.navigationItem.title = _restaurant.name;
@@ -48,185 +66,191 @@
     _contentManager = [MCTContentManager sharedManager];
     
     [self.view setBackgroundColor:[UIColor whiteColor]];
+    [self setupScrollView];
     [self layoutViews];
+}
+
+-(void) setupScrollView {
+    _scrollView = [[UIScrollView alloc] init];
+    [_scrollView setFrame: self.view.frame];
+    [_scrollView setScrollEnabled:YES];
+    [_scrollView setContentSize:CGSizeMake(self.view.frame.size.width, self.view.frame.size.height * 1.8)];
+    [_scrollView setBackgroundColor:[MCTUtils MCTRestaurantBackground]];
+    [_scrollView setShowsVerticalScrollIndicator:YES];
+    [_scrollView setBounces:NO];
+    [self.view addSubview:_scrollView];
 }
 
 -(void) layoutViews {
     CGFloat LEFT_MARGIN = 10;
     
     _imageView = [[UIImageView alloc] init];
-    [self.view addSubview:_imageView];
+    [_scrollView addSubview:_imageView];
     [_imageView setImage:[UIImage imageNamed:_restaurant.imageName]];
     [_imageView setBackgroundColor:[UIColor grayColor]];
     [_imageView setContentMode:UIViewContentModeScaleAspectFill];
     [_imageView setClipsToBounds:YES];
     [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view);
-        make.right.left.equalTo(self.view);
-        make.height.mas_equalTo(130);
+        make.top.equalTo(_scrollView);
+        make.width.equalTo(self.view);
+        make.height.mas_equalTo(200);
+    }];
+    
+    UIView *imageOverlay = [[UIView alloc] init];
+    [imageOverlay setBackgroundColor:[MCTUtils MCTRestaurantBackground]];
+    [_imageView addSubview:imageOverlay];
+    [imageOverlay setAlpha:.1];
+    
+    [imageOverlay mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.bottom.right.equalTo(_imageView);
+    }];
+    
+    
+    //Add gradient overlay
+    UIView *gradientView = [[UIView alloc] init];
+    UIColor *gradientColor = [UIColor colorWithGradientStyle:UIGradientStyleTopToBottom withFrame:CGRectMake(0, 0, self.view.frame.size.width, 200) andColors:@[[UIColor clearColor], [MCTUtils MCTRestaurantBackground]]];
+    [gradientView setBackgroundColor:gradientColor];
+    [_imageView addSubview:gradientView];
+    
+    [gradientView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.bottom.right.equalTo(_imageView);
+    }];
+    
+    _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_backButton setBackgroundImage:[[UIImage imageNamed:@"back"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    [_backButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    [_backButton setClipsToBounds:YES];
+    [_backButton setBackgroundColor:[UIColor clearColor]];
+    [_backButton setTintColor:[UIColor whiteColor]];
+    [_scrollView addSubview:_backButton];
+    
+    [_backButton sizeToFit];
+    [_backButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.equalTo(_scrollView).with.offset(20);
     }];
     
     _introContainerView = [[UIView alloc] init];
-    [self.view addSubview:_introContainerView];
-    
-    _ratingsTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-    _ratingsTableView.delegate = self;
-    _ratingsTableView.dataSource = self;
-    [_ratingsTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    [_introContainerView addSubview:_ratingsTableView];
+    [_scrollView addSubview:_introContainerView];
     
     [_introContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.left.equalTo(self.view);
+        make.left.equalTo(_scrollView);
+        make.width.equalTo(self.view);
         make.top.equalTo(_imageView.mas_bottom);
-        CGFloat cellHeight = RATING_CELL_HEIGHT;
-        CGFloat tvHeight = cellHeight * (_restaurant.dietTags.count);
-        make.height.mas_equalTo(tvHeight + cellHeight);
+        make.height.mas_equalTo(60);
     }];
     
-    UIView *separator = [UIView new];
-    [separator setBackgroundColor:[UIColor lightGrayColor]];
-    [_introContainerView addSubview:separator];
-    [separator mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.left.right.equalTo(_introContainerView);
-        make.height.mas_equalTo(1.f);
-    }];
+    UILabel *nameLabel = [[UILabel alloc] init];
+    [_introContainerView addSubview:nameLabel];
+    [nameLabel setText: _restaurant.name];
+    [nameLabel setFont:[UIFont fontWithName:MCT_BOLD_FONT_NAME size:24]];
+    [nameLabel setTextColor:[UIColor whiteColor]];
+    [nameLabel sizeToFit];
     
-    [_ratingsTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.left.equalTo(self.view);
-        make.top.mas_equalTo(_introContainerView);
-        CGFloat cellHeight = RATING_CELL_HEIGHT;
-        CGFloat tvHeight = cellHeight * (_restaurant.dietTags.count);
-        make.height.mas_equalTo(tvHeight);
+    [nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.centerX.mas_equalTo(_introContainerView);
     }];
     
     _costLabel = [[UILabel alloc] init];
     [_introContainerView addSubview:_costLabel];
     [_costLabel setText: [NSString stringWithFormat:@"%@ - American, Burgers, Shakes", [MCTUtils priceStringForRestaurant:_restaurant]]];
-    [_costLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12]];
-    [_costLabel setTextColor:[UIColor grayColor]];
+    [_costLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:14]];
+    [_costLabel setTextColor:[UIColor whiteColor]];
     [_costLabel sizeToFit];
     
     [_costLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(LEFT_MARGIN);
+        make.centerX.equalTo(nameLabel);
+        make.top.equalTo(nameLabel.mas_bottom).with.offset(2);
+    }];
+    
+    UIView *separator = [UIView new];
+    [separator setBackgroundColor:[UIColor whiteColor]];
+    [_scrollView addSubview:separator];
+    [separator mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(_introContainerView);
+        make.top.equalTo(_introContainerView.mas_bottom).with.offset(15);
+        make.height.mas_equalTo(1.f);
+        make.width.mas_equalTo(80.f);
+    }];
+    
+    _ratingsContainerView = [[UIView alloc] init];
+    [_scrollView addSubview:_ratingsContainerView];
+    
+    _ratingsTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    _ratingsTableView.delegate = self;
+    _ratingsTableView.dataSource = self;
+    [_ratingsTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    [_ratingsTableView setBackgroundColor:[UIColor clearColor]];
+    [_ratingsContainerView addSubview:_ratingsTableView];
+    
+    [_ratingsContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.left.equalTo(_introContainerView);
+        make.top.equalTo(separator.mas_bottom).with.offset(20);
         CGFloat cellHeight = RATING_CELL_HEIGHT;
-        make.centerY.equalTo(_ratingsTableView.mas_bottom).with.offset(cellHeight/2);
+        CGFloat tvHeight = cellHeight * (_restaurant.dietTags.count);
+        make.height.mas_equalTo(tvHeight);
+    }];
+    
+    [_ratingsTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.left.equalTo(_ratingsContainerView);
+        make.top.equalTo(_ratingsContainerView);
+        CGFloat cellHeight = RATING_CELL_HEIGHT;
+        CGFloat tvHeight = cellHeight * (_restaurant.dietTags.count);
+        make.height.mas_equalTo(tvHeight);
+    }];
+    
+    separator = [UIView new];
+    [separator setBackgroundColor:[UIColor whiteColor]];
+    [_ratingsContainerView addSubview:separator];
+    [separator mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(_ratingsContainerView);
+        make.top.equalTo(_ratingsContainerView.mas_bottom).with.offset(20);
+        make.height.mas_equalTo(1.f);
+        make.width.mas_equalTo(80.f);
     }];
     
     _eventsContainerView = [[UIView alloc] init];
-    [self.view addSubview:_eventsContainerView];
+    [_scrollView addSubview:_eventsContainerView];
+    
+    UILabel *eventDetailLabel = [[UILabel alloc] init];
+    [_eventsContainerView addSubview:eventDetailLabel];
+    [eventDetailLabel setText:@"Upcoming Events"];
+    [eventDetailLabel setFont:[UIFont fontWithName:MCT_BOLD_FONT_NAME size:18]];
+    [eventDetailLabel setTextColor:[UIColor whiteColor]];
+    [eventDetailLabel sizeToFit];
+    
+    [eventDetailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(LEFT_MARGIN);
+        make.centerX.equalTo(_eventsContainerView);
+    }];
+    
+    _eventsTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    _eventsTableView.delegate = self;
+    _eventsTableView.dataSource = self;
+    [_eventsTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    [_eventsTableView setBackgroundColor:[UIColor clearColor]];
+    [_eventsContainerView addSubview:_eventsTableView];
+    
     [_eventsContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.left.equalTo(self.view);
-        make.top.equalTo(_introContainerView.mas_bottom);
-        make.height.mas_equalTo(55);
+        make.right.left.equalTo(_introContainerView);
+        make.top.equalTo(separator.mas_bottom).with.offset(20);
+        CGFloat cellHeight = 80;
+        CGFloat tvHeight = cellHeight * (_events.count);
+        make.height.mas_equalTo(tvHeight);
     }];
     
-    separator = [UIView new];
-    [separator setBackgroundColor:[UIColor lightGrayColor]];
-    [_eventsContainerView addSubview:separator];
-    [separator mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.left.right.equalTo(_eventsContainerView);
-        make.height.mas_equalTo(1.f);
+    [_eventsTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.left.equalTo(_eventsContainerView);
+        make.top.equalTo(eventDetailLabel.mas_bottom).with.offset(20);
+        CGFloat cellHeight = 80;
+        CGFloat tvHeight = cellHeight * (_events.count);
+        make.height.mas_equalTo(tvHeight);
     }];
     
-    UILabel *guestDetailLabel = [[UILabel alloc] init];
-    [_eventsContainerView addSubview:guestDetailLabel];
-    [guestDetailLabel setText:@"Events"];
-    [guestDetailLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12]];
-    [guestDetailLabel setTextColor:[UIColor lightGrayColor]];
-    [guestDetailLabel sizeToFit];
-    
-    [guestDetailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.mas_equalTo(LEFT_MARGIN);
-    }];
-    
-    _eventsLabel = [[UILabel alloc] init];
-    [_eventsContainerView addSubview:_eventsLabel];
-    [_eventsLabel setText:[NSString stringWithFormat:@"%lu upcoming events", (unsigned long)3]];
-    [_eventsLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:16]];
-    [_eventsLabel setTextColor:[UIColor blackColor]];
-    [_eventsLabel sizeToFit];
-    
-    [_eventsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(guestDetailLabel);
-        make.top.equalTo(guestDetailLabel.mas_bottom);
-    }];
-    
-    _contactContainerView = [[UIView alloc] init];
-    [self.view addSubview:_contactContainerView];
-    [_contactContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.left.bottom.equalTo(self.view);
-        make.top.equalTo(_eventsContainerView.mas_bottom);
-    }];
-    
-    _mapView = [[MKMapView alloc] init];
-    MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-    [annotation setCoordinate:_restaurant.location.coordinate];
-    [annotation setTitle:_restaurant.name]; //You can set the subtitle too
-    [_mapView addAnnotation:annotation];
-    MKCoordinateRegion region;
-    MKCoordinateSpan span;
-    span.latitudeDelta = 0.1;
-    span.longitudeDelta = 0.1;
-    region.span = span;
-    region.center = _restaurant.location.coordinate;
-    [_mapView setRegion:region animated:TRUE];
-    [_mapView regionThatFits:region];
-    [_contactContainerView addSubview:_mapView];
-    [_mapView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.left.equalTo(_contactContainerView);
-        make.top.equalTo(_contactContainerView).with.offset(10);
-        CGFloat contactCellHeight = 40;
-        make.bottom.equalTo(_contactContainerView).with.offset(-contactCellHeight);
-    }];
-    
-    UIView *phoneView = [[UIView alloc] init];
-    [_contactContainerView addSubview:phoneView];
-    [phoneView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_contactContainerView);
-        make.width.mas_equalTo(self.view.frame.size.width/2);
-        make.top.equalTo(_mapView.mas_bottom);
-        make.bottom.equalTo(_contactContainerView);
-    }];
-    
-    _phoneLabel = [[UILabel alloc] init];
-    [_phoneLabel setText:_restaurant.phone];
-    [_phoneLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:14]];
-    [_phoneLabel setTextColor:[MCTUtils defaultBarColor]];
-    [phoneView addSubview:_phoneLabel];
-    [_phoneLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.centerX.equalTo(phoneView);
-    }];
-    
-    UIView *websiteView = [[UIView alloc] init];
-    [_contactContainerView addSubview:websiteView];
-    [websiteView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(phoneView.mas_right);
-        make.right.mas_equalTo(_contactContainerView);
-        make.top.equalTo(_mapView.mas_bottom);
-        make.bottom.equalTo(_contactContainerView);
-    }];
-    
-    _websiteLabel = [[UILabel alloc] init];
-    [_websiteLabel setText:@"Website"];
-    [_websiteLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:14]];
-    [_websiteLabel setTextColor:[MCTUtils defaultBarColor]];
-    [websiteView addSubview:_websiteLabel];
-    [_websiteLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.centerX.equalTo(websiteView);
-    }];
-    
-    separator = [UIView new];
-    [separator setBackgroundColor:[UIColor lightGrayColor]];
-    [_contactContainerView addSubview:separator];
-    [separator mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.top.equalTo(phoneView);
-        make.right.equalTo(phoneView).with.offset(-.5f);
-        make.width.mas_equalTo(1.f);
-    }];
+    [_scrollView setContentSize:CGSizeMake(self.view.frame.size.width, 500 + 60 * _events.count + _restaurant.dietTags.count * 40)];
 }
 
--(void)setRestaurant:(MCTRestaurant *)restaurant {
-    _restaurant = restaurant;
+-(void) back {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma TableView Methods
@@ -241,16 +265,34 @@
         }
         ratingsCell.dietTag = _restaurant.dietTags[indexPath.row];
         return ratingsCell;
+    } else if([tableView isEqual:_eventsTableView]) {
+        NSString *identifier = @"event cell";
+        MCTRestaurantEventTableViewCell *eventCell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if(!eventCell){
+            eventCell = [[MCTRestaurantEventTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
+        }
+        eventCell.event = _events[indexPath.row];
+        return eventCell;
     }
     return cell;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _restaurant.dietTags.count;
+    if ([tableView isEqual:_ratingsTableView]) {
+        return _restaurant.dietTags.count;
+    } else if([tableView isEqual:_eventsTableView]) {
+        return _events.count;
+    }
+    return 0;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return RATING_CELL_HEIGHT;
+    if ([tableView isEqual:_ratingsTableView]) {
+        return RATING_CELL_HEIGHT;
+    } else if([tableView isEqual:_eventsTableView]) {
+        return 60;
+    }
+    return 0;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
