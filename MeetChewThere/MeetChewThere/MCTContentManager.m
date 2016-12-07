@@ -38,6 +38,7 @@
         [self initUsers];
         [self initRestaurants];
         [self initEvents];
+        [self initReviews];
         _attendingEvents = [NSMutableArray new];
     }
     return self;
@@ -242,7 +243,7 @@
     MCTRestaurantReview *review = [[MCTRestaurantReview alloc] init];
     review.objectID = 0;
     review.user = _users[0];
-    review.reviewString = @"Great restaurant!";
+    review.reviewString = @"This is a much longer review than I had previously in order to test the length functionality!";
     review.date = [NSDate date];
     review.restaurant = _restaurants[0];
     review.dietTags = @[_dietTags[0], _dietTags[1]];

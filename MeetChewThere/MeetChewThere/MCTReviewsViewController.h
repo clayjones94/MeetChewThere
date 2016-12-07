@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MCTDietTag.h"
 
-@interface MCTReviewsViewController : UIViewController
+@interface MCTReviewsViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
+
+@property (weak, nonatomic) MCTDietTag *dietTag;
 
 @end

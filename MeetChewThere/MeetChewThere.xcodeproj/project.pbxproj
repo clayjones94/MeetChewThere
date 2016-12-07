@@ -17,6 +17,7 @@
 		925FF8E01DF7AF30003960C4 /* MCTRestaurantEventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 925FF8DF1DF7AF30003960C4 /* MCTRestaurantEventTableViewCell.m */; };
 		925FF8E31DF7E3A4003960C4 /* MCTProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 925FF8E21DF7E3A4003960C4 /* MCTProfileViewController.m */; };
 		925FF8E71DF80FEC003960C4 /* MCTReviewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 925FF8E61DF80FEC003960C4 /* MCTReviewsViewController.m */; };
+		925FF8EB1DF82433003960C4 /* MCTReviewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 925FF8EA1DF82433003960C4 /* MCTReviewTableViewCell.m */; };
 		927E5C801DD658CA0060F111 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 927E5C7F1DD658CA0060F111 /* MapKit.framework */; };
 		927E5C831DD65D2A0060F111 /* MCTDietRatingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 927E5C821DD65D2A0060F111 /* MCTDietRatingsTableViewCell.m */; };
 		92A855581DCD5AA100DB27A3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 92A855571DCD5AA100DB27A3 /* Default-568h@2x.png */; };
@@ -101,6 +102,8 @@
 		925FF8E21DF7E3A4003960C4 /* MCTProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTProfileViewController.m; sourceTree = "<group>"; };
 		925FF8E51DF80FEC003960C4 /* MCTReviewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTReviewsViewController.h; sourceTree = "<group>"; };
 		925FF8E61DF80FEC003960C4 /* MCTReviewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTReviewsViewController.m; sourceTree = "<group>"; };
+		925FF8E91DF82433003960C4 /* MCTReviewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTReviewTableViewCell.h; sourceTree = "<group>"; };
+		925FF8EA1DF82433003960C4 /* MCTReviewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTReviewTableViewCell.m; sourceTree = "<group>"; };
 		927E5C7F1DD658CA0060F111 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		927E5C811DD65D2A0060F111 /* MCTDietRatingsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTDietRatingsTableViewCell.h; sourceTree = "<group>"; };
 		927E5C821DD65D2A0060F111 /* MCTDietRatingsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTDietRatingsTableViewCell.m; sourceTree = "<group>"; };
@@ -306,6 +309,17 @@
 			name = Profile;
 			sourceTree = "<group>";
 		};
+		925FF8E81DF82414003960C4 /* Reviews */ = {
+			isa = PBXGroup;
+			children = (
+				925FF8E51DF80FEC003960C4 /* MCTReviewsViewController.h */,
+				925FF8E61DF80FEC003960C4 /* MCTReviewsViewController.m */,
+				925FF8E91DF82433003960C4 /* MCTReviewTableViewCell.h */,
+				925FF8EA1DF82433003960C4 /* MCTReviewTableViewCell.m */,
+			);
+			name = Reviews;
+			sourceTree = "<group>";
+		};
 		92A8555E1DCD5DA400DB27A3 /* Discover */ = {
 			isa = PBXGroup;
 			children = (
@@ -480,8 +494,7 @@
 				927E5C821DD65D2A0060F111 /* MCTDietRatingsTableViewCell.m */,
 				925FF8DE1DF7AF30003960C4 /* MCTRestaurantEventTableViewCell.h */,
 				925FF8DF1DF7AF30003960C4 /* MCTRestaurantEventTableViewCell.m */,
-				925FF8E51DF80FEC003960C4 /* MCTReviewsViewController.h */,
-				925FF8E61DF80FEC003960C4 /* MCTReviewsViewController.m */,
+				925FF8E81DF82414003960C4 /* Reviews */,
 			);
 			name = "Restaurant Detail";
 			sourceTree = "<group>";
@@ -708,6 +721,7 @@
 				92C8A2461DDFA74F001B606A /* MCTSelectTimeViewController.m in Sources */,
 				92A855BE1DCD9FA400DB27A3 /* MCTUser.m in Sources */,
 				92A855D11DCEF20400DB27A3 /* MCTRestaurantDetailViewController.m in Sources */,
+				925FF8EB1DF82433003960C4 /* MCTReviewTableViewCell.m in Sources */,
 				92A855AC1DCD7ADC00DB27A3 /* ZLDropDownMenuCollectionViewCell.m in Sources */,
 				92A855AD1DCD7ADC00DB27A3 /* ZLDropDownMenuTitleButton.m in Sources */,
 				92A855A21DCD7ADC00DB27A3 /* MASConstraint.m in Sources */,

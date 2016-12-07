@@ -15,8 +15,10 @@
 #import "MCTDietRatingsTableViewCell.h"
 #import <ChameleonFramework/Chameleon.h>
 #import "MCTRestaurantEventTableViewCell.h"
+#import "MCTReviewsViewController.h"
 #import "MCTConstants.h"
 #import "MCTEvent.h"
+#import "MCTEventDetailViewController.h"
 
 #define RATING_CELL_HEIGHT 40;
 
@@ -57,8 +59,13 @@
     [_eventsTableView reloadData];
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    self.navigationController.navigationBarHidden = YES;
+}
+
 -(void)viewDidLoad {
     self.navigationController.navigationBarHidden = YES;
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
     self.navigationItem.title = _restaurant.name;
@@ -304,6 +311,15 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     [cell setSelected:NO];
+    if ([tableView isEqual:_ratingsTableView]) {
+        MCTReviewsViewController *vc = [MCTReviewsViewController new];
+        vc.dietTag = _restaurant.dietTags[indexPath.row];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        MCTEventDetailViewController *vc = [MCTEventDetailViewController new];
+        vc.event = _events[indexPath.row];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 @end

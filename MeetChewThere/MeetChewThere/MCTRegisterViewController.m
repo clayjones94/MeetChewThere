@@ -34,9 +34,7 @@
     [self setupScrollView];
     self.navigationController.navigationItem.backBarButtonItem = nil;
     _contentManager = [MCTContentManager sharedManager];
-//    [_scrollView setBackgroundColor:[MCTUtils gradientBackgroundColorWithFrame:self.view.frame]];
     [_scrollView setBackgroundColor:[UIColor whiteColor]];
-//    [self setThemeUsingPrimaryColor:[UIColor whiteColor] withSecondaryColor:[MCTUtils defaultBarColor] andContentStyle:UIContentStyleLight];
     [self setupFields];
     [self setupTap];
 }

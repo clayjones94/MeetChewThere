@@ -55,7 +55,7 @@
     
     UINavigationController *profileController = [[UINavigationController alloc] initWithRootViewController:[[MCTProfileViewController alloc] init]];
     profileController.tabBarItem.title = @"Profile";
-    profileController.tabBarItem.image = [UIImage imageNamed:@"my_events_tab"];
+    profileController.tabBarItem.image = [UIImage imageNamed:@"profile_tab_icon"];
     
     NSArray *viewControllers = @[discoverController, createController, eventsController, profileController];
     for (UINavigationController *vc in viewControllers) {

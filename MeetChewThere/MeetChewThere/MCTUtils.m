@@ -34,6 +34,11 @@
 
 +(UIColor *) MCTRestaurantBackground {
     return [self colorForHex:0x2E2D2D];
+//    return [UIColor colorWithRed:(0.0f/256.f)
+//                           green:(112.0f/256.f)
+//                            blue:(220.0f/256.f)
+//                           alpha:(1.0f)];
+//    return [UIColor whiteColor];
 }
 
 +(UIColor *) colorForHex: (int) rgbValue {
@@ -42,6 +47,7 @@
 
 +(UIColor *) MCTBarBackgroundColorForFrame: (CGRect) frame{
     return [UIColor colorWithGradientStyle:UIGradientStyleTopToBottom withFrame:CGRectMake(0, 0, frame.size.width, frame.size.height) andColors:@[[MCTUtils colorForHex:0x00A9F0], [MCTUtils colorForHex:0x0070DC]]];
+//    return [UIColor colorWithGradientStyle:UIGradientStyleTopToBottom withFrame:CGRectMake(0, 0, frame.size.width, frame.size.height) andColors:@[[MCTUtils colorForHex:0x696969], [MCTUtils colorForHex:0x696969]]];
 }
 
 +(UIColor *)gradientBackgroundColorWithFrame: (CGRect) frame {

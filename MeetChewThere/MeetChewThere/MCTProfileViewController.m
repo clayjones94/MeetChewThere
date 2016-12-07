@@ -45,7 +45,7 @@
 
 -(void) layoutViews {
     UIView *upperView = [[UIView alloc] init];
-    UIColor *gradientColor = [UIColor colorWithGradientStyle:UIGradientStyleTopToBottom withFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height * .6) andColors:@[[MCTUtils colorForHex:0x00A9F0], [MCTUtils colorForHex:0x0070DC]]];
+    UIColor *gradientColor = [MCTUtils MCTBarBackgroundColorForFrame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height * .6)];
     [upperView setBackgroundColor:gradientColor];
     [self.view addSubview:upperView];
     

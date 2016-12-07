@@ -34,6 +34,13 @@
     [self.navigationItem setHidesBackButton:YES];
     self.navigationItem.title = @"Diet Preferences";
     
+    [self.navigationController.navigationBar setOpaque:YES];
+    self.navigationController.navigationBar.translucent = NO;
+    [self.navigationController.navigationBar setBarTintColor:[MCTUtils MCTBarBackgroundColorForFrame:CGRectMake(0, 0, self.view.frame.size.width, self.navigationController.navigationBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height)]];
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    [self.navigationController.navigationBar
+     setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    
     _contentManager = [MCTContentManager sharedManager];
     if (_contentManager.user.dietTags) {
         _selectedTags = [[NSMutableArray<MCTDietTag *> alloc] initWithArray: _contentManager.user.dietTags];
@@ -43,7 +50,7 @@
     
     _dietTags = [_contentManager getAllDietTags];
     [self.view setBackgroundColor:[UIColor whiteColor]];
-    [self setThemeUsingPrimaryColor:[UIColor whiteColor] withSecondaryColor:[MCTUtils defaultBarColor] andContentStyle:UIContentStyleLight];
+//    [self setThemeUsingPrimaryColor:[UIColor whiteColor] withSecondaryColor:[MCTUtils defaultBarColor] andContentStyle:UIContentStyleLight];
     
     [self layoutViews];
 }
