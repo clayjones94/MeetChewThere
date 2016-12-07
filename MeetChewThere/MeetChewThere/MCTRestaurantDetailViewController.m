@@ -19,6 +19,7 @@
 #import "MCTConstants.h"
 #import "MCTEvent.h"
 #import "MCTEventDetailViewController.h"
+#import <MapKit/MapKit.h>
 
 #define RATING_CELL_HEIGHT 40;
 
@@ -195,7 +196,7 @@
     UIButton *button = [[UIButton alloc] init];
     [buttonContainer addSubview:button];
     [button setBackgroundImage:[[UIImage imageNamed:buttonNames[0]]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
-//    [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(call) forControlEvents:UIControlEventTouchUpInside];
     [button setClipsToBounds:YES];
     [button setBackgroundColor:[UIColor clearColor]];
     [button setTintColor:[UIColor whiteColor]];
@@ -209,7 +210,7 @@
     button = [[UIButton alloc] init];
     [buttonContainer addSubview:button];
     [button setBackgroundImage:[[UIImage imageNamed:buttonNames[1]]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
-//    [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(website) forControlEvents:UIControlEventTouchUpInside];
     [button setClipsToBounds:YES];
     [button setBackgroundColor:[UIColor clearColor]];
     [button setTintColor:[UIColor whiteColor]];
@@ -223,7 +224,7 @@
     button = [[UIButton alloc] init];
     [buttonContainer addSubview:button];
     [button setBackgroundImage:[[UIImage imageNamed:buttonNames[2]]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
-//    [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(directions) forControlEvents:UIControlEventTouchUpInside];
     [button setClipsToBounds:YES];
     [button setBackgroundColor:[UIColor clearColor]];
     [button setTintColor:[UIColor whiteColor]];
@@ -385,6 +386,37 @@
         vc.event = _events[indexPath.row];
         [self.navigationController pushViewController:vc animated:YES];
     }
+}
+
+-(void) call {
+    NSString *phoneNumber = _restaurant.phone;
+    NSString *phoneURLString = [NSString stringWithFormat:@"tel:%@", phoneNumber];
+    NSURL *phoneURL = [NSURL URLWithString:phoneURLString];
+    [[UIApplication sharedApplication] openURL:phoneURL options:@{} completionHandler:nil];
+}
+
+-(void)directions {
+    // Create an MKMapItem to pass to the Maps app
+    CLLocationCoordinate2D coordinate =
+    _restaurant.location.coordinate;
+    MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:coordinate
+                                                   addressDictionary:nil];
+    MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
+    [mapItem setName:_restaurant.name];
+    
+    // Set the directions mode to "Walking"
+    // Can use MKLaunchOptionsDirectionsModeDriving instead
+    NSDictionary *launchOptions = @{MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeWalking};
+    // Get the "Current User Location" MKMapItem
+    MKMapItem *currentLocationMapItem = [MKMapItem mapItemForCurrentLocation];
+    // Pass the current location and destination map items to the Maps app
+    // Set the direction mode in the launchOptions dictionary
+    [MKMapItem openMapsWithItems:@[currentLocationMapItem, mapItem]
+                   launchOptions:launchOptions];
+}
+
+-(void) website{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://%@", _restaurant.urlString]] options:@{} completionHandler:nil];
 }
 
 @end
