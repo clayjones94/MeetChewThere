@@ -61,11 +61,11 @@
         }];
     }
 }
-
+#define ARC4RANDOM_MAX 0x100000000
 -(void)setDietTag:(MCTDietTag *)dietTag {
     _dietTag = dietTag;
     [_dietTagLabel setText:_dietTag.name];
-    _starCount = 3.6;
+    _starCount = ((double)arc4random() / ARC4RANDOM_MAX) * (5) + 1;;
     [self setStars];
 }
 
