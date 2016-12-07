@@ -14,6 +14,7 @@
 #import <ChameleonFramework/Chameleon.h>
 #import "MCTSelectDateViewController.h"
 #import "MCTAddEventDetailsViewController.h"
+#import "MCTProfileViewController.h"
 
 @interface AppDelegate () <UITabBarControllerDelegate>
 
@@ -27,7 +28,7 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    [Chameleon setGlobalThemeUsingPrimaryColor:[MCTUtils defaultBarColor] withContentStyle:UIContentStyleLight];
+//    [Chameleon setGlobalThemeUsingPrimaryColor:[MCTUtils defaultBarColor] withContentStyle:UIContentStyleLight];
     
     _controller = [[UITabBarController alloc] init];
     _controller.delegate = self;
@@ -52,9 +53,16 @@
     eventsController.tabBarItem.title = @"Events";
     eventsController.tabBarItem.image = [UIImage imageNamed:@"my_events_tab"];
     
-    NSArray *viewControllers = @[discoverController, createController, eventsController];
+    UINavigationController *profileController = [[UINavigationController alloc] initWithRootViewController:[[MCTProfileViewController alloc] init]];
+    profileController.tabBarItem.title = @"Profile";
+    profileController.tabBarItem.image = [UIImage imageNamed:@"my_events_tab"];
+    
+    NSArray *viewControllers = @[discoverController, createController, eventsController, profileController];
     for (UINavigationController *vc in viewControllers) {
         [vc.navigationBar setOpaque:YES];
+        vc.navigationBar.translucent = NO;
+        [vc.navigationBar setBarTintColor:[MCTUtils MCTBarBackgroundColorForFrame:CGRectMake(0, 0, vc.view.frame.size.width, vc.navigationBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height)]];
+        [vc.navigationBar setTintColor:[UIColor whiteColor]];
     }
     return viewControllers;
 }
@@ -63,6 +71,13 @@
     NSArray *viewControllers = ((UINavigationController *) viewController).viewControllers;
     if([[viewControllers objectAtIndex:viewControllers.count - 1] isKindOfClass:[MCTCreateEventViewController class]]) {
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:[MCTAddEventDetailsViewController new]];
+        [nav.navigationBar setOpaque:YES];
+        nav.navigationBar.translucent = NO;
+        [nav.navigationBar
+         setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+        nav.navigationBar.translucent = NO;
+        [nav.navigationBar setBarTintColor:[MCTUtils MCTBarBackgroundColorForFrame:CGRectMake(0, 0, nav.view.frame.size.width, nav.navigationBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height)]];
+        [nav.navigationBar setTintColor:[UIColor whiteColor]];
         [_controller presentViewController:nav animated:YES completion:nil];
         return NO;
     }

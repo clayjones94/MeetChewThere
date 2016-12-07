@@ -18,6 +18,7 @@
 +(UIColor *) MCTRestaurantBackground;
 +(UIColor *) colorForHex: (int) rgbValue;
 +(UIColor *) gradientBackgroundColorWithFrame: (CGRect) frame;
++(UIColor *) MCTBarBackgroundColorForFrame: (CGRect) frame;
 +(NSString *) priceStringForRestaurant: (MCTRestaurant *) restaurant;
 +(NSString *) dietTagsListtoString: (NSArray <MCTDietTag *> * ) tags;
 + (NSDate *)dateWithYear:(NSInteger)year month:(NSInteger)month day:(NSInteger)day hour:(NSInteger)hour minute:(NSInteger)minute;

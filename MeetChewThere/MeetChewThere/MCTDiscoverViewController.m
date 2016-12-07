@@ -49,8 +49,11 @@
 //    }
     if (![MCTContentManager sharedManager].user) {
         MCTUser *user = [MCTUser new];
-        user.name = @"Clayy";
+        user.name = @"Clay Jones";
         user.password = @"pass";
+        MCTDietTag *tag1 = [[MCTDietTag alloc] init];
+        tag1.name = @"Vegetarian";
+        user.dietTags = @[tag1];
         [MCTContentManager sharedManager].user = user;
     }
 }
@@ -66,7 +69,7 @@
 
 -(void) layoutSegmentedControl {
     _topBar = [[UIView alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width, self.navigationController.navigationBar.frame.size.height + [[UIApplication sharedApplication] statusBarFrame].size.height)];
-    [_topBar setBackgroundColor:[MCTUtils defaultBarColor]];
+    [_topBar setBackgroundColor:[MCTUtils MCTBarBackgroundColorForFrame:_topBar.frame]];
     [self.view addSubview:_topBar];
     
     _segControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"Restaurants",@"Events"]];

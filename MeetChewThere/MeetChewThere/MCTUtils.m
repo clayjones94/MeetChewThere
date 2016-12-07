@@ -14,11 +14,11 @@
 @implementation MCTUtils
 
 +(UIColor *)defaultBarColor {
-    return [self colorForHex:0x2E2D2D];
-//    return [UIColor colorWithRed:(0.0f/256.f)
-//                          green:(112.0f/256.f)
-//                           blue:(220.0f/256.f)
-//                          alpha:(1.0f)];
+//    return [self colorForHex:0x2E2D2D];
+    return [UIColor colorWithRed:(0.0f/256.f)
+                          green:(112.0f/256.f)
+                           blue:(220.0f/256.f)
+                          alpha:(1.0f)];
 }
 
 +(UIColor *)MCTLightGrayColor {
@@ -38,6 +38,10 @@
 
 +(UIColor *) colorForHex: (int) rgbValue {
     return [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0f green:((float)((rgbValue & 0xFF00) >> 8))/255.0f blue:((float)(rgbValue & 0xFF))/255.0f alpha:1.0f];
+}
+
++(UIColor *) MCTBarBackgroundColorForFrame: (CGRect) frame{
+    return [UIColor colorWithGradientStyle:UIGradientStyleTopToBottom withFrame:CGRectMake(0, 0, frame.size.width, frame.size.height) andColors:@[[MCTUtils colorForHex:0x00A9F0], [MCTUtils colorForHex:0x0070DC]]];
 }
 
 +(UIColor *)gradientBackgroundColorWithFrame: (CGRect) frame {

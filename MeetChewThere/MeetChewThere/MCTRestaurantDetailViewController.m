@@ -122,7 +122,7 @@
     [_backButton setClipsToBounds:YES];
     [_backButton setBackgroundColor:[UIColor clearColor]];
     [_backButton setTintColor:[UIColor whiteColor]];
-    [_scrollView addSubview:_backButton];
+    [self.view addSubview:_backButton];
     
     [_backButton sizeToFit];
     [_backButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -213,9 +213,15 @@
     
     UILabel *eventDetailLabel = [[UILabel alloc] init];
     [_eventsContainerView addSubview:eventDetailLabel];
-    [eventDetailLabel setText:@"Upcoming Events"];
-    [eventDetailLabel setFont:[UIFont fontWithName:MCT_BOLD_FONT_NAME size:18]];
-    [eventDetailLabel setTextColor:[UIColor whiteColor]];
+    if (_events.count > 0) {
+        [eventDetailLabel setText:@"Upcoming Events"];
+        [eventDetailLabel setFont:[UIFont fontWithName:MCT_BOLD_FONT_NAME size:18]];
+        [eventDetailLabel setTextColor:[UIColor whiteColor]];
+    } else {
+        [eventDetailLabel setText:@"No Upcoming Events"];
+        [eventDetailLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:16]];
+        [eventDetailLabel setTextColor:[MCTUtils MCTLightGrayColor]];
+    }
     [eventDetailLabel sizeToFit];
     
     [eventDetailLabel mas_makeConstraints:^(MASConstraintMaker *make) {

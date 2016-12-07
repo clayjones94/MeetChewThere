@@ -15,6 +15,8 @@
 		925DF8041DC6A2A900A96BAF /* MeetChewThereUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 925DF8031DC6A2A900A96BAF /* MeetChewThereUITests.m */; };
 		925FF8DD1DF78266003960C4 /* MCTSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 925FF8DC1DF78266003960C4 /* MCTSignInViewController.m */; };
 		925FF8E01DF7AF30003960C4 /* MCTRestaurantEventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 925FF8DF1DF7AF30003960C4 /* MCTRestaurantEventTableViewCell.m */; };
+		925FF8E31DF7E3A4003960C4 /* MCTProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 925FF8E21DF7E3A4003960C4 /* MCTProfileViewController.m */; };
+		925FF8E71DF80FEC003960C4 /* MCTReviewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 925FF8E61DF80FEC003960C4 /* MCTReviewsViewController.m */; };
 		927E5C801DD658CA0060F111 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 927E5C7F1DD658CA0060F111 /* MapKit.framework */; };
 		927E5C831DD65D2A0060F111 /* MCTDietRatingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 927E5C821DD65D2A0060F111 /* MCTDietRatingsTableViewCell.m */; };
 		92A855581DCD5AA100DB27A3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 92A855571DCD5AA100DB27A3 /* Default-568h@2x.png */; };
@@ -95,6 +97,10 @@
 		925FF8DC1DF78266003960C4 /* MCTSignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTSignInViewController.m; sourceTree = "<group>"; };
 		925FF8DE1DF7AF30003960C4 /* MCTRestaurantEventTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTRestaurantEventTableViewCell.h; sourceTree = "<group>"; };
 		925FF8DF1DF7AF30003960C4 /* MCTRestaurantEventTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTRestaurantEventTableViewCell.m; sourceTree = "<group>"; };
+		925FF8E11DF7E3A4003960C4 /* MCTProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTProfileViewController.h; sourceTree = "<group>"; };
+		925FF8E21DF7E3A4003960C4 /* MCTProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTProfileViewController.m; sourceTree = "<group>"; };
+		925FF8E51DF80FEC003960C4 /* MCTReviewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTReviewsViewController.h; sourceTree = "<group>"; };
+		925FF8E61DF80FEC003960C4 /* MCTReviewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTReviewsViewController.m; sourceTree = "<group>"; };
 		927E5C7F1DD658CA0060F111 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		927E5C811DD65D2A0060F111 /* MCTDietRatingsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTDietRatingsTableViewCell.h; sourceTree = "<group>"; };
 		927E5C821DD65D2A0060F111 /* MCTDietRatingsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTDietRatingsTableViewCell.m; sourceTree = "<group>"; };
@@ -291,6 +297,15 @@
 			path = MeetChewThereUITests;
 			sourceTree = "<group>";
 		};
+		925FF8E41DF7E3AD003960C4 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				925FF8E11DF7E3A4003960C4 /* MCTProfileViewController.h */,
+				925FF8E21DF7E3A4003960C4 /* MCTProfileViewController.m */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
 		92A8555E1DCD5DA400DB27A3 /* Discover */ = {
 			isa = PBXGroup;
 			children = (
@@ -310,6 +325,7 @@
 				92A855681DCD63ED00DB27A3 /* DiscoverRestaurants */,
 				92A855631DCD61FA00DB27A3 /* CreateEvent */,
 				92A8556C1DCD645600DB27A3 /* DiscoverEvents */,
+				925FF8E41DF7E3AD003960C4 /* Profile */,
 				92A8555E1DCD5DA400DB27A3 /* Discover */,
 			);
 			name = "View Controllers";
@@ -464,6 +480,8 @@
 				927E5C821DD65D2A0060F111 /* MCTDietRatingsTableViewCell.m */,
 				925FF8DE1DF7AF30003960C4 /* MCTRestaurantEventTableViewCell.h */,
 				925FF8DF1DF7AF30003960C4 /* MCTRestaurantEventTableViewCell.m */,
+				925FF8E51DF80FEC003960C4 /* MCTReviewsViewController.h */,
+				925FF8E61DF80FEC003960C4 /* MCTReviewsViewController.m */,
 			);
 			name = "Restaurant Detail";
 			sourceTree = "<group>";
@@ -706,11 +724,13 @@
 				92A855B51DCD967100DB27A3 /* MCTEvent.m in Sources */,
 				92A855A71DCD7ADC00DB27A3 /* NSArray+MASAdditions.m in Sources */,
 				92A855AE1DCD7ADC00DB27A3 /* ZLDropDownMenuUICalc.m in Sources */,
+				925FF8E71DF80FEC003960C4 /* MCTReviewsViewController.m in Sources */,
 				92A855A81DCD7ADC00DB27A3 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				92A855B81DCD968D00DB27A3 /* MCTRestaurant.m in Sources */,
 				92C8A2491DDFB810001B606A /* MCTAddEventDetailsViewController.m in Sources */,
 				92A855671DCD625700DB27A3 /* MCTProfileEventsViewController.m in Sources */,
 				92A8556F1DCD64A700DB27A3 /* MCTDiscoverEventsViewController.m in Sources */,
+				925FF8E31DF7E3A4003960C4 /* MCTProfileViewController.m in Sources */,
 				925FF8E01DF7AF30003960C4 /* MCTRestaurantEventTableViewCell.m in Sources */,
 				92A8556B1DCD643400DB27A3 /* MCTDiscoverRestaurantsViewController.m in Sources */,
 				92A855AB1DCD7ADC00DB27A3 /* ZLDropDownMenu.m in Sources */,

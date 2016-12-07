@@ -49,6 +49,10 @@
     [self layoutViews];
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    self.navigationController.navigationBarHidden = NO;
+}
+
 -(void) layoutViews {
     CGFloat LEFT_MARGIN = 15;
     

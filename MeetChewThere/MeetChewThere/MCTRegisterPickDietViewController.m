@@ -35,7 +35,11 @@
     self.navigationItem.title = @"Diet Preferences";
     
     _contentManager = [MCTContentManager sharedManager];
-    _selectedTags = [NSMutableArray new];
+    if (_contentManager.user.dietTags) {
+        _selectedTags = [[NSMutableArray<MCTDietTag *> alloc] initWithArray: _contentManager.user.dietTags];
+    } else {
+       _selectedTags = [NSMutableArray new];
+    }
     
     _dietTags = [_contentManager getAllDietTags];
     [self.view setBackgroundColor:[UIColor whiteColor]];
