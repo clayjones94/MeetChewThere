@@ -16,6 +16,8 @@
 #import "MCTRestaurantReview.h"
 #import "MCTConstants.h"
 #import <POP.h>
+#import <STPopup/STPopup.h>
+#import "MCTAddReviewViewController.h"
 
 @implementation MCTReviewsViewController {
     UITableView *_tableView;
@@ -26,6 +28,7 @@
 }
 
 @synthesize dietTag = _dietTag;
+@synthesize restaurant = _restaurant;
 
 -(void)setDietTag:(MCTDietTag *)dietTag {
     _dietTag = dietTag;
@@ -38,6 +41,9 @@
     [self.navigationController setNavigationBarHidden:NO];
     self.navigationItem.title = [NSString stringWithFormat:@"%@ Reviews", _dietTag.name];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"new_event_tab"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] style:UIBarButtonItemStylePlain target:self action:@selector(newReview)];
+    [self.navigationItem.rightBarButtonItem setTintColor:[UIColor whiteColor]];
     
     [self.navigationController.navigationBar setOpaque:YES];
     self.navigationController.navigationBar.translucent = NO;
@@ -57,6 +63,8 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:NO];
+    _reviews = [_contentManager getAllReviews];
+    [_tableView reloadData];
 }
 
 -(void) layoutViews {
@@ -65,6 +73,7 @@
     _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     _tableView.dataSource = self;
     _tableView.delegate = self;
+    _tableView.rowHeight = UITableViewAutomaticDimension;
     [self.view addSubview:_tableView];
     
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -80,7 +89,7 @@
         cell = [[MCTReviewTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
         cell.tintColor = [MCTUtils defaultBarColor];
         [cell.textLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:14]];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
     MCTRestaurantReview *tag = _reviews[indexPath.row];
@@ -93,7 +102,19 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 25 + [self getLabelHeight:[_reviews objectAtIndex:indexPath.row].reviewString];
+    if (_reviews.count > indexPath.row) {
+        return 65 + [self getLabelHeight:((MCTRestaurantReview *)[_reviews objectAtIndex:indexPath.row]).reviewString];
+    } else {
+        return 65;
+    }
+}
+
+-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (_reviews.count > indexPath.row) {
+        return 65 + [self getLabelHeight:((MCTRestaurantReview *)[_reviews objectAtIndex:indexPath.row]).reviewString];
+    } else {
+        return 65;
+    }
 }
 
 - (CGFloat)getLabelHeight:(NSString *) str{
@@ -103,7 +124,7 @@
     NSStringDrawingContext *context = [[NSStringDrawingContext alloc] init];
     CGSize boundingBox = [str boundingRectWithSize:constraint
                                                   options:NSStringDrawingUsesLineFragmentOrigin
-                                               attributes:@{NSFontAttributeName:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:12]}
+                                               attributes:@{NSFontAttributeName:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:14]}
                                                   context:context].size;
     
     size = CGSizeMake(ceil(boundingBox.width), ceil(boundingBox.height));
@@ -115,4 +136,13 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     [cell setSelected:NO];
 }
+
+-(void) newReview {
+    MCTAddReviewViewController *popup = [MCTAddReviewViewController new];
+    popup.dietTag = _dietTag;
+    popup.restaurant = _restaurant;
+    STPopupController *popupController = [[STPopupController alloc] initWithRootViewController:popup];
+    [popupController presentInViewController:self];
+}
+
 @end

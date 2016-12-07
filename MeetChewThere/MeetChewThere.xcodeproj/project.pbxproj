@@ -18,6 +18,7 @@
 		925FF8E31DF7E3A4003960C4 /* MCTProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 925FF8E21DF7E3A4003960C4 /* MCTProfileViewController.m */; };
 		925FF8E71DF80FEC003960C4 /* MCTReviewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 925FF8E61DF80FEC003960C4 /* MCTReviewsViewController.m */; };
 		925FF8EB1DF82433003960C4 /* MCTReviewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 925FF8EA1DF82433003960C4 /* MCTReviewTableViewCell.m */; };
+		925FF8EE1DF894A9003960C4 /* MCTAddReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 925FF8ED1DF894A9003960C4 /* MCTAddReviewViewController.m */; };
 		927E5C801DD658CA0060F111 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 927E5C7F1DD658CA0060F111 /* MapKit.framework */; };
 		927E5C831DD65D2A0060F111 /* MCTDietRatingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 927E5C821DD65D2A0060F111 /* MCTDietRatingsTableViewCell.m */; };
 		92A855581DCD5AA100DB27A3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 92A855571DCD5AA100DB27A3 /* Default-568h@2x.png */; };
@@ -104,6 +105,8 @@
 		925FF8E61DF80FEC003960C4 /* MCTReviewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTReviewsViewController.m; sourceTree = "<group>"; };
 		925FF8E91DF82433003960C4 /* MCTReviewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTReviewTableViewCell.h; sourceTree = "<group>"; };
 		925FF8EA1DF82433003960C4 /* MCTReviewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTReviewTableViewCell.m; sourceTree = "<group>"; };
+		925FF8EC1DF894A9003960C4 /* MCTAddReviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTAddReviewViewController.h; sourceTree = "<group>"; };
+		925FF8ED1DF894A9003960C4 /* MCTAddReviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTAddReviewViewController.m; sourceTree = "<group>"; };
 		927E5C7F1DD658CA0060F111 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		927E5C811DD65D2A0060F111 /* MCTDietRatingsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTDietRatingsTableViewCell.h; sourceTree = "<group>"; };
 		927E5C821DD65D2A0060F111 /* MCTDietRatingsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTDietRatingsTableViewCell.m; sourceTree = "<group>"; };
@@ -316,6 +319,8 @@
 				925FF8E61DF80FEC003960C4 /* MCTReviewsViewController.m */,
 				925FF8E91DF82433003960C4 /* MCTReviewTableViewCell.h */,
 				925FF8EA1DF82433003960C4 /* MCTReviewTableViewCell.m */,
+				925FF8EC1DF894A9003960C4 /* MCTAddReviewViewController.h */,
+				925FF8ED1DF894A9003960C4 /* MCTAddReviewViewController.m */,
 			);
 			name = Reviews;
 			sourceTree = "<group>";
@@ -709,6 +714,7 @@
 				920E05531DEF83DA00F5E93C /* MCTContentManager.m in Sources */,
 				92A855A51DCD7ADC00DB27A3 /* MASViewAttribute.m in Sources */,
 				925FF8DD1DF78266003960C4 /* MCTSignInViewController.m in Sources */,
+				925FF8EE1DF894A9003960C4 /* MCTAddReviewViewController.m in Sources */,
 				925DF7E01DC6A2A900A96BAF /* main.m in Sources */,
 				92A855A01DCD7ADC00DB27A3 /* NSString+ZLStringSize.m in Sources */,
 				92A855721DCD662000DB27A3 /* MCTUtils.m in Sources */,

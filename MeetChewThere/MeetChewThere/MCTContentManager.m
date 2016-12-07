@@ -255,6 +255,10 @@
     [_events addObject:event];
 }
 
+-(void) addNewReview:(MCTRestaurantReview *)review {
+    [_reviews addObject:review];
+}
+
 - (NSArray *) getAllUsers {
     return _users;
 }
@@ -275,6 +279,16 @@
                 [revs addObject:review];
             }
         }
+    }
+    return revs;
+}
+
+- (NSArray *) getReviewsForUser {
+    NSMutableArray *revs = [NSMutableArray new];
+    for (int i = 0; i < _reviews.count; i ++) {
+        MCTRestaurantReview *review = _reviews[i];
+        if (![review.user isEqual:_user]) continue;
+        [revs addObject:review];
     }
     return revs;
 }

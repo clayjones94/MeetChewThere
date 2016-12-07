@@ -10,4 +10,6 @@
 
 @interface MCTProfileEventsViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 
+-(void) setToHosted;
+
 @end

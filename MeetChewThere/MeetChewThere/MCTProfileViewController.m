@@ -17,12 +17,14 @@
 #import <ChameleonFramework/Chameleon.h>
 #import "MCTRegisterViewController.h"
 #import "MCTRegisterPickDietViewController.h"
+#import "MCTProfileEventsViewController.h"
 
 @implementation MCTProfileViewController {
     UITableView *_dietTagTableView;
     UILabel *nameLabel;
     UILabel *dietLabel;
     UILabel *eventCountLabel;
+    UILabel *_reviewCountLabel;
 }
 
 - (void)viewDidLoad {
@@ -41,6 +43,9 @@
     
     [eventCountLabel setText:[NSString stringWithFormat:@"%lu",(unsigned long)[MCTContentManager sharedManager].getUserHostingEvents.count]];
     [eventCountLabel sizeToFit];
+    
+    [_reviewCountLabel setText:[NSString stringWithFormat:@"%lu",(unsigned long)[MCTContentManager sharedManager].getReviewsForUser.count]];
+    [_reviewCountLabel sizeToFit];
 }
 
 -(void) layoutViews {
@@ -128,14 +133,26 @@
         make.centerX.equalTo(eventCountLabel);
     }];
     
-    UILabel *reviewCountLabel = [[UILabel alloc] init];
-    [upperView addSubview:reviewCountLabel];
-    [reviewCountLabel setText:@"0"];
-    [reviewCountLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:50]];
-    [reviewCountLabel setTextColor:[UIColor whiteColor]];
-    [reviewCountLabel sizeToFit];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapEvents)];
+    tap.numberOfTapsRequired = 1;
+    UIView *tapView = [[UIView alloc] init];
+    [labelView addSubview:tapView];
+    [tapView addGestureRecognizer:tap];
+    [tapView setUserInteractionEnabled:YES];
     
-    [reviewCountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [tapView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.bottom.equalTo(labelView);
+        make.right.equalTo(labelView.mas_centerX);
+    }];
+    
+    _reviewCountLabel = [[UILabel alloc] init];
+    [upperView addSubview:_reviewCountLabel];
+    [_reviewCountLabel setText:@"0"];
+    [_reviewCountLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:50]];
+    [_reviewCountLabel setTextColor:[UIColor whiteColor]];
+    [_reviewCountLabel sizeToFit];
+    
+    [_reviewCountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(labelView.mas_centerY).with.offset(25);
         make.centerX.equalTo(labelView).with.offset(self.view.frame.size.width * 1/4);
     }];
@@ -148,8 +165,8 @@
     [reviewDetailLabel sizeToFit];
     
     [reviewDetailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(reviewCountLabel.mas_bottom).with.offset(-10);
-        make.centerX.equalTo(reviewCountLabel);
+        make.top.equalTo(_reviewCountLabel.mas_bottom).with.offset(-10);
+        make.centerX.equalTo(_reviewCountLabel);
     }];
     
     UIView *separator = [UIView new];
@@ -200,6 +217,12 @@
         make.top.equalTo(separator.mas_bottom).with.offset(22);
         make.centerX.equalTo(upperView);
     }];
+}
+
+-(void)tapEvents {
+    MCTProfileEventsViewController *vc = [((UINavigationController *)[self.navigationController.tabBarController.viewControllers objectAtIndex:2]).viewControllers objectAtIndex:0];
+    [vc setToHosted];
+    [self.navigationController.tabBarController setSelectedIndex:2];
 }
 
 -(void) logout {

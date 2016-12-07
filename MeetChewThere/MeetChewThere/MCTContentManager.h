@@ -37,6 +37,8 @@
 -(NSArray *) getUserUpcomingEvents;
 -(NSArray *)getUserPastEvents;
 -(NSArray *)getUserHostingEvents;
+-(void) addNewReview:(MCTRestaurantReview *)review ;
+- (NSArray *) getReviewsForUser;
 
 
 - (void) searchRestaurantsBySearchText: (NSString *) text;

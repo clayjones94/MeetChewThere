@@ -48,6 +48,8 @@
 }
 
 -(void)layoutSubviews {
+    [super layoutSubviews];
+    
     [_nameLabel sizeToFit];
     [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self).with.offset(10);

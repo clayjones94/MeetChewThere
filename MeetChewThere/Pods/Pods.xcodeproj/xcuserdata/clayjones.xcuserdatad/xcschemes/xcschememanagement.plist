@@ -4,11 +4,6 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>CWPopup.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>ChameleonFramework.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -34,6 +29,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>STPopup.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>pop.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,12 +42,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0AFD17B6ECD221D2C0CFAD0F78592E19</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>20B43714F7596373FAAD70BB7B2D7BEE</key>
+		<key>13BBB4AE17552650CE2609BF046B4DEF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -57,12 +52,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2FD2ADB24D86180EB8797A07F643AEDE</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>523D77D103A8AF100017E495A00201A3</key>
+		<key>7379413A79A68D88B1AB8FD09A54958D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -72,7 +62,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>8FCA7BDD704C9145FBC791567CD641C0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>935A7E52B6D8B7E37EAEA138EDC52155</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E38D220671246B27140795E1196CDE31</key>
 		<dict>
 			<key>primary</key>
 			<true/>

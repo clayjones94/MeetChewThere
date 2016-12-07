@@ -75,7 +75,7 @@
         
         [self addSubview:_nameLabel];
         [self addSubview:_priceLabel];
-//        [self addSubview:_dietTagsLabel];
+        [self addSubview:_dietTagsLabel];
         [self addSubview:_eventsLabel];
         [self addSubview:_imageView];
         [self addSubview:_distanceLabel];
@@ -93,9 +93,9 @@
     
     if (_restaurant) {
         [_nameLabel setText:_restaurant.name];
-        [_priceLabel setText:[NSString stringWithFormat:@"%@", [MCTUtils priceStringForRestaurant:_restaurant]]];
+        [_priceLabel setText:[NSString stringWithFormat:@"%@ - ", [MCTUtils priceStringForRestaurant:_restaurant]]];
         [_dietTagsLabel setText: [MCTUtils dietTagsListtoString: _restaurant.dietTags]];
-//        [_dietTagsLabel setText:_restaurant.dietTags.firstObject.name];
+        [_dietTagsLabel setText:[MCTUtils dietTagsListtoString: _restaurant.dietTags]];
         [_eventsLabel setText:[NSString stringWithFormat:@"%lu events", (unsigned long)[_contentManager getEventsForRestaurant:_restaurant].count]];
         CLLocationDistance distance = [_restaurant.location distanceFromLocation: [_contentManager locationManager].location];
         _distanceLabel.text = [NSString stringWithFormat:@"%.1f mi", distance/1607.0];
@@ -129,12 +129,12 @@
         make.width.mas_equalTo(self.frame.size.width * .25);
     }];
     
-//    [_dietTagsLabel sizeToFit];
-//    [_dietTagsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(_priceLabel.mas_bottom).with.offset(5);
-//        make.left.equalTo(_nameLabel);
-//        make.right.equalTo(_imageView.mas_left).with.offset(-5);
-//    }];
+    [_dietTagsLabel sizeToFit];
+    [_dietTagsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(_priceLabel);
+        make.right.equalTo(_imageView.mas_left).with.offset(-10);
+        make.left.equalTo(_priceLabel.mas_right);
+    }];
     
     [_separator mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.right.equalTo(self);

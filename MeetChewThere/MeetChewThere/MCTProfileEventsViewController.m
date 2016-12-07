@@ -174,4 +174,8 @@
     [_tableView reloadData];
 }
 
+-(void) setToHosted {
+    [_segControl setSelectedSegmentIndex:2];
+}
+
 @end

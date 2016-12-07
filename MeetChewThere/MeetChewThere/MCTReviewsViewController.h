@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "MCTDietTag.h"
+#import "MCTRestaurant.h"
 
 @interface MCTReviewsViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) MCTDietTag *dietTag;
+@property (weak, nonatomic) MCTRestaurant *restaurant;
 
 @end
