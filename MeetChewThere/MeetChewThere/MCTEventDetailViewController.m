@@ -13,6 +13,8 @@
 #import "MCTContentManager.h"
 #import "MCTRestaurantDetailViewController.h"
 #import <ChameleonFramework/Chameleon.h>
+#import <STPopup/STPopup.h>
+#import "MCTGuestsViewController.h"
 
 @implementation MCTEventDetailViewController {
     UIImageView *_imageView;
@@ -225,7 +227,7 @@
     
     _guestsLabel = [[UILabel alloc] init];
     [_scrollView addSubview:_guestsLabel];
-    [_guestsLabel setText:[NSString stringWithFormat:@"%lu of %ld people are going.", (unsigned long)_event.guests.count, (long)_event.capacity]];
+    [_guestsLabel setText:[NSString stringWithFormat:@"%lu going. %ld available.", (unsigned long)_event.guests.count, (long)_event.capacity]];
     [_guestsLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:16]];
     [_guestsLabel setTextColor:[UIColor whiteColor]];
     [_guestsLabel sizeToFit];
@@ -233,6 +235,20 @@
     [_guestsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
         make.top.equalTo(separator).with.offset(20);
+    }];
+    
+    UIView *tapView = [UIView new];
+    [_scrollView addSubview:tapView];
+    tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGuests)];
+    tap.delegate = self;
+    tap.numberOfTapsRequired = 1;
+    [tapView setUserInteractionEnabled:YES];
+    [tapView addGestureRecognizer:tap];
+    
+    [tapView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(_guestsLabel);
+        make.width.mas_equalTo(250);
+        make.height.mas_equalTo(50);
     }];
     
     separator = [UIView new];
@@ -337,6 +353,13 @@
     MCTRestaurantDetailViewController *vc = [[MCTRestaurantDetailViewController alloc] init];
     vc.restaurant = _event.restaurant;
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void)tapGuests {
+    MCTGuestsViewController *popup = [MCTGuestsViewController new];
+    popup.guests = _event.guests;
+    STPopupController *popupController = [[STPopupController alloc] initWithRootViewController:popup];
+    [popupController presentInViewController:self];
 }
 
 @end

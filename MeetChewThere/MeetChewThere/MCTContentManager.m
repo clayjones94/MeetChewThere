@@ -214,6 +214,7 @@
         [restaurant setPrice: arc4random_uniform(3)+1];
         double rating = ((double)arc4random() / ARC4RANDOM_MAX) * (5) + 1;
         [restaurant setOverallRating: rating];
+        restaurant.cuisineType = @"American, Burgers, BBQ";
         [_allRestaurants addObject:restaurant];
     }
 }
@@ -365,7 +366,7 @@
 }
 
 - (NSArray *) getAllRestaurants {
-    return _restaurants;
+    return _allRestaurants;
 }
 
 - (NSArray *) getAllRestaurantsByRating {
