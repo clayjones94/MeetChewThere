@@ -31,6 +31,9 @@
 //    [Chameleon setGlobalThemeUsingPrimaryColor:[MCTUtils defaultBarColor] withContentStyle:UIContentStyleLight];
     
     _controller = [[UITabBarController alloc] init];
+    [UITabBar appearance].barTintColor = [UIColor whiteColor];
+    [UITabBar appearance].tintColor = [MCTUtils defaultBarColor];
+    [UITabBar appearance].backgroundColor = [UIColor whiteColor];
     _controller.delegate = self;
     [_controller setViewControllers:[self tabBarControllers] animated:NO];
     
