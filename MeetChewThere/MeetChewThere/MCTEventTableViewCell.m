@@ -81,7 +81,7 @@
     if (_event) {
         [_nameLabel setText:_event.name];
         [_restaurantButton setText:[NSString stringWithFormat:@"%@ - %@", _event.restaurant.name, [MCTUtils priceStringForRestaurant:_event.restaurant]]];
-        [_dietTagsLabel setText:_event.dietTags.firstObject.name];
+        [_dietTagsLabel setText:[MCTUtils dietTagsListtoString:_event.restaurant.dietTags]];
         [_guestsLabel setText:[NSString stringWithFormat:@"%lu guests", (unsigned long)_event.guests.count]];
         NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init] ;
         [dateFormatter setDateStyle:NSDateFormatterLongStyle];

@@ -149,7 +149,7 @@
         } else if(_segControl.selectedSegmentIndex == 1) {
             noDataLabel.text = @"You have no Upcoming Events :(";
         } else {
-            noDataLabel.text = @"You are not hosting Any Events :(";
+            noDataLabel.text = @"You are not hosting any Events :(";
         }
         noDataLabel.textColor = [UIColor blackColor];
         noDataLabel.textAlignment = NSTextAlignmentCenter;

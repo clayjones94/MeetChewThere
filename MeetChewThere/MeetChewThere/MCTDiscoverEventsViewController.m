@@ -28,12 +28,14 @@ int _selectedIndexes[4] = {0,0,3,0};
 
 -(void)viewDidLoad {
     [self.view setBackgroundColor:[UIColor whiteColor]];
-    
-    _contentManager = [MCTContentManager sharedManager];
-    [self updateEventsTable];
-    
     [self layoutDropDownMenu];
     [self layoutTableView];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    _contentManager = [MCTContentManager sharedManager];
+    [_contentManager updateRestaurantsAndEvents];
+    [self updateEventsTable];
 }
 
 -(void) layoutDropDownMenu {

@@ -20,5 +20,6 @@
 @synthesize price = _price;
 @synthesize overallRating = _overallRating;
 @synthesize dietTags = _dietTags;
+@synthesize cuisineType = _cuisineType;
 
 @end

@@ -29,7 +29,6 @@
 
 -(void)viewDidLoad {
     [self.view setBackgroundColor:[UIColor whiteColor]];
-    _contentManager = [MCTContentManager sharedManager];
     _searchText = @"";
     [self layoutSearch];
     [self layoutTableView];
@@ -37,6 +36,8 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    _contentManager = [MCTContentManager sharedManager];
+    [_contentManager updateRestaurantsAndEvents];
     [self loadTableView];
     [_tableView reloadData];
 }

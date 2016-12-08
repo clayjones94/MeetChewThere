@@ -249,10 +249,10 @@
 
     } else if ([LUNField isEqual:_passwordField]){
         if (text.length < 7) {
-            LUNField.incorrectLabelText = @"Too Short";
+            LUNField.incorrectLabelText = @"Password must be at least 7 characters";
             return NO;
         } else if (text.length > 20){
-            LUNField.incorrectLabelText = @"Too Long";
+            LUNField.incorrectLabelText = @"Password must be less than 20 characters";
             return NO;
         }
     }

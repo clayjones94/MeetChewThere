@@ -251,6 +251,44 @@
     [_reviews addObject:review];
 }
 
+-(void) updateRestaurantsAndEvents {
+    if (!_user) {
+        return;
+    }
+    [self initRestaurants];
+    [self initEvents];
+    NSMutableArray *newArr = [NSMutableArray new];
+    for (MCTRestaurant *restaurant in _allRestaurants) {
+        BOOL remove = YES;
+        for (MCTDietTag *dietTag in restaurant.dietTags) {
+            if ([_user.dietTags containsObject:dietTag]) {
+                remove = NO;
+                break;
+            }
+        }
+        if (!remove) {
+            [newArr addObject:restaurant];
+        }
+    }
+    _allRestaurants = newArr;
+    _restaurants = newArr;
+    
+    newArr = [NSMutableArray new];
+    for (MCTEvent *event in _events) {
+        BOOL remove = YES;
+        for (MCTDietTag *dietTag in event.restaurant.dietTags) {
+            if ([_user.dietTags containsObject:dietTag]) {
+                remove = NO;
+                break;
+            }
+        }
+        if (!remove) {
+            [newArr addObject:event];
+        }
+    }
+    _events = newArr;
+}
+
 -(void) addNewEvent:(MCTEvent *)event {
     [_events addObject:event];
 }
