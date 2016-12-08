@@ -160,7 +160,7 @@
     
     _costLabel = [[UILabel alloc] init];
     [_introContainerView addSubview:_costLabel];
-    [_costLabel setText: [NSString stringWithFormat:@"%@ - %@", [MCTUtils priceStringForRestaurant:_restaurant], _restaurant.cuisineType]];
+    [_costLabel setText: [NSString stringWithFormat:@"%@ - %@", [MCTUtils priceStringForRestaurant:_restaurant], _restaurant.details]];
     [_costLabel setFont:[UIFont fontWithName:MCT_REGULAR_FONT_NAME size:14]];
     [_costLabel setTextColor:[UIColor whiteColor]];
     [_costLabel sizeToFit];
