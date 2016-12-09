@@ -43,19 +43,19 @@
     self.extendedLayoutIncludesOpaqueBars = NO;
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-//    if (![MCTContentManager sharedManager].user) {
-//        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:[MCTRegisterViewController new]];
-//        [self presentViewController:nav animated:YES completion:nil];
-////        [[MCTContentManager sharedManager] updateRestaurantsAndEvents];
-//    }
     if (![MCTContentManager sharedManager].user) {
-        MCTUser *user = [MCTUser new];
-        user.name = @"Clay Jones";
-        user.password = @"pass";
-        user.dietTags = [[MCTContentManager sharedManager].getAllDietTags subarrayWithRange:NSMakeRange(0, 3)];
-        [MCTContentManager sharedManager].user = user;
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:[MCTRegisterViewController new]];
+        [self presentViewController:nav animated:YES completion:nil];
 //        [[MCTContentManager sharedManager] updateRestaurantsAndEvents];
     }
+//    if (![MCTContentManager sharedManager].user) {
+//        MCTUser *user = [MCTUser new];
+//        user.name = @"Clay Jones";
+//        user.password = @"pass";
+//        user.dietTags = [[MCTContentManager sharedManager].getAllDietTags subarrayWithRange:NSMakeRange(0, 3)];
+//        [MCTContentManager sharedManager].user = user;
+////        [[MCTContentManager sharedManager] updateRestaurantsAndEvents];
+//    }
 }
 
 - (void)viewDidLoad {

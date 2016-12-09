@@ -53,6 +53,8 @@
 //    [self setThemeUsingPrimaryColor:[UIColor whiteColor] withSecondaryColor:[MCTUtils defaultBarColor] andContentStyle:UIContentStyleLight];
     
     [self layoutViews];
+    
+    [self checkForDoneButton];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -147,6 +149,8 @@
             cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"add_diet_plus"]];
         }
     }];
+    
+    [self checkForDoneButton];
 }
 
 -(void) finish {
@@ -177,6 +181,14 @@
     _dietTags = [_contentManager searchDietTagsBySearchText:searchText];
     [_tableView reloadData];
     return YES;
+}
+
+-(void) checkForDoneButton {
+    if(_selectedTags.count == 0) {
+        [self.navigationItem.rightBarButtonItem setEnabled:NO];
+    } else {
+        [self.navigationItem.rightBarButtonItem setEnabled:YES];
+    }
 }
 
 @end
