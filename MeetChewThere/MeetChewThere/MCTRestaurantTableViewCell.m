@@ -157,6 +157,15 @@
             make.left.equalTo(lastStar.mas_right).with.offset(5);
         }];
     }
+    
+    NSArray *ratings = [[MCTContentManager sharedManager] getReviewsForRestaurant:_restaurant WithTag:nil];
+    CGFloat total = 0;
+    for (MCTRestaurantReview *review in ratings) {
+        total += review.rating;
+    }
+    
+    _restaurant.overallRating = total / ratings.count;
+    [self setStars];
 }
 
 -(void) setStars {

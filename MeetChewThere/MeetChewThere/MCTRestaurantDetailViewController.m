@@ -343,6 +343,7 @@
             ratingsCell = [[MCTDietRatingsTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
         }
         ratingsCell.dietTag = _restaurant.dietTags[indexPath.row];
+        ratingsCell.restaurant = _restaurant;
         return ratingsCell;
     } else if([tableView isEqual:_eventsTableView]) {
         NSString *identifier = @"event cell";
@@ -380,6 +381,7 @@
     if ([tableView isEqual:_ratingsTableView]) {
         MCTReviewsViewController *vc = [MCTReviewsViewController new];
         vc.dietTag = _restaurant.dietTags[indexPath.row];
+        vc.restaurant = _restaurant;
         [self.navigationController pushViewController:vc animated:YES];
     } else {
         MCTEventDetailViewController *vc = [MCTEventDetailViewController new];

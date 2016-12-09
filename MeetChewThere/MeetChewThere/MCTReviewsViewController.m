@@ -35,6 +35,11 @@
     self.navigationItem.title = [NSString stringWithFormat:@"%@ Reviews", _dietTag.name];
 }
 
+-(void)setRestaurant:(MCTRestaurant *)restaurant {
+    _restaurant = restaurant;
+    _reviews = [_contentManager getReviewsForRestaurant:_restaurant WithTag:_dietTag];
+}
+
 -(void)viewDidLoad {
     [super viewDidLoad];
     self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -54,7 +59,7 @@
     
     _contentManager = [MCTContentManager sharedManager];
 
-    _reviews = [_contentManager getAllReviews];
+    _reviews = [_contentManager getReviewsForRestaurant:_restaurant WithTag:_dietTag];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     //    [self setThemeUsingPrimaryColor:[UIColor whiteColor] withSecondaryColor:[MCTUtils defaultBarColor] andContentStyle:UIContentStyleLight];
     
@@ -63,7 +68,7 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:NO];
-    _reviews = [_contentManager getAllReviews];
+    _reviews = [_contentManager getReviewsForRestaurant:_restaurant WithTag:_dietTag];
     [_tableView reloadData];
 }
 

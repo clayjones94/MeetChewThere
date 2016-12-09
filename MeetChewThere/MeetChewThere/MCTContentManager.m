@@ -421,12 +421,13 @@
     NSMutableArray *revs = [NSMutableArray new];
     for (int i = 0; i < _reviews.count; i ++) {
         MCTRestaurantReview *review = _reviews[i];
-        if (![review.restaurant isEqual:restaurant]) continue;
-        if (!dietTag) {
-            [revs addObject:review];
-        } else {
-            if ([dietTag isEqual:dietTag]) {
+        if (review.restaurant.objectID == restaurant.objectID){
+            if (!dietTag) {
                 [revs addObject:review];
+            } else {
+                if ([review.dietTags containsObject: dietTag]) {
+                    [revs addObject:review];
+                }
             }
         }
     }
